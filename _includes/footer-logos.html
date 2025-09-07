@@ -1,9 +1,9 @@
 <!-- ======================== FOOTER / LOGOS & SETTINGS ======================== -->
 <footer id="footer-logos" class="mx-auto center">
 
-  <!-- Gabriel Edits Logo #2 -->
+  <!-- Bottom Gabriel Edits Logo -->
   <div class="footer-logo">
-    <img src="/assets/img/gabriel-edits-logo2.png"
+    <img src="https://i.imgur.com/Hi9k0uo.png"
          alt="Gabriel Edits Logo"
          draggable="false"
          style="width:120px; margin:40px auto; display:block;" />
@@ -11,9 +11,30 @@
 
 </footer>
 
-<!-- Lenis Smooth Scroll -->
-<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+<!-- Inject TOP Gabriel Edits Logo into #logo-1 (or prepend to <main>) -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const src = "https://i.imgur.com/Hi9k0uo.png";
+  const imgHTML = '<img src="' + src + '" alt="Gabriel Edits Logo" draggable="false" style="width:120px; margin:24px auto 12px; display:block;" />';
 
+  // Prefer an existing #logo-1 placeholder (from container-1)
+  let anchor = document.getElementById("logo-1");
+  if (anchor) {
+    anchor.innerHTML = imgHTML;
+  } else {
+    // Fallback: prepend to the top of <main>
+    const main = document.querySelector("main.page") || document.querySelector("main");
+    if (main) {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = imgHTML;
+      main.insertBefore(wrapper, main.firstChild);
+    }
+  }
+});
+</script>
+
+<!-- Lenis Smooth Scroll (EXACT as you provided) -->
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
 <script>
 if (window.innerWidth > 768) { // only enable on tablets/desktops
   const lenis = new Lenis({
@@ -35,6 +56,7 @@ if (window.innerWidth > 768) { // only enable on tablets/desktops
 }
 </script>
 
+<!-- Smooth anchors for <a data-smooth href="#..."> (EXACT as you provided) -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('a[data-smooth][href^="#"]').forEach(anchor => {
@@ -72,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<!-- Scrollbar styling (EXACT as you provided) -->
 <style>
 /* Scrollbar styling for WebKit browsers (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
@@ -94,4 +117,3 @@ document.addEventListener("DOMContentLoaded", function () {
   scrollbar-color: rgba(68, 68, 68, 0.8) transparent;
 }
 </style>
-
