@@ -97,7 +97,7 @@
           const slideshow=document.getElementById("slideshow");
           const slides=[];
           IMAGE_URLS.forEach(url=>{ const d=document.createElement("div"); d.className="slide"; track.appendChild(d); slides.push(d); });
-          requestAnimationFrame(()=>{ slides.forEach((el,i)=>{ el.style.backgroundImage=url("${IMAGE_URLS[i]}"); }); });
+          requestAnimationFrame(()=>{ slides.forEach((el,i)=>{ el.style.backgroundImage=`url("${IMAGE_URLS[i]}")`; }); });
           let current=0, autoplayTimer=null; const interval=7000;
           function update(){ slides.forEach((s,i)=>{ s.classList.remove("active","left","right");
             if(i===current) s.classList.add("active");
@@ -204,7 +204,7 @@
         @media (max-width:767.98px){
           #steps-flow-mobile, #steps-flow-mobile *{ box-sizing:border-box; }
           #steps-flow-mobile{ display:flex; flex-direction:column; align-items:center;
-            font-family:'SF Pro Display', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+            font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
             margin-bottom:48px; font-size:1.1em; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; -webkit-tap-highlight-color:transparent; }
           .step-box{ width:100%; max-width:320px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white;
             box-shadow:0 1px 5px rgba(0,0,0,.1); transition: box-shadow .3s ease, border-color .3s ease; }
