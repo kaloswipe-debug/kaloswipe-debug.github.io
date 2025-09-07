@@ -101,14 +101,18 @@ img{
 html, body { overflow-x: hidden; }
 
 /* Make full-bleed actually bleed, but not trigger scrollbars */
+/* Full-bleed that truly spans the viewport, with scrollbar compensation */
 .full-bleed{
   position: relative;
   left: 50%;
-  width: 100vw;
+  /* Pull the element to the viewport edges regardless of parent width */
+  width: calc(100vw - (100vw - 100%)); /* = 100vw on classic scrollbars, = 100% on overlay BUT we fix via margins */
   margin-left: calc(-50vw + (100vw - 100%) / 2);
   margin-right: calc(-50vw + (100vw - 100%) / 2);
+  /* optional: keep any internal overflow from causing side-scroll */
   overflow-x: clip;
 }
+
 
 
 /* Background grid-lines used on container-6 */
