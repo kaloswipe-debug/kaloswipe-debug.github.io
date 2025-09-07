@@ -1,7 +1,6 @@
-<!-- Inject TOP Gabriel Edits Logo into #logo-1 (or prepend to <main>) -->
-<!-- Inject TOP Gabriel Edits Logo into #logo-1 (protected like Life Pictures) -->
+<!-- TOP: Gabriel Edits Logo (isolated) -->
 <style>
-  /* Scoped, minimal, and tough to long-press/save */
+  /* Scoped, minimal, and tougher to long-press/save */
   #ge-logo-wrap{
     position:relative;
     width:88px;
@@ -24,19 +23,22 @@
 document.addEventListener("DOMContentLoaded", function () {
   const src = "https://i.imgur.com/Hi9k0uo.png";
 
-  // Build protected wrapper (mirrors Life Pictures approach)
+  // Build protected wrapper
   const wrap = document.createElement("div");
   wrap.id = "ge-logo-wrap";
+
   const img  = document.createElement("img");
   img.src = src;
   img.alt = "Gabriel Edits Logo";
   img.setAttribute("draggable","false");
+
   const guard = document.createElement("div");
   guard.className = "protect-guard";
+
   wrap.appendChild(img);
   wrap.appendChild(guard);
 
-  // Install into preferred anchor or fallback to <main>
+  // Install into #logo-1 or prepend to <main>
   const anchor = document.getElementById("logo-1");
   if (anchor) {
     anchor.innerHTML = ""; // clear anything old
@@ -44,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     const main = document.querySelector("main.page") || document.querySelector("main");
     if (main) main.insertBefore(wrap, main.firstChild);
+    else document.body.insertBefore(wrap, document.body.firstChild);
   }
 
   // --- Protection handlers (scoped to the logo area) ---
@@ -65,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
   guard.addEventListener("touchend", disarm, {passive:true});
   guard.addEventListener("touchcancel", disarm, {passive:true});
 
-  // Block typical save-source/print combos while armed (matches Life Pictures)
+  // Block typical save-source/print combos while armed
   document.addEventListener("keydown", function(e){
     if (!armed) return;
     const k = e.key && e.key.toLowerCase();
@@ -85,105 +88,3 @@ document.addEventListener("DOMContentLoaded", function () {
   guard.addEventListener("touchmove",  () => clearTimeout(pressTimer), {passive:true});
 });
 </script>
-
-<script>
-(function () {
-  // Guard to ensure this runs after Lenis script tag is parsed
-  function initLenis() {
-    if (window.innerWidth > 768 && window.Lenis) {
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smooth: true,
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smoothTouch: false,
-        touchMultiplier: 1.5,
-      });
-
-      // expose globally so anchor code can use it
-      window.__lenis = lenis;
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    }
-  }
-
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-    initLenis();
-  } else {
-    document.addEventListener("DOMContentLoaded", initLenis);
-  }
-})();
-</script>
-
-<!-- Smooth anchors for <a data-smooth href="#..."> -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const links = document.querySelectorAll('a[data-smooth][href^="#"]');
-
-  links.forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      const targetId = this.getAttribute("href").substring(1);
-      const target = document.getElementById(targetId);
-      if (!target) return;
-
-      e.preventDefault();
-
-      // If Lenis is active (desktop), use it; otherwise, fall back to manual tween.
-      if (window.__lenis) {
-        // Keep the exact feel: ~900ms with similar easing
-        window.__lenis.scrollTo(target, {
-          offset: 0,
-          duration: 0.9, // seconds
-          easing: t => (t < 0.5 ? 8*t*t*t*t : 1 - Math.pow(-2*t + 2, 4)/2)
-        });
-        return;
-      }
-
-      // Manual tween (mobile)
-      const start = window.scrollY;
-      const end = window.scrollY + target.getBoundingClientRect().top;
-      const duration = 900;
-      let startTime = null;
-
-      function easeInOutQuart(t) {
-        return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
-      }
-
-      function animateScroll(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = easeInOutQuart(progress);
-        window.scrollTo(0, start + (end - start) * eased);
-        if (progress < 1) requestAnimationFrame(animateScroll);
-      }
-
-      requestAnimationFrame(animateScroll);
-    });
-  });
-});
-</script>
-
-<!-- Scrollbar styling (same as Carrd) + override to prevent CSS smooth conflict -->
-<style>
-/* Neutralize CSS smooth scrolling so JS has full control */
-html { scroll-behavior: auto !important; }
-
-/* Scrollbar styling for WebKit browsers (Chrome, Edge, Safari) */
-::-webkit-scrollbar { width: 18px; }
-::-webkit-scrollbar-track { background: transparent !important; }
-::-webkit-scrollbar-thumb {
-  background-color: rgba(68, 68, 68, 0.8);
-  border-radius: 8px;
-  border: 3px solid transparent;
-}
-::-webkit-scrollbar-thumb:hover { background-color: rgba(102, 102, 102, 0.9); }
-
-/* Scrollbar styling for Firefox */
-* { scrollbar-width: auto; scrollbar-color: rgba(68, 68, 68, 0.8) transparent; }
-</style>
