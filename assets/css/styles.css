@@ -570,3 +570,89 @@ html, body {
   scrollbar-width: auto;
   scrollbar-color: rgba(68,68,68,.8) transparent;
 }
+
+/* ============ Layout core: container → wrapper → inner ============ */
+/* Container: apenas margens externas; nunca padding */
+.container {
+  margin: var(--space-4) auto;   /* ajuste fino à vontade */
+  padding: 0 !important;
+  background: transparent;       /* não obrigatório; só pra deixar claro */
+}
+
+/* Wrapper: controla largura e centraliza; sem padding */
+.container > .wrapper {
+  max-width: min(1200px, 75vw);  /* mantém teu cap de 1200/75vw */
+  margin-inline: auto;
+  padding: 0 !important;
+}
+
+/* Inner: único lugar com padding interno */
+.container > .wrapper > .inner {
+  padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 40px);
+}
+
+/* Elementos/embeds dentro da inner ocupam a largura máxima da inner */
+.container > .wrapper > .inner > * {
+  max-width: 100%;
+}
+
+/* ================== Harmonização com classes existentes ================== */
+/* Tua .wrapper antiga passa a ser usada só dentro de .container */
+.wrapper { max-width: none; margin: 0; } /* neutraliza default global */
+.container > .wrapper { max-width: min(1200px, 75vw); margin-inline: auto; }
+
+/* A .section não deve ter padding se for usada como container */
+.section { padding: 0; } /* tira o padding; mantém apenas margin já definida */
+
+/* Se precisar de uma seção com padding interno, usa .inner (não .section) */
+
+/* ================== Ajustes nos containers específicos ================== */
+/* #3, #5, #6 passam a seguir a hierarquia, sem padding no nível do container */
+#container-3,
+#container-5,
+#container-6 {
+  padding: 0 !important;
+  margin: var(--space-4) auto;
+}
+
+/* No #6 você tinha padding em .content-75; move para .inner */
+#container-6 .content-75 { padding: 0 !important; }
+#container-6 .wrapper { max-width: min(1200px, 75vw); margin-inline: auto; padding: 0; }
+#container-6 .inner { padding: 3.25rem var(--pad-h); } /* preserva a intenção anterior */
+
+/* No #5 (FAQ), remove padding do “outer” e aplica na .inner (já definida globalmente) */
+#container-5 { margin-top: 0; }
+#container-5 .inner-wrap { padding: 0 !important; } /* era padding no wrapper; tira */
+#container-5 .faq-section { padding: 0 var(--pad-h); } /* esta fica dentro da .inner */
+
+/* No #3, sem mudanças de tipografia; só garantindo a hierarquia sem padding extra */
+#container-3 .whoami,
+#container-3 #gs-blurb { max-width: 100%; } /* largura controlada pelo wrapper */
+
+/* ================== Full-bleed compatível com nova hierarquia ================== */
+/* Full-bleed dentro de .container: não depende de padding horizontal */
+.container .full-bleed{
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: calc(-50vw + (100vw - 100%) / 2);
+  margin-right: calc(-50vw + (100vw - 100%) / 2);
+  overflow-x: clip;
+}
+
+/* ================== Utilidades coerentes ================== */
+/* “content-75/40/100” passam a atuar no wrapper, não adicionam padding */
+.content-100, .content-75, .content-40 { width: 100%; max-width: 100%; }
+.container > .wrapper.content-75 { max-width: 75rem; }
+.container > .wrapper.content-40 { max-width: 40rem; }
+
+/* Calendly/embeds: garantem largura máxima da inner */
+.calendly-inline-widget,
+.calendly-inline-widget iframe,
+#container-3 .slideshow-container,
+#container-3 .slideshow-frame,
+#container-3 img,
+#container-3 video {
+  max-width: 100%;
+}
+
