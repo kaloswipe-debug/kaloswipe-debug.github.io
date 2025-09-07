@@ -1,31 +1,50 @@
+<!-- ======================== CONTAINER #5 ======================== -->
 <section id="container-5" class="full-bleed center">
-  <!-- SF Pro Display (safe to remove if already in <head>) -->
-  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
+  <!-- 🔧 Scoped layout fixes just for this section -->
   <style>
-    .questions-title {
+    /* keep the section in-bounds and prevent horizontal spill */
+    #container-5 { display:block; width:100%; overflow-x:hidden; position:relative; }
+
+    /* if your .full-bleed utility uses negative margins, neutralize them here */
+    #container-5.full-bleed { margin-inline:0 !important; width:100% !important; }
+
+    /* center/constrain inner content */
+    #container-5 .inner-wrap {
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: clamp(16px, 4vw, 32px);
+      box-sizing: border-box;
+    }
+
+    /* ensure no rogue transforms push content off-screen */
+    #container-5, 
+    #container-5 .inner-wrap, 
+    #container-5 .faq-section { 
+      left:auto !important; right:auto !important; transform:none !important; 
+    }
+
+    /* ---------------- existing styles (scoped) ---------------- */
+    #container-5 .questions-title {
       margin: 1.375rem auto;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont,
       'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 300; /* Light */
-      font-size: 2.25rem; /* Carrd size 2.25 */
-      line-height: 1.125; /* Carrd line spacing */
-      letter-spacing: -0.1rem; /* tighter tracking */
+      font-weight: 300;
+      font-size: 2.25rem;
+      line-height: 1.125;
+      letter-spacing: -0.1rem;
       color: #E1E6EC;
       text-align: center;
       max-width: 100%;
     }
-
     @media (max-width: 768px) {
-      .questions-title {
-        margin-bottom: calc(1.375rem + 10px);
-      }
+      #container-5 .questions-title { margin-bottom: calc(1.375rem + 10px); }
     }
 
-    a { text-decoration: none; color: #e1e6ec; }
-    a:hover { text-decoration: none; color: #e1e6ec; }
+    #container-5 a { text-decoration: none; color: #e1e6ec; }
+    #container-5 a:hover { text-decoration: none; color: #e1e6ec; }
 
-    .accordion {
+    #container-5 .accordion {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -44,23 +63,24 @@
       user-select: none;
       overflow: hidden;
       flex-direction: column;
+      box-sizing: border-box; /* important when we clamp width */
     }
 
-    .accordion-header {
+    #container-5 .accordion-header {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .question {
+    #container-5 .question {
       line-height: 1;
       font-size: 1.1rem;
       position: relative;
       top: 1.4px;
     }
 
-    .icon {
+    #container-5 .icon {
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont,
       'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       font-weight: 300;
@@ -72,17 +92,16 @@
       flex-shrink: 0;
       transform: rotate(0deg);
     }
+    #container-5 .icon.rotate { transform: rotate(180deg); }
 
-    .icon.rotate { transform: rotate(180deg); }
-
-    .extra-content {
+    #container-5 .extra-content {
       overflow: hidden;
       max-height: 0;
       transition: max-height 0.3s cubic-bezier(0.25,0.8,0.5,1);
       width: 100%;
     }
 
-    .inner {
+    #container-5 .inner {
       padding-top: 20px;
       font-size: 0.9rem;
       font-weight: 400;
@@ -92,19 +111,18 @@
       box-sizing: border-box;
     }
 
-    .bullet-list {
+    #container-5 .bullet-list {
       list-style-type: disc;
       padding-left: 1.5em;
     }
 
     @media(max-width:600px) {
-      @keyframes rotateGradient {
+      @keyframes c5RotateGradient {
         0% { background-position:0% 50%; }
         50% { background-position:100% 50%; }
         100% { background-position:0% 50%; }
       }
-
-      .accordion {
+      #container-5 .accordion {
         max-width: 100%;
         margin: 0 auto 12px;
         padding: 20px;
@@ -114,22 +132,21 @@
         transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
         background: linear-gradient(120deg,rgba(28,28,28,0.94),rgba(0,0,0,0.9));
         background-size: 200% 200%;
-        animation: rotateGradient 30s ease infinite;
+        animation: c5RotateGradient 30s ease infinite;
         user-select: none;
       }
+      #container-5 .accordion:nth-of-type(2) { background: linear-gradient(160deg,rgba(27,27,27,0.93),rgba(0,0,0,0.89)); animation: c5RotateGradient 35s ease infinite; }
+      #container-5 .accordion:nth-of-type(3) { background: linear-gradient(200deg,rgba(26,26,26,0.92),rgba(0,0,0,0.88)); animation: c5RotateGradient 32s ease infinite; }
+      #container-5 .accordion:nth-of-type(4) { background: linear-gradient(135deg,rgba(25,25,25,0.93),rgba(0,0,0,0.89)); animation: c5RotateGradient 34s ease infinite; }
+      #container-5 .accordion:nth-of-type(5) { background: linear-gradient(180deg,rgba(26,26,26,0.92),rgba(0,0,0,0.87)); animation: c5RotateGradient 31s ease infinite; }
+      #container-5 .accordion:nth-of-type(6) { background: linear-gradient(100deg,rgba(25,25,25,0.93),rgba(0,0,0,0.88)); animation: c5RotateGradient 36s ease infinite; }
+      #container-5 .accordion:nth-of-type(7) { background: linear-gradient(150deg,rgba(24,24,24,0.92),rgba(0,0,0,0.89)); animation: c5RotateGradient 33s ease infinite; }
 
-      .accordion:nth-of-type(2) { background: linear-gradient(160deg,rgba(27,27,27,0.93),rgba(0,0,0,0.89)); animation: rotateGradient 35s ease infinite; }
-      .accordion:nth-of-type(3) { background: linear-gradient(200deg,rgba(26,26,26,0.92),rgba(0,0,0,0.88)); animation: rotateGradient 32s ease infinite; }
-      .accordion:nth-of-type(4) { background: linear-gradient(135deg,rgba(25,25,25,0.93),rgba(0,0,0,0.89)); animation: rotateGradient 34s ease infinite; }
-      .accordion:nth-of-type(5) { background: linear-gradient(180deg,rgba(26,26,26,0.92),rgba(0,0,0,0.87)); animation: rotateGradient 31s ease infinite; }
-      .accordion:nth-of-type(6) { background: linear-gradient(100deg,rgba(25,25,25,0.93),rgba(0,0,0,0.88)); animation: rotateGradient 36s ease infinite; }
-      .accordion:nth-of-type(7) { background: linear-gradient(150deg,rgba(24,24,24,0.92),rgba(0,0,0,0.89)); animation: rotateGradient 33s ease infinite; }
-
-      .accordion:active { transform: scale(0.98); box-shadow: 0 1px 3px rgba(0,0,0,0.6); }
-      .accordion:hover { filter: brightness(1.05); }
-      .accordion-header { position: relative; justify-content: center; padding-right: 6px; }
-      .accordion-header .question { flex:1; text-align: center; }
-      .accordion-header .icon { display: none !important; }
+      #container-5 .accordion:active { transform: scale(0.98); box-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+      #container-5 .accordion:hover { filter: brightness(1.05); }
+      #container-5 .accordion-header { position: relative; justify-content: center; padding-right: 6px; }
+      #container-5 .accordion-header .question { flex:1; text-align: center; }
+      #container-5 .accordion-header .icon { display: none !important; }
     }
   </style>
 
@@ -235,46 +252,62 @@
     </div>
   </div>
 
+  <!-- Scoped script so multiple includes don't fight each other -->
   <script>
-    const accordions=document.querySelectorAll('.accordion');
-    function updateQuestionsForMobile(){
-      if(window.innerWidth<=600){
-        document.querySelectorAll('.question').forEach(q=>{
-          const original=q.getAttribute('data-text');
-          if(original)q.textContent=original;
-        });
-        document.getElementById('desc1').innerHTML="In contrast to most editors, who are only interested in pumping out the bare minimum video editing service to collect their money, I work very closely with you to consistently push the limits with my editing while staying true to your brand and vision. Creating the best content and maximizing ROI.";
-        document.getElementById('desc2').innerHTML="After we start working together, we'll have an alignment meeting to get on the same page about how your content should be. I'll ask questions like:<ul class='bullet-list'><li>“If someone binge-watched 5 of your videos, what word should they walk away with?”</li><li>“What emotion should still land even if the video had no visuals?”</li><li>“What’s totally off-brand for you, even if it could go viral?”</li></ul>These types of questions allow me to edit in your voice, <em>but better.</em>";
-        document.getElementById('desc3').innerHTML="Revisions usually happen for one of two reasons:<ul class='bullet-list'><li>Your editor is sloppy and doesn't pay attention to detail.</li><li>They're misaligned and disconnected from you and your brand.</li></ul>This is why the alignment call is so important.";
-      }else{
-        document.querySelectorAll('.question').forEach((q,i)=>{
-          const original=q.getAttribute('data-text');
-          if(original)q.textContent=(i+1)+". "+original;
-        });
-      }
-    }
-    updateQuestionsForMobile();
-    window.addEventListener('resize',updateQuestionsForMobile);
+    (function(){
+      const section = document.currentScript.closest('#container-5');
+      if (!section) return;
 
-    accordions.forEach(acc=>{
-      const icon=acc.querySelector('.icon');
-      const content=acc.querySelector('.extra-content');
-      const inner=acc.querySelector('.inner');
-      acc.addEventListener('click',()=>{
-        const isActive=acc.classList.contains('active');
-        accordions.forEach(other=>{
-          if(other!==acc){
-            other.classList.remove('active');
-            const oIcon=other.querySelector('.icon');
-            const oContent=other.querySelector('.extra-content');
-            if(oIcon){oIcon.textContent='+';oIcon.classList.remove('rotate');}
-            oContent.style.maxHeight=null;
+      const accordions = section.querySelectorAll('.accordion');
+
+      function updateQuestionsForMobile(){
+        if(window.innerWidth<=600){
+          section.querySelectorAll('.question').forEach(q=>{
+            const original=q.getAttribute('data-text');
+            if(original) q.textContent=original;
+          });
+          const d1 = section.querySelector('#desc1');
+          const d2 = section.querySelector('#desc2');
+          const d3 = section.querySelector('#desc3');
+          if (d1) d1.innerHTML="In contrast to most editors, who are only interested in pumping out the bare minimum video editing service to collect their money, I work very closely with you to consistently push the limits with my editing while staying true to your brand and vision. Creating the best content and maximizing ROI.";
+          if (d2) d2.innerHTML="After we start working together, we'll have an alignment meeting to get on the same page about how your content should be. I'll ask questions like:<ul class='bullet-list'><li>“If someone binge-watched 5 of your videos, what word should they walk away with?”</li><li>“What emotion should still land even if the video had no visuals?”</li><li>“What’s totally off-brand for you, even if it could go viral?”</li></ul>These types of questions allow me to edit in your voice, <em>but better.</em>";
+          if (d3) d3.innerHTML="Revisions usually happen for one of two reasons:<ul class='bullet-list'><li>Your editor is sloppy and doesn't pay attention to detail.</li><li>They're misaligned and disconnected from you and your brand.</li></ul>This is why the alignment call is so important.";
+        } else {
+          section.querySelectorAll('.question').forEach((q,i)=>{
+            const original=q.getAttribute('data-text');
+            if(original) q.textContent=(i+1)+". "+original;
+          });
+        }
+      }
+
+      updateQuestionsForMobile();
+      window.addEventListener('resize', updateQuestionsForMobile);
+
+      accordions.forEach(acc=>{
+        const icon=acc.querySelector('.icon');
+        const content=acc.querySelector('.extra-content');
+        const inner=acc.querySelector('.inner');
+
+        acc.addEventListener('click',()=>{
+          const isActive=acc.classList.contains('active');
+
+          accordions.forEach(other=>{
+            if(other!==acc){
+              other.classList.remove('active');
+              const oIcon=other.querySelector('.icon');
+              const oContent=other.querySelector('.extra-content');
+              if(oIcon){ oIcon.textContent='+'; oIcon.classList.remove('rotate'); }
+              if(oContent){ oContent.style.maxHeight=null; }
+            }
+          });
+
+          acc.classList.toggle('active');
+          if(icon){ icon.textContent=isActive?'+':'–'; icon.classList.toggle('rotate'); }
+          if(content && inner){
+            content.style.maxHeight = isActive ? null : inner.scrollHeight+'px';
           }
         });
-        acc.classList.toggle('active');
-        if(icon){icon.textContent=isActive?'+':'–';icon.classList.toggle('rotate');}
-        content.style.maxHeight=isActive?null:inner.scrollHeight+'px';
       });
-    });
+    })();
   </script>
 </section>
