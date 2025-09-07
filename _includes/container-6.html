@@ -1,6 +1,99 @@
 <!-- ======================== BIG CONTAINER #6 ======================== -->
 <section id="container-6" class="full-bleed bg-02060A pattern-lines">
 
+  <!-- 🔧 Scoped fixes just for this section -->
+  <style>
+    /* layout: center the inner wrapper and block any off-screen overflow */
+    #container-6 { display:block; width:100%; overflow-x:hidden; position:relative; }
+
+    /* if your .full-bleed utility uses negative margins, neutralize them here */
+    #container-6.full-bleed { margin-inline:0 !important; width:100% !important; }
+
+    /* inner max-width + side padding */
+    #container-6 .mx-auto { 
+      max-width: 1200px; 
+      margin-inline: auto; 
+      padding-inline: clamp(16px, 4vw, 32px);
+    }
+
+    /* some codebases use .content-75 to clamp width with transforms; kill offsets */
+    #container-6 .content-75, 
+    #container-6 .content-75 * {
+      left:auto !important; right:auto !important; transform:none !important;
+    }
+
+    /* decorative backgrounds shouldn’t cause horizontal scroll */
+    #container-6.pattern-lines,
+    #container-6.pattern-lines::before,
+    #container-6.pattern-lines::after {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* calendly: keep it fluid */
+    #container-6 .calendly-inline-widget {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 850px;
+      border: 0;
+    }
+
+    /* reveal card basics (safe defaults if not already in your global CSS) */
+    #container-6 .reveal-card {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      border-radius: 12px;
+      overflow: hidden;
+      outline: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      max-width: 100%;
+    }
+    #container-6 .rc-media img { 
+      display:block; 
+      width:100%; 
+      height:auto; 
+    }
+    #container-6 .rc-overlay {
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      opacity:0; transition:opacity .2s;
+      background:rgba(0,0,0,.25);
+    }
+    #container-6 .reveal-card:focus .rc-overlay,
+    #container-6 .reveal-card:hover .rc-overlay { opacity:1; }
+
+    /* footnote */
+    #container-6 .disclaim {
+      opacity:.75; 
+      font-size: .9rem; 
+      line-height: 1.4;
+      margin-top: 20px;
+    }
+
+    /* spacing utilities fallback (if your tokens differ, keep these) */
+    #container-6 .pv-325 { padding-block: clamp(48px, 8vw, 120px); }
+    #container-6 .ph-auto { padding-inline: 0; }
+    #container-6 .center { text-align:center; }
+
+    /* button normalization (in case .scroll-button isn’t globally styled) */
+    #container-6 .scroll-button {
+      display:inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      line-height: 1;
+      border: 1px solid currentColor;
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 768px) {
+      #container-6 .calendly-inline-widget { height: 900px; }
+    }
+  </style>
+
   <!-- INNER CONTENT: centered, constrained -->
   <div class="mx-auto content-75 center pv-325 ph-auto">
 
@@ -10,7 +103,10 @@
     </a>
 
     <!-- Reveal card -->
-    <div class="reveal-card" data-src="https://i.imgur.com/LaQ7YLf.png" role="button" aria-expanded="false" aria-label="View image" tabindex="0">
+    <div class="reveal-card" 
+         data-src="https://i.imgur.com/LaQ7YLf.png" 
+         role="button" aria-expanded="false" 
+         aria-label="View image" tabindex="0">
       <div class="rc-media">
         <img src="https://i.imgur.com/LaQ7YLf.png" alt="Preview" loading="lazy" draggable="false" />
       </div>
@@ -19,9 +115,9 @@
     </div>
 
     <!-- Calendly -->
-    <div id="book-your-call" class="calendly-inline-widget"
-         data-url="https://calendly.com/gabriel-edits/30min"
-         style="min-width:320px;height:850px;">
+    <div id="book-your-call"
+         class="calendly-inline-widget"
+         data-url="https://calendly.com/gabriel-edits/30min">
     </div>
 
     <!-- Footnote -->
@@ -30,4 +126,18 @@
     </div>
 
   </div>
+
+  <!-- Optional: tiny enhancer for keyboard-activation of the reveal card (no dependency) -->
+  <script>
+    (function(){
+      var card = document.currentScript && document.currentScript.previousElementSibling?.querySelector('.reveal-card');
+      if (!card) return;
+      var src = card.getAttribute('data-src');
+      function openImg(){ if(src) window.open(src, '_blank', 'noopener'); }
+      card.addEventListener('click', openImg);
+      card.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openImg(); }
+      });
+    })();
+  </script>
 </section>
