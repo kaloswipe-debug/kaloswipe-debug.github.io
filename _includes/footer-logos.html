@@ -1,23 +1,91 @@
 <!-- Inject TOP Gabriel Edits Logo into #logo-1 (or prepend to <main>) -->
+<!-- Inject TOP Gabriel Edits Logo into #logo-1 (protected like Life Pictures) -->
+<style>
+  /* Scoped, minimal, and tough to long-press/save */
+  #ge-logo-wrap{
+    position:relative;
+    width:88px;
+    margin:0 auto 12px;
+    user-select:none; -webkit-user-select:none; -ms-user-select:none;
+    -webkit-touch-callout:none; /* iOS long-press menu */
+    touch-action:manipulation;
+  }
+  #ge-logo-wrap img{
+    display:block; width:100%; height:auto;
+    pointer-events:none; /* overlay catches all events */
+  }
+  #ge-logo-wrap .protect-guard{
+    position:absolute; inset:0; z-index:2;
+    background:transparent; pointer-events:auto;
+  }
+</style>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const src = "https://i.imgur.com/Hi9k0uo.png";
-  const imgHTML =
-    '<img src="' + src + '" alt="Gabriel Edits Logo" draggable="false" style="width:88px; margin:0px auto 12px; display:block;" />';
 
+  // Build protected wrapper (mirrors Life Pictures approach)
+  const wrap = document.createElement("div");
+  wrap.id = "ge-logo-wrap";
+  const img  = document.createElement("img");
+  img.src = src;
+  img.alt = "Gabriel Edits Logo";
+  img.setAttribute("draggable","false");
+  const guard = document.createElement("div");
+  guard.className = "protect-guard";
+  wrap.appendChild(img);
+  wrap.appendChild(guard);
+
+  // Install into preferred anchor or fallback to <main>
   const anchor = document.getElementById("logo-1");
   if (anchor) {
-    anchor.innerHTML = imgHTML;
+    anchor.innerHTML = ""; // clear anything old
+    anchor.appendChild(wrap);
   } else {
     const main = document.querySelector("main.page") || document.querySelector("main");
-    if (main) {
-      const wrapper = document.createElement("div");
-      wrapper.innerHTML = imgHTML;
-      main.insertBefore(wrapper, main.firstChild);
-    }
+    if (main) main.insertBefore(wrap, main.firstChild);
   }
+
+  // --- Protection handlers (scoped to the logo area) ---
+  // No context menu / copy / cut on the protected zone
+  ["contextmenu","copy","cut"].forEach(evt =>
+    guard.addEventListener(evt, e => e.preventDefault(), {passive:false})
+  );
+
+  // No drag
+  guard.addEventListener("dragstart", e => e.preventDefault());
+
+  // Track hover/focus so we only block hotkeys when user is on/near the logo
+  let armed = false;
+  const arm   = () => { armed = true; };
+  const disarm= () => { armed = false; };
+  guard.addEventListener("mouseenter", arm);
+  guard.addEventListener("mouseleave", disarm);
+  guard.addEventListener("touchstart", arm, {passive:true});
+  guard.addEventListener("touchend", disarm, {passive:true});
+  guard.addEventListener("touchcancel", disarm, {passive:true});
+
+  // Block typical save-source/print combos while armed (matches Life Pictures)
+  document.addEventListener("keydown", function(e){
+    if (!armed) return;
+    const k = e.key && e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && (k === "s" || k === "u" || k === "p")){
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+
+  // Cheap long-press deterrent on some Android browsers (iOS handled via CSS)
+  let pressTimer;
+  guard.addEventListener("touchstart", () => {
+    clearTimeout(pressTimer);
+    pressTimer = setTimeout(()=>{}, 650);
+  }, {passive:true});
+  guard.addEventListener("touchend",   () => clearTimeout(pressTimer), {passive:true});
+  guard.addEventListener("touchmove",  () => clearTimeout(pressTimer), {passive:true});
 });
 </script>
+
 <script>
 (function () {
   // Guard to ensure this runs after Lenis script tag is parsed
