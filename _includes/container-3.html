@@ -3,102 +3,436 @@
   class="mx-auto full-bleed bg-02060A pattern-noise pv-auto ph-auto mt-225 mb-1875 center">
   <div class="mx-auto center">
 
-    <!-- Who I Am -->
-    <!-- 18Who am I.txt -->
-    <!-- SF Pro Display Font -->
-    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-    <div style="margin:auto;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
-    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:300;font-size:2.625rem;
-    line-height:1.125;letter-spacing:-0.1rem;color:#E1E6EC;text-align:center;max-width:100%;">Who am I?</div>
+<!-- 18Who am I.txt -->
+<!-- Load SF Pro Display -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
-    <!-- My Name is Gabriel Santana -->
-    <!-- 19My name is Gabriel Santana.txt -->
-    <div id="gs-blurb" style="margin:auto;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
-    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:400;font-size:1.125rem;line-height:1.125;
-    letter-spacing:0;color:#8a8a8a;text-align:center;max-width:57%;">
-      <span class="mobile-only">
-        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
-      </span>
-      <span class="desktop-only">
-        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
-        My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong>
-      </span>
+<div style="
+  margin: auto;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 2.625rem;
+  line-height: 1.125;
+  letter-spacing: -0.1rem;
+  color: #E1E6EC;
+  text-align: center;
+  max-width: 100%;
+">Who am I?</div>
+
+<!-- 19My name is Gabriel Santana.txt -->
+<!-- Load SF Pro Display -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
+<div id="gs-blurb" style="
+  margin: auto;
+  font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.125;
+  letter-spacing: 0;
+  color: #8a8a8a;
+  text-align: center;
+  max-width: 57%;
+">
+  <span class="mobile-only">
+    My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+  </span>
+  <span class="desktop-only">
+    My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+    My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong>
+  </span>
+</div>
+
+<style>
+@media (max-width: 768px) {
+  #gs-blurb { max-width: 90% !important; margin-top: 10px !important; }
+  #gs-blurb .desktop-only { display: none; }
+}
+@media (min-width: 769px) {
+  #gs-blurb .mobile-only { display: none; }
+}
+</style>
+
+<!-- 20Life Pictures.txt -->
+<style>
+/* sane box model */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* wrapper centers and contains */
+.slideshow-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* outer frame that constrains width & wipes browser effects */
+.slideshow-frame {
+  width: min(1100px, 92vw);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* main container (arrows + track + guard) */
+.slideshow-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  grid-template-rows: 1fr;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 30px auto 190px auto;
+}
+
+/* slide track (holds the slides) */
+.slide-track {
+  position: relative;
+  overflow: hidden;
+  height: min(62vw, 590px);
+  border-radius: 10px;
+  border: 1px solid rgba(12,12,12,1);
+  box-shadow: 0 0 16px rgba(0,0,0,0.15);
+}
+
+/* single slide card */
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity .5s ease, transform .5s ease, filter .5s ease;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(88%) contrast(105%) brightness(98%);
+}
+.slide.active { opacity: 1; transform: scale(1); filter: none; }
+.slide.left, .slide.right { opacity: 0; transform: scale(0.985); }
+
+/* arrows */
+.arrow {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: 1px solid rgba(12,12,12,1);
+  background: #00000091;
+  color: #E1E6EC;
+  border-radius: 8px;
+  width: 50px; height: 50px;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: box-shadow .3s ease, border-color .3s ease, transform .15s ease;
+  box-shadow: 0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02);
+}
+.arrow:hover {
+  border-color: #ffffff33;
+  box-shadow: 0 0 8px rgba(255,255,255,0.08), 0 0 16px rgba(255,255,255,0.04);
+}
+.arrow:active { transform: scale(0.97); }
+
+/* protect guard over the track */
+.protect-guard {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* mobile tweaks */
+@media (max-width: 768px) {
+  .slideshow-container {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-bottom: 120px;
+  }
+  .arrow { width: 46px; height: 46px; }
+}
+</style>
+
+<div class="slideshow-wrapper">
+  <div class="slideshow-frame">
+    <div class="slideshow-container" id="slideshow">
+      <button type="button" class="arrow arrow-left">&#10094;</button>
+      <div class="slide-track" id="slideTrack"></div>
+      <button type="button" class="arrow arrow-right">&#10095;</button>
+      <div class="protect-guard"></div>
     </div>
-    <style>
-      @media (max-width: 768px){#gs-blurb{max-width:90%!important;margin-top:10px!important;}
-      #gs-blurb .desktop-only{display:none;}}
-      @media (min-width:769px){#gs-blurb .mobile-only{display:none;}}
-    </style>
+  </div>
+</div>
 
-    <!-- Life Pictures -->
-    <!-- 20Life Pictures.txt -->
-    <style>*,*::before,*::after{box-sizing:border-box;}</style>
-    <div class="slideshow-wrapper"><div class="slideshow-frame">
-      <div class="slideshow-container" id="slideshow">
-        <button type="button" class="arrow arrow-left">&#10094;</button>
-        <div class="slide-track" id="slideTrack"></div>
-        <button type="button" class="arrow arrow-right">&#10095;</button>
-        <div class="protect-guard"></div>
-      </div></div></div>
-    <script>
-    const IMAGE_URLS=["https://i.imgur.com/M3iYH0R.jpeg","https://i.imgur.com/iTgs8Nm.jpeg",
-    "https://i.imgur.com/xqhNrMc.jpeg","https://i.imgur.com/JIZwpKT.jpeg","https://i.imgur.com/kYj36ZY.jpeg"];
-    const track=document.getElementById("slideTrack");const slides=[];
-    IMAGE_URLS.forEach(url=>{const d=document.createElement("div");d.className="slide";
-    d.style.backgroundImage=`url("${url}")`;track.appendChild(d);slides.push(d);});
-    let current=0;function update(){slides.forEach((s,i)=>{s.classList.remove("active","left","right");
-    if(i===current)s.classList.add("active");
-    else if(i===(current+1)%slides.length)s.classList.add("right");
-    else if(i===(current-1+slides.length)%slides.length)s.classList.add("left");});}
-    function move(d){current=(current+d+slides.length)%slides.length;update();}
-    document.querySelector(".arrow-left").onclick=()=>move(-1);
-    document.querySelector(".arrow-right").onclick=()=>move(1);update();
-    </script>
+<script>
+const IMAGE_URLS = [
+  "https://i.imgur.com/M3iYH0R.jpeg",
+  "https://i.imgur.com/iTgs8Nm.jpeg",
+  "https://i.imgur.com/xqhNrMc.jpeg",
+  "https://i.imgur.com/JIZwpKT.jpeg",
+  "https://i.imgur.com/kYj36ZY.jpeg"
+];
+const track = document.getElementById("slideTrack");
+const slides = [];
+IMAGE_URLS.forEach(url => {
+  const d = document.createElement("div");
+  d.className = "slide";
+  d.style.backgroundImage = `url("${url}")`;
+  track.appendChild(d);
+  slides.push(d);
+});
+let current = 0;
+function update(){
+  slides.forEach((s,i)=>{
+    s.classList.remove("active","left","right");
+    if(i===current) s.classList.add("active");
+    else if(i===(current+1)%slides.length) s.classList.add("right");
+    else if(i===(current-1+slides.length)%slides.length) s.classList.add("left");
+  });
+}
+function move(d){ current = (current + d + slides.length) % slides.length; update(); }
+document.querySelector(".arrow-left").onclick = () => move(-1);
+document.querySelector(".arrow-right").onclick = () => move(1);
+update();
+</script>
 
-    <!-- My Goal is Simple (Mobile) -->
-    <!-- 21My goal is simple (mobile).txt -->
-    <div id="gs-blurb-mobile" style="margin:auto;margin-bottom:50px;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
-    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:400;font-size:0.9rem;line-height:1.125;color:#8a8a8a;
-    text-align:center;max-width:57%;">My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong></div>
-    <style>@media(max-width:768px){#gs-blurb-mobile{max-width:90%!important;margin-top:10px!important;display:block!important;}}
-    @media(min-width:769px){#gs-blurb-mobile{display:none!important;}}</style>
+<!-- 21My goal is simple (mobile).txt -->
+<!-- Load SF Pro Display -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
-    <!-- Divider 3 -->
-    <!-- 22Divider 3.txt -->
-    <hr style="border:0;border-top:1px solid rgba(255,255,255,0.08);margin:40px auto;width:60%;">
+<div id="gs-blurb-mobile" style="
+  margin:auto;
+  margin-bottom: 50px; /* 👈 aqui */
+  font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.125;
+  color: #8a8a8a;
+  text-align: center;
+  max-width: 57%;
+">My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong></div>
 
-    <!-- Here’s what working with me looks like -->
-    <!-- 23Here's what working with me looks like.txt -->
-    <div class="responsive-text"><span>Here's what working with me looks like:</span></div>
-    <style>.responsive-text{margin:auto;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-    font-weight:300;font-size:2.625rem;line-height:1.125;letter-spacing:-0.1rem;color:#E1E6EC;text-align:center;max-width:100%;}
-    @media(max-width:768px){.responsive-text{font-size:2.1rem;line-height:1.05;margin-bottom:10px;}
-    .responsive-text::before{content:"Here’s how I work with you:";display:block;}
-    .responsive-text span{display:none;}}</style>
+<style>
+@media (max-width: 768px) {
+  #gs-blurb-mobile{
+    max-width: 90% !important;
+    margin-top: 10px !important;
+    display: block !important;
+  }
+}
+@media (min-width: 769px) {
+  #gs-blurb-mobile { display: none !important; }
+}
+</style>
 
-    <!-- The exact system I use daily -->
-    <!-- 24The exact system I use daily to produce client content with minimal input from them.txt -->
-    <div id="hero-blurb" style="margin:auto;display:block;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
-    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:400;font-size:1.125rem;line-height:1.3;color:#8a8a8a;text-align:center;max-width:57%;">The exact system I use daily to produce client content with minimal input from them.</div>
-    <style>@media(max-width:768px){#hero-blurb{display:none!important;}}</style>
+<!-- 22Divider 3.txt -->
+<!-- Mobile-only fade divider (Carrd) -->
+<style>
+#mobile-fade-divider-3 {
+  display: block;
+  width: 85%;
+  height: 1px;
+  margin: 24px auto 55px;
+  background: linear-gradient(90deg, rgba(225,230,236,0) 0%, #e1e6ec 20%, #e1e6ec 80%, rgba(225,230,236,0) 100%);
+}
+@media (min-width: 768px) { #mobile-fade-divider-3 { display: none !important; } }
+</style>
+<div id="mobile-fade-divider-3" role="separator" aria-hidden="true"></div>
 
-    <!-- Dashboard Note -->
-    <!-- 25Dashboard Note.txt -->
-    <div id="no-select" style="display:flex;flex-direction:column;align-items:center;font-family:'SF Pro Display',sans-serif;font-size:0.65em;
-    margin-bottom:3px;margin-top:18px;user-select:none;">
-      <div style="max-width:300px;background:rgba(30,30,30,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:8px;
-      padding:8px 14px;color:#e1e6ec;font-style:italic;box-shadow:0 0 8px rgba(255,255,255,0.05);backdrop-filter:blur(5px);text-align:center;">
-        <p style="margin:0;">✨ You'll get access to a <strong>private dashboard</strong> with step-by-step project tracking. Rough cuts, music, asset gathering, final touches. Updates in real time, no need to ask about project status.</p>
-      </div>
-      <div style="font-size:13px;color:#e1e6ec;margin-top:6px;opacity:0.6;">↑</div>
-    </div>
+<!-- 23Here's what working with me looks like.txt -->
+<!-- Load SF Pro Display -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
-    <!-- How it works (Desktop + Mobile) -->
-    <!-- 26How it works.txt -->
-    <!-- 27How it works (mobile).txt -->
-    <div id="steps-flow">… desktop flow code …</div>
-    <div id="steps-flow-mobile">… mobile flow code …</div>
+<div class="responsive-text">
+  <span>Here's what working with me looks like:</span>
+</div>
+<style>
+.responsive-text {
+  margin: auto;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+  font-size: 2.625rem;
+  line-height: 1.125;
+  letter-spacing: -0.1rem;
+  color: #E1E6EC;
+  text-align: center;
+  max-width: 100%;
+}
+@media (max-width: 768px) {
+  .responsive-text { font-size: 2.1rem; line-height: 1.05; margin-bottom: 10px; }
+  .responsive-text::before { content:"Here’s how I work with you:"; display:block; }
+  .responsive-text span { display:none; }
+}
+</style>
+
+<!-- 24The exact system I use daily to produce client content with minimal input from them.txt -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
+<div id="hero-blurb" style="
+  margin:auto;
+  display:block;
+  font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight:400;
+  font-size:1.125rem;
+  line-height:1.3;
+  color:#8a8a8a;
+  text-align:center;
+  max-width:57%;
+">The exact system I use daily to produce client content with minimal input from them.</div>
+
+<style>@media (max-width: 768px){ #hero-blurb{ display:none !important; } }</style>
+
+<!-- 25Dashboard Note.txt -->
+<!-- SF Pro Display Font -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
+<div id="no-select" style="
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-family:'SF Pro Display', sans-serif;
+  font-size:0.65em;
+  margin-bottom:3px;
+  margin-top:18px;
+  user-select:none;
+">
+  <div style="
+    max-width:300px;
+    background:rgba(30,30,30,0.7);
+    border:1px solid rgba(255,255,255,0.05);
+    border-radius:8px;
+    padding:8px 14px;
+    color:#e1e6ec;
+    font-style:italic;
+    box-shadow:0 0 8px rgba(255,255,255,0.05);
+    backdrop-filter:blur(5px);
+    text-align:center;
+  ">
+    <p style="margin:0;">
+      ✨ You'll get access to a <strong>private dashboard</strong> with step-by-step project tracking.
+      Rough cuts, music, asset gathering, final touches. Updates in real time, no need to ask about project status.
+    </p>
+  </div>
+  <div style="font-size:13px;color:#e1e6ec;margin-top:6px;opacity:0.6;">↑</div>
+</div>
+
+<!-- 26How it works.txt -->
+<!-- SF Pro Display Font -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
+<style>
+/* Hide this block on mobile (below 768px) */
+@media (max-width: 767px) {
+#steps-flow {
+display: none !important;
+}
+}
+</style>
+
+<div id="steps-flow" style="
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+margin-bottom: 48px;
+font-size: 0.75em;
+user-select: none;
+">
+
+<!-- Step 1 -->
+<div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
+style="flex: 1; min-width: 160px; max-width: 200px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 12px; color: white; box-shadow: 0 1px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+<h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.05em; font-weight:700;">Step 1: Alignment</h3>
+<p style="margin: 0; color: #ccc; font-weight:400;">We start with a deep alignment call to align with your voice + set up all technical details.</p>
+</div>
+
+<!-- ➔ -->
+<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+
+<!-- Note 1 -->
+<div style="flex: 0 0 160px; max-width: 180px; background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 10px; color: #ddd; font-style: italic; box-shadow: 0 1px 4px rgba(0,0,0,0.15);">
+<p style="margin: 0; font-weight:400;">I’m notified when a new file is added to the shared folder.<span style="color:#aaa;"> No messages needed.</span></p>
+</div>
+
+<!-- ➔ -->
+<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+
+<!-- Step 2 -->
+<div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
+style="flex: 1; min-width: 160px; max-width: 200px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 12px; color: white; box-shadow: 0 1px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+<h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.05em; font-weight:700;">Step 2: Execution</h3>
+<p style="margin: 0; color: #ccc; font-weight:400;">I create the video based on the vision from our alignment call, ensuring it matches your goals and minimizes revisions.</p>
+</div>
+
+<!-- ➔ -->
+<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+
+<!-- Note 2 -->
+<div style="flex: 0 0 160px; max-width: 180px; background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 10px; color: #ddd; font-style: italic; box-shadow: 0 1px 4px rgba(0,0,0,0.15);">
+<p style="margin: 0; font-weight:400;">Final video is uploaded to the shared folder.</p>
+</div>
+
+<!-- ➔ -->
+<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+
+<!-- Step 3 -->
+<div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
+style="flex: 1; min-width: 160px; max-width: 200px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 12px; color: white; box-shadow: 0 1px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+<h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.05em; font-weight:700;">Step 3: Delivery</h3>
+<p style="margin: 0; color: #ccc; font-weight:400;">You review it. If aligns with your vision, you upload it. Revisions are rare, though.</p>
+</div>
+
+</div>
+
+<!-- 27How it works (mobile).txt (stripped) -->
+<div id="steps-flow-mobile">
+<!-- Step 1 -->
+<div class="step"
+style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
+<h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 1: Alignment</h3>
+<p style="margin:0;color:#ccc;font-weight:400;">We start with a deep alignment call to align with your voice + set up all technical details.</p>
+</div>
+
+<!-- Note -->
+<div class="note"
+style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px;margin:6px 0;font-style:italic;color:#ddd;">
+<p style="margin:0;">I’m notified when a new file is added to the shared folder.<span style="color:#aaa;"> No messages needed.</span></p>
+</div>
+
+<!-- Step 2 -->
+<div class="step"
+style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
+<h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 2: Execution</h3>
+<p style="margin:0;color:#ccc;font-weight:400;">I create the video based on the vision from our alignment call, ensuring it matches your goals and minimizes revisions.</p>
+</div>
+
+<!-- Note -->
+<div class="note"
+style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px;margin:6px 0;font-style:italic;color:#ddd;">
+<p style="margin:0;">Final video is uploaded to the shared folder.</p>
+</div>
+
+<!-- Step 3 -->
+<div class="step"
+style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
+<h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 3: Delivery</h3>
+<p style="margin:0;color:#ccc;font-weight:400;">You review it. If aligns with your vision, you upload it. Revisions are rare, though.</p>
+</div>
+</div>
+
+<style>
+/* Only show the mobile flow on small screens */
+@media (min-width: 768px) { #steps-flow-mobile { display: none !important; } }
+/* Only show the desktop flow on larger screens (already hidden in its own CSS for max-width:767px) */
+</style>
 
   </div>
 </section>
-
