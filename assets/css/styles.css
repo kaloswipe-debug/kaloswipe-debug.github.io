@@ -8,6 +8,9 @@
   /* Carrd paddings */
   --pad-v: 1.375rem;
   --pad-h: 2.125rem;
+
+  /* Scrollbar-safe viewport width */
+  --vw-safe: calc(100vw - (100vw - 100%));
 }
 
 /* Single source of truth for rem base (Carrd parity = 16px) */
@@ -52,7 +55,11 @@ img{
 }
 
 /* Utilities */
-.full-bleed{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+.full-bleed{
+  width:var(--vw-safe);
+  margin-left:calc(50% - (var(--vw-safe) / 2));
+  margin-right:calc(50% - (var(--vw-safe) / 2));
+}
 .mx-auto{margin-left:auto;margin-right:auto}
 .center{text-align:center}
 .content-100{max-width:100%;width:100%}
