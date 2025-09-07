@@ -1,1 +1,104 @@
+<!-- ======================== BIG CONTAINER #3 ======================== -->
+<section id="container-3"
+  class="mx-auto full-bleed bg-02060A pattern-noise pv-auto ph-auto mt-225 mb-1875 center">
+  <div class="mx-auto center">
+
+    <!-- Who I Am -->
+    <!-- 18Who am I.txt -->
+    <!-- SF Pro Display Font -->
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+    <div style="margin:auto;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
+    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:300;font-size:2.625rem;
+    line-height:1.125;letter-spacing:-0.1rem;color:#E1E6EC;text-align:center;max-width:100%;">Who am I?</div>
+
+    <!-- My Name is Gabriel Santana -->
+    <!-- 19My name is Gabriel Santana.txt -->
+    <div id="gs-blurb" style="margin:auto;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
+    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:400;font-size:1.125rem;line-height:1.125;
+    letter-spacing:0;color:#8a8a8a;text-align:center;max-width:57%;">
+      <span class="mobile-only">
+        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+      </span>
+      <span class="desktop-only">
+        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+        My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong>
+      </span>
+    </div>
+    <style>
+      @media (max-width: 768px){#gs-blurb{max-width:90%!important;margin-top:10px!important;}
+      #gs-blurb .desktop-only{display:none;}}
+      @media (min-width:769px){#gs-blurb .mobile-only{display:none;}}
+    </style>
+
+    <!-- Life Pictures -->
+    <!-- 20Life Pictures.txt -->
+    <style>*,*::before,*::after{box-sizing:border-box;}</style>
+    <div class="slideshow-wrapper"><div class="slideshow-frame">
+      <div class="slideshow-container" id="slideshow">
+        <button type="button" class="arrow arrow-left">&#10094;</button>
+        <div class="slide-track" id="slideTrack"></div>
+        <button type="button" class="arrow arrow-right">&#10095;</button>
+        <div class="protect-guard"></div>
+      </div></div></div>
+    <script>
+    const IMAGE_URLS=["https://i.imgur.com/M3iYH0R.jpeg","https://i.imgur.com/iTgs8Nm.jpeg",
+    "https://i.imgur.com/xqhNrMc.jpeg","https://i.imgur.com/JIZwpKT.jpeg","https://i.imgur.com/kYj36ZY.jpeg"];
+    const track=document.getElementById("slideTrack");const slides=[];
+    IMAGE_URLS.forEach(url=>{const d=document.createElement("div");d.className="slide";
+    d.style.backgroundImage=`url("${url}")`;track.appendChild(d);slides.push(d);});
+    let current=0;function update(){slides.forEach((s,i)=>{s.classList.remove("active","left","right");
+    if(i===current)s.classList.add("active");
+    else if(i===(current+1)%slides.length)s.classList.add("right");
+    else if(i===(current-1+slides.length)%slides.length)s.classList.add("left");});}
+    function move(d){current=(current+d+slides.length)%slides.length;update();}
+    document.querySelector(".arrow-left").onclick=()=>move(-1);
+    document.querySelector(".arrow-right").onclick=()=>move(1);update();
+    </script>
+
+    <!-- My Goal is Simple (Mobile) -->
+    <!-- 21My goal is simple (mobile).txt -->
+    <div id="gs-blurb-mobile" style="margin:auto;margin-bottom:50px;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
+    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:400;font-size:0.9rem;line-height:1.125;color:#8a8a8a;
+    text-align:center;max-width:57%;">My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong></div>
+    <style>@media(max-width:768px){#gs-blurb-mobile{max-width:90%!important;margin-top:10px!important;display:block!important;}}
+    @media(min-width:769px){#gs-blurb-mobile{display:none!important;}}</style>
+
+    <!-- Divider 3 -->
+    <!-- 22Divider 3.txt -->
+    <hr style="border:0;border-top:1px solid rgba(255,255,255,0.08);margin:40px auto;width:60%;">
+
+    <!-- Here’s what working with me looks like -->
+    <!-- 23Here's what working with me looks like.txt -->
+    <div class="responsive-text"><span>Here's what working with me looks like:</span></div>
+    <style>.responsive-text{margin:auto;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    font-weight:300;font-size:2.625rem;line-height:1.125;letter-spacing:-0.1rem;color:#E1E6EC;text-align:center;max-width:100%;}
+    @media(max-width:768px){.responsive-text{font-size:2.1rem;line-height:1.05;margin-bottom:10px;}
+    .responsive-text::before{content:"Here’s how I work with you:";display:block;}
+    .responsive-text span{display:none;}}</style>
+
+    <!-- The exact system I use daily -->
+    <!-- 24The exact system I use daily to produce client content with minimal input from them.txt -->
+    <div id="hero-blurb" style="margin:auto;display:block;font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
+    'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-weight:400;font-size:1.125rem;line-height:1.3;color:#8a8a8a;text-align:center;max-width:57%;">The exact system I use daily to produce client content with minimal input from them.</div>
+    <style>@media(max-width:768px){#hero-blurb{display:none!important;}}</style>
+
+    <!-- Dashboard Note -->
+    <!-- 25Dashboard Note.txt -->
+    <div id="no-select" style="display:flex;flex-direction:column;align-items:center;font-family:'SF Pro Display',sans-serif;font-size:0.65em;
+    margin-bottom:3px;margin-top:18px;user-select:none;">
+      <div style="max-width:300px;background:rgba(30,30,30,0.7);border:1px solid rgba(255,255,255,0.05);border-radius:8px;
+      padding:8px 14px;color:#e1e6ec;font-style:italic;box-shadow:0 0 8px rgba(255,255,255,0.05);backdrop-filter:blur(5px);text-align:center;">
+        <p style="margin:0;">✨ You'll get access to a <strong>private dashboard</strong> with step-by-step project tracking. Rough cuts, music, asset gathering, final touches. Updates in real time, no need to ask about project status.</p>
+      </div>
+      <div style="font-size:13px;color:#e1e6ec;margin-top:6px;opacity:0.6;">↑</div>
+    </div>
+
+    <!-- How it works (Desktop + Mobile) -->
+    <!-- 26How it works.txt -->
+    <!-- 27How it works (mobile).txt -->
+    <div id="steps-flow">… desktop flow code …</div>
+    <div id="steps-flow-mobile">… mobile flow code …</div>
+
+  </div>
+</section>
 
