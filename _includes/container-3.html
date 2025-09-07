@@ -1,438 +1,517 @@
 <!-- ======================== BIG CONTAINER #3 ======================== -->
 <section id="container-3"
   class="mx-auto full-bleed bg-02060A pattern-noise pv-auto ph-auto mt-225 mb-1875 center">
+
+  <!-- Load SF Pro Display ONCE -->
+  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
   <div class="mx-auto center">
 
-<!-- 18Who am I.txt -->
-<!-- Load SF Pro Display -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+    <!-- ========== 18 — Who am I? ========== -->
+    <div style="
+      margin:auto;
+      font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      font-weight:300;
+      font-size:2.625rem;
+      line-height:1.125;
+      letter-spacing:-0.1rem;
+      color:#E1E6EC;
+      text-align:center;
+      max-width:100%;
+    ">Who am I?</div>
 
-<div style="
-  margin: auto;
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont,
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 300;
-  font-size: 2.625rem;
-  line-height: 1.125;
-  letter-spacing: -0.1rem;
-  color: #E1E6EC;
-  text-align: center;
-  max-width: 100%;
-">Who am I?</div>
-
-<!-- 19My name is Gabriel Santana.txt -->
-<!-- Load SF Pro Display -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-
-<div id="gs-blurb" style="
-  margin: auto;
-  font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 400;
-  font-size: 1.125rem;
-  line-height: 1.125;
-  letter-spacing: 0;
-  color: #8a8a8a;
-  text-align: center;
-  max-width: 57%;
-">
-  <span class="mobile-only">
-    My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
-  </span>
-  <span class="desktop-only">
-    My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
-    My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong>
-  </span>
-</div>
-
-<style>
-@media (max-width: 768px) {
-  #gs-blurb { max-width: 90% !important; margin-top: 10px !important; }
-  #gs-blurb .desktop-only { display: none; }
-}
-@media (min-width: 769px) {
-  #gs-blurb .mobile-only { display: none; }
-}
-</style>
-
-<!-- 20Life Pictures.txt -->
-<style>
-/* sane box model */
-*, *::before, *::after { box-sizing: border-box; }
-
-/* wrapper centers and contains */
-.slideshow-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-/* outer frame that constrains width & wipes browser effects */
-.slideshow-frame {
-  width: min(1100px, 92vw);
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-}
-
-/* main container (arrows + track + guard) */
-.slideshow-container {
-  position: relative;
-  display: grid;
-  grid-template-columns: 50px 1fr 50px;
-  grid-template-rows: 1fr;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 30px auto 190px auto;
-}
-
-/* slide track (holds the slides) */
-.slide-track {
-  position: relative;
-  overflow: hidden;
-  height: min(62vw, 590px);
-  border-radius: 10px;
-  border: 1px solid rgba(12,12,12,1);
-  box-shadow: 0 0 16px rgba(0,0,0,0.15);
-}
-
-/* single slide card */
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: scale(0.98);
-  transition: opacity .5s ease, transform .5s ease, filter .5s ease;
-  background-size: cover;
-  background-position: center;
-  filter: saturate(88%) contrast(105%) brightness(98%);
-}
-.slide.active { opacity: 1; transform: scale(1); filter: none; }
-.slide.left, .slide.right { opacity: 0; transform: scale(0.985); }
-
-/* arrows */
-.arrow {
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  border: 1px solid rgba(12,12,12,1);
-  background: #00000091;
-  color: #E1E6EC;
-  border-radius: 8px;
-  width: 50px; height: 50px;
-  font-size: 22px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: box-shadow .3s ease, border-color .3s ease, transform .15s ease;
-  box-shadow: 0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02);
-}
-.arrow:hover {
-  border-color: #ffffff33;
-  box-shadow: 0 0 8px rgba(255,255,255,0.08), 0 0 16px rgba(255,255,255,0.04);
-}
-.arrow:active { transform: scale(0.97); }
-
-/* protect guard over the track */
-.protect-guard {
-  position: absolute; inset: 0;
-  pointer-events: none;
-  background: transparent;
-}
-
-/* mobile tweaks */
-@media (max-width: 768px) {
-  .slideshow-container {
-    grid-template-columns: 1fr;
-    gap: 6px;
-    margin-bottom: 120px;
-  }
-  .arrow { width: 46px; height: 46px; }
-}
-</style>
-
-<div class="slideshow-wrapper">
-  <div class="slideshow-frame">
-    <div class="slideshow-container" id="slideshow">
-      <button type="button" class="arrow arrow-left">&#10094;</button>
-      <div class="slide-track" id="slideTrack"></div>
-      <button type="button" class="arrow arrow-right">&#10095;</button>
-      <div class="protect-guard"></div>
+    <!-- ========== 19 — Intro blurb (desktop + mobile variants) ========== -->
+    <div id="gs-blurb" style="
+      margin:auto;
+      font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      font-weight:400;
+      font-size:1.125rem;
+      line-height:1.125;
+      letter-spacing:0;
+      color:#8a8a8a;
+      text-align:center;
+      max-width:57%;
+    ">
+      <span class="mobile-only">
+        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+      </span>
+      <span class="desktop-only">
+        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+        My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong>
+      </span>
     </div>
-  </div>
-</div>
 
-<script>
-const IMAGE_URLS = [
-  "https://i.imgur.com/M3iYH0R.jpeg",
-  "https://i.imgur.com/iTgs8Nm.jpeg",
-  "https://i.imgur.com/xqhNrMc.jpeg",
-  "https://i.imgur.com/JIZwpKT.jpeg",
-  "https://i.imgur.com/kYj36ZY.jpeg"
-];
-const track = document.getElementById("slideTrack");
-const slides = [];
-IMAGE_URLS.forEach(url => {
-  const d = document.createElement("div");
-  d.className = "slide";
-  d.style.backgroundImage = `url("${url}")`;
-  track.appendChild(d);
-  slides.push(d);
-});
-let current = 0;
-function update(){
-  slides.forEach((s,i)=>{
-    s.classList.remove("active","left","right");
-    if(i===current) s.classList.add("active");
-    else if(i===(current+1)%slides.length) s.classList.add("right");
-    else if(i===(current-1+slides.length)%slides.length) s.classList.add("left");
-  });
-}
-function move(d){ current = (current + d + slides.length) % slides.length; update(); }
-document.querySelector(".arrow-left").onclick = () => move(-1);
-document.querySelector(".arrow-right").onclick = () => move(1);
-update();
-</script>
+    <style>
+      @media (max-width:768px){
+        #gs-blurb{ max-width:90% !important; margin-top:10px !important; }
+        #gs-blurb .desktop-only{ display:none; }
+      }
+      @media (min-width:769px){
+        #gs-blurb .mobile-only{ display:none; }
+      }
+    </style>
 
-<!-- 21My goal is simple (mobile).txt -->
-<!-- Load SF Pro Display -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+    <!-- ========== 20 — Life Pictures (slideshow) ========== -->
+    <style>
+      /* sane box model */
+      *,*::before,*::after{ box-sizing:border-box; }
 
-<div id="gs-blurb-mobile" style="
-  margin:auto;
-  margin-bottom: 50px; /* 👈 aqui */
-  font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 400;
-  font-size: 0.9rem;
-  line-height: 1.125;
-  color: #8a8a8a;
-  text-align: center;
-  max-width: 57%;
-">My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong></div>
+      /* wrapper centers and contains */
+      .slideshow-wrapper{
+        display:flex; justify-content:center; align-items:center; width:100%;
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right:max(12px, env(safe-area-inset-right));
+      }
 
-<style>
-@media (max-width: 768px) {
-  #gs-blurb-mobile{
-    max-width: 90% !important;
-    margin-top: 10px !important;
-    display: block !important;
-  }
-}
-@media (min-width: 769px) {
-  #gs-blurb-mobile { display: none !important; }
-}
-</style>
+      /* outer frame: constrain width and disable selection */
+      .slideshow-frame{
+        width:min(700px,92vw);
+        user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+      }
 
-<!-- 22Divider 3.txt -->
-<!-- Mobile-only fade divider (Carrd) -->
-<style>
-#mobile-fade-divider-3 {
-  display: block;
-  width: 85%;
-  height: 1px;
-  margin: 24px auto 55px;
-  background: linear-gradient(90deg, rgba(225,230,236,0) 0%, #e1e6ec 20%, #e1e6ec 80%, rgba(225,230,236,0) 100%);
-}
-@media (min-width: 768px) { #mobile-fade-divider-3 { display: none !important; } }
-</style>
-<div id="mobile-fade-divider-3" role="separator" aria-hidden="true"></div>
+      /* container with overlay arrows */
+      .slideshow-container{
+        position:relative; width:100%;
+        margin:30px auto 190px auto;
+      }
 
-<!-- 23Here's what working with me looks like.txt -->
-<!-- Load SF Pro Display -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+      /* slide track with aspect ratio and rounded mask */
+      .slide-track{
+        position:relative; width:100%;
+        aspect-ratio:16/9;
+        overflow:hidden; border-radius:10px;
+        border:1px solid rgba(12,12,12,1);
+        box-shadow:0 0 16px rgba(0,0,0,0.15);
+        touch-action:pan-y;
+        background:#000; /* prevents flash on load */
+      }
 
-<div class="responsive-text">
-  <span>Here's what working with me looks like:</span>
-</div>
-<style>
-.responsive-text {
-  margin: auto;
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont,
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 300;
-  font-size: 2.625rem;
-  line-height: 1.125;
-  letter-spacing: -0.1rem;
-  color: #E1E6EC;
-  text-align: center;
-  max-width: 100%;
-}
-@media (max-width: 768px) {
-  .responsive-text { font-size: 2.1rem; line-height: 1.05; margin-bottom: 10px; }
-  .responsive-text::before { content:"Here’s how I work with you:"; display:block; }
-  .responsive-text span { display:none; }
-}
-</style>
+      /* slides */
+      .slide{
+        position:absolute; inset:0;
+        opacity:0; transform:scale(0.985);
+        background-size:cover; background-position:center;
+        transition:opacity .5s ease, transform .5s ease, filter .5s ease;
+        filter:saturate(88%) contrast(105%) brightness(98%);
+        will-change:opacity, transform, filter;
+      }
+      .slide.active{ opacity:1; transform:scale(1); filter:none; }
+      .slide.left, .slide.right{ opacity:0; transform:scale(0.985); }
 
-<!-- 24The exact system I use daily to produce client content with minimal input from them.txt -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+      /* arrows (overlay) */
+      .arrow{
+        position:absolute; top:50%; translate:0 -50%;
+        width:46px; height:46px; border-radius:8px;
+        border:1px solid rgba(12,12,12,1);
+        background:#00000091; color:#E1E6EC;
+        font-size:22px; font-weight:700; line-height:46px; text-align:center;
+        cursor:pointer; outline:none;
+        transition: box-shadow .3s ease, border-color .3s ease, transform .15s ease, background .2s ease;
+        box-shadow:0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02);
+      }
+      .arrow:hover{ border-color:#ffffff33; box-shadow:0 0 8px rgba(255,255,255,0.08), 0 0 16px rgba(255,255,255,0.04); background:#000000b0; }
+      .arrow:active{ transform:scale(0.97); }
+      .arrow-left{ left:10px; }
+      .arrow-right{ right:10px; }
 
-<div id="hero-blurb" style="
-  margin:auto;
-  display:block;
-  font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight:400;
-  font-size:1.125rem;
-  line-height:1.3;
-  color:#8a8a8a;
-  text-align:center;
-  max-width:57%;
-">The exact system I use daily to produce client content with minimal input from them.</div>
+      /* a11y focus */
+      .arrow:focus-visible{
+        outline:2px solid #9ad1ff; outline-offset:2px;
+      }
 
-<style>@media (max-width: 768px){ #hero-blurb{ display:none !important; } }</style>
+      /* transparent click-guard to keep arrows on top on weird mobile browsers */
+      .protect-guard{ position:absolute; inset:0; pointer-events:none; background:transparent; }
 
-<!-- 25Dashboard Note.txt -->
-<!-- SF Pro Display Font -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+      /* mobile spacing tweaks */
+      @media (max-width:768px){
+        .slideshow-container{ margin-bottom:120px; }
+        .arrow{ width:44px; height:44px; line-height:44px; }
+      }
+    </style>
 
-<div id="no-select" style="
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-family:'SF Pro Display', sans-serif;
-  font-size:0.65em;
-  margin-bottom:3px;
-  margin-top:18px;
-  user-select:none;
-">
-  <div style="
-    max-width:300px;
-    background:rgba(30,30,30,0.7);
-    border:1px solid rgba(255,255,255,0.05);
-    border-radius:8px;
-    padding:8px 14px;
-    color:#e1e6ec;
-    font-style:italic;
-    box-shadow:0 0 8px rgba(255,255,255,0.05);
-    backdrop-filter:blur(5px);
-    text-align:center;
-  ">
-    <p style="margin:0;">
-      ✨ You'll get access to a <strong>private dashboard</strong> with step-by-step project tracking.
-      Rough cuts, music, asset gathering, final touches. Updates in real time, no need to ask about project status.
-    </p>
-  </div>
-  <div style="font-size:13px;color:#e1e6ec;margin-top:6px;opacity:0.6;">↑</div>
-</div>
+    <div class="slideshow-wrapper">
+      <div class="slideshow-frame">
+        <div class="slideshow-container" id="slideshow" aria-roledescription="carousel" aria-label="Life pictures">
+          <div class="slide-track" id="slideTrack"></div>
 
-<!-- 26How it works.txt -->
-<!-- SF Pro Display Font -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+          <!-- overlay arrows -->
+          <button type="button" class="arrow arrow-left" aria-label="Previous slide" title="Previous">&#10094;</button>
+          <button type="button" class="arrow arrow-right" aria-label="Next slide" title="Next">&#10095;</button>
 
-<style>
-/* Hide this block on mobile (below 768px) */
-@media (max-width: 767px) {
-#steps-flow {
-display: none !important;
-}
-}
-</style>
+          <div class="protect-guard" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
 
-<div id="steps-flow" style="
-display: flex;
-flex-wrap: wrap;
-align-items: center;
-justify-content: center;
-gap: 8px;
-font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-margin-bottom: 48px;
-font-size: 0.75em;
-user-select: none;
-">
+    <script>
+      (function(){
+        const IMAGE_URLS = [
+          "https://i.imgur.com/M3iYH0R.jpeg",
+          "https://i.imgur.com/iTgs8Nm.jpeg",
+          "https://i.imgur.com/xqhNrMc.jpeg",
+          "https://i.imgur.com/JIZwpKT.jpeg",
+          "https://i.imgur.com/kYj36ZY.jpeg"
+        ];
 
-<!-- Step 1 -->
-<div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
-onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
-style="flex: 1; min-width: 160px; max-width: 200px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 12px; color: white; box-shadow: 0 1px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-<h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.05em; font-weight:700;">Step 1: Alignment</h3>
-<p style="margin: 0; color: #ccc; font-weight:400;">We start with a deep alignment call to align with your voice + set up all technical details.</p>
-</div>
+        const track = document.getElementById("slideTrack");
+        const prevBtn = document.querySelector(".arrow-left");
+        const nextBtn = document.querySelector(".arrow-right");
+        const container = document.getElementById("slideshow");
 
-<!-- ➔ -->
-<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+        const slides = IMAGE_URLS.map((url, i) => {
+          const d = document.createElement("div");
+          d.className = "slide";
+          d.style.backgroundImage = `url("${url}")`;
+          d.setAttribute("role","group");
+          d.setAttribute("aria-roledescription","slide");
+          d.setAttribute("aria-label", `${i+1} of ${IMAGE_URLS.length}`);
+          track.appendChild(d);
+          return d;
+        });
 
-<!-- Note 1 -->
-<div style="flex: 0 0 160px; max-width: 180px; background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 10px; color: #ddd; font-style: italic; box-shadow: 0 1px 4px rgba(0,0,0,0.15);">
-<p style="margin: 0; font-weight:400;">I’m notified when a new file is added to the shared folder.<span style="color:#aaa;"> No messages needed.</span></p>
-</div>
+        let current = 0;
+        let timer = null;
+        const INTERVAL = 7000; // 7s autoplay
+        let isPaused = false;
 
-<!-- ➔ -->
-<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+        function update(){
+          slides.forEach((s,i)=>{
+            s.classList.remove("active","left","right");
+            if(i===current) s.classList.add("active");
+            else if(i===(current+1)%slides.length) s.classList.add("right");
+            else if(i===(current-1+slides.length)%slides.length) s.classList.add("left");
+          });
+        }
 
-<!-- Step 2 -->
-<div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
-onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
-style="flex: 1; min-width: 160px; max-width: 200px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 12px; color: white; box-shadow: 0 1px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-<h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.05em; font-weight:700;">Step 2: Execution</h3>
-<p style="margin: 0; color: #ccc; font-weight:400;">I create the video based on the vision from our alignment call, ensuring it matches your goals and minimizes revisions.</p>
-</div>
+        function goto(idx){
+          current = (idx + slides.length) % slides.length;
+          update();
+        }
 
-<!-- ➔ -->
-<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+        function move(delta){
+          goto(current + delta);
+          restart();
+        }
 
-<!-- Note 2 -->
-<div style="flex: 0 0 160px; max-width: 180px; background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 10px; color: #ddd; font-style: italic; box-shadow: 0 1px 4px rgba(0,0,0,0.15);">
-<p style="margin: 0; font-weight:400;">Final video is uploaded to the shared folder.</p>
-</div>
+        function play(){
+          if(timer) return;
+          timer = setInterval(()=> goto(current+1), INTERVAL);
+        }
 
-<!-- ➔ -->
-<div style="font-size: 18px; color: white; align-self: center;">➔</div>
+        function pause(){
+          clearInterval(timer); timer = null;
+        }
 
-<!-- Step 3 -->
-<div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
-onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
-style="flex: 1; min-width: 160px; max-width: 200px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 12px; color: white; box-shadow: 0 1px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-<h3 style="margin-top: 0; margin-bottom: 8px; font-size: 1.05em; font-weight:700;">Step 3: Delivery</h3>
-<p style="margin: 0; color: #ccc; font-weight:400;">You review it. If aligns with your vision, you upload it. Revisions are rare, though.</p>
-</div>
+        function restart(){
+          pause(); if(!isPaused) play();
+        }
 
-</div>
+        // Buttons
+        prevBtn.addEventListener("click", ()=> move(-1));
+        nextBtn.addEventListener("click", ()=> move(1));
 
-<!-- 27How it works (mobile).txt (stripped) -->
-<div id="steps-flow-mobile">
-<!-- Step 1 -->
-<div class="step"
-style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
-<h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 1: Alignment</h3>
-<p style="margin:0;color:#ccc;font-weight:400;">We start with a deep alignment call to align with your voice + set up all technical details.</p>
-</div>
+        // Keyboard
+        container.addEventListener("keydown", (e)=>{
+          if(e.key === "ArrowLeft"){ e.preventDefault(); move(-1); }
+          if(e.key === "ArrowRight"){ e.preventDefault(); move(1); }
+          if(e.key === " "){ e.preventDefault(); isPaused = !isPaused; isPaused ? pause() : play(); }
+        });
+        container.setAttribute("tabindex","0");
 
-<!-- Note -->
-<div class="note"
-style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px;margin:6px 0;font-style:italic;color:#ddd;">
-<p style="margin:0;">I’m notified when a new file is added to the shared folder.<span style="color:#aaa;"> No messages needed.</span></p>
-</div>
+        // Hover pause
+        container.addEventListener("mouseenter", ()=>{ isPaused = true; pause(); });
+        container.addEventListener("mouseleave", ()=>{ isPaused = false; play(); });
 
-<!-- Step 2 -->
-<div class="step"
-style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
-<h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 2: Execution</h3>
-<p style="margin:0;color:#ccc;font-weight:400;">I create the video based on the vision from our alignment call, ensuring it matches your goals and minimizes revisions.</p>
-</div>
+        // Visibility pause (new tab / lock screen)
+        document.addEventListener("visibilitychange", ()=> {
+          if(document.hidden) pause(); else if(!isPaused) play();
+        });
 
-<!-- Note -->
-<div class="note"
-style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px;margin:6px 0;font-style:italic;color:#ddd;">
-<p style="margin:0;">Final video is uploaded to the shared folder.</p>
-</div>
+        // Swipe (pointer events)
+        let startX = 0, startY = 0, dragging = false;
+        track.addEventListener("pointerdown", (e)=>{
+          dragging = true; startX = e.clientX; startY = e.clientY; track.setPointerCapture(e.pointerId);
+        });
+        track.addEventListener("pointermove", (e)=>{
+          if(!dragging) return;
+          const dx = e.clientX - startX, dy = e.clientY - startY;
+          if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){
+            dragging = false;
+            if(dx > 0) move(-1); else move(1);
+          }
+        });
+        const end = (e)=>{ if(dragging){ dragging = false; track.releasePointerCapture?.(e.pointerId); } };
+        track.addEventListener("pointerup", end);
+        track.addEventListener("pointercancel", end);
+        track.addEventListener("pointerleave", end);
 
-<!-- Step 3 -->
-<div class="step"
-style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
-<h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 3: Delivery</h3>
-<p style="margin:0;color:#ccc;font-weight:400;">You review it. If aligns with your vision, you upload it. Revisions are rare, though.</p>
-</div>
-</div>
+        update(); play();
+      })();
+    </script>
 
-<style>
-/* Only show the mobile flow on small screens */
-@media (min-width: 768px) { #steps-flow-mobile { display: none !important; } }
-/* Only show the desktop flow on larger screens (already hidden in its own CSS for max-width:767px) */
-</style>
+    <!-- ========== 21 — Mobile-only goal line ========== -->
+    <div id="gs-blurb-mobile" style="
+      margin:auto;
+      margin-bottom:50px;
+      font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      font-weight:400; font-size:0.9rem; line-height:1.125; color:#8a8a8a;
+      text-align:center; max-width:57%;
+    ">My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong></div>
+
+    <style>
+      @media (max-width:768px){
+        #gs-blurb-mobile{ max-width:90% !important; margin-top:10px !important; display:block !important; }
+      }
+      @media (min-width:769px){
+        #gs-blurb-mobile{ display:none !important; }
+      }
+    </style>
+
+    <!-- ========== 22 — Mobile fade divider (ID matches Carrd) ========== -->
+    <style>
+      #mobile-fade-divider{
+        display:block; width:85%; height:1px; margin:24px auto 55px;
+        background:linear-gradient(90deg, rgba(225,230,236,0) 0%, #e1e6ec 20%, #e1e6ec 80%, rgba(225,230,236,0) 100%);
+      }
+      @media (min-width:768px){ #mobile-fade-divider{ display:none !important; } }
+    </style>
+    <div id="mobile-fade-divider" role="separator" aria-hidden="true"></div>
+
+    <!-- ========== 23 — “Here's what working with me looks like:” ========== -->
+    <div class="responsive-text">
+      <span>Here's what working with me looks like:</span>
+    </div>
+    <style>
+      .responsive-text{
+        margin:auto;
+        font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+        font-weight:300; font-size:2.625rem; line-height:1.125; letter-spacing:-0.1rem;
+        color:#E1E6EC; text-align:center; max-width:100%;
+      }
+      @media (max-width:768px){
+        .responsive-text{ font-size:2.1rem; line-height:1.05; margin-bottom:10px; }
+        .responsive-text::before{ content:"Here’s how I work with you:"; display:block; }
+        .responsive-text span{ display:none; }
+      }
+    </style>
+
+    <!-- ========== 24 — Hero blurb (hidden on mobile) ========== -->
+    <div id="hero-blurb" style="
+      margin:auto; display:block;
+      font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      font-weight:400; font-size:1.125rem; line-height:1.3; color:#8a8a8a; text-align:center; max-width:57%;
+    ">The exact system I use daily to produce client content with minimal input from them.</div>
+    <style>@media (max-width:768px){ #hero-blurb{ display:none !important; } }</style>
+
+    <!-- ========== 25 — Dashboard Note (hidden on mobile) ========== -->
+    <div id="no-select" style="
+      display:flex; flex-direction:column; align-items:center;
+      font-family:'SF Pro Display',sans-serif; font-size:0.65em; margin-bottom:3px; margin-top:18px; user-select:none;
+    ">
+      <div class="dash-note" style="
+        max-width:300px; background:rgba(30,30,30,0.7);
+        border:1px solid rgba(255,255,255,0.05); border-radius:8px; padding:8px 14px;
+        color:#e1e6ec; font-style:italic; box-shadow:0 0 8px rgba(255,255,255,0.05); backdrop-filter:blur(5px);
+        text-align:center;
+      ">
+        <p style="margin:0;">
+          ✨ You'll get access to a <strong>private dashboard</strong> with step-by-step project tracking.
+          Rough cuts, music, asset gathering, final touches. Updates in real time, no need to ask about project status.
+        </p>
+      </div>
+      <div style="font-size:13px;color:#e1e6ec;margin-top:6px;opacity:0.6;">↑</div>
+    </div>
+    <style>
+      @media (max-width:767px){ #no-select{ display:none !important; } }
+    </style>
+    <script>
+      // optional: gentle anti-copy parity like Carrd often adds to little notes
+      (function(){
+        const el = document.querySelector('#no-select .dash-note');
+        if(!el) return;
+        el.addEventListener('contextmenu', e=> e.preventDefault());
+        el.addEventListener('copy', e=> e.preventDefault());
+        document.addEventListener('keydown', e=>{
+          if((e.ctrlKey||e.metaKey) && ['s','u','p'].includes(e.key.toLowerCase())){ e.preventDefault(); }
+        });
+      })();
+    </script>
+
+    <!-- ========== 26 — How it works (desktop) ========== -->
+    <style>
+      @media (max-width:767px){ #steps-flow{ display:none !important; } }
+    </style>
+
+    <div id="steps-flow" style="
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px;
+      font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      margin-bottom:48px; font-size:0.75em; user-select:none;
+    ">
+      <!-- Step 1 -->
+      <div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+           onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
+           style="flex:1; min-width:160px; max-width:200px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
+        <h3 style="margin:0 0 8px 0; font-size:1.05em; font-weight:700;">Step 1: Alignment</h3>
+        <p style="margin:0; color:#ccc; font-weight:400;">We start with a deep alignment call to align with your voice + set up all technical details.</p>
+      </div>
+
+      <!-- ➔ -->
+      <div style="font-size:18px; color:white; align-self:center;">➔</div>
+
+      <!-- Note 1 -->
+      <div style="flex:0 0 160px; max-width:180px; background:#1a1a1a; border:1px solid #333; border-radius:6px; padding:10px; color:#ddd; font-style:italic; box-shadow:0 1px 4px rgba(0,0,0,0.15);">
+        <p style="margin:0; font-weight:400;">I’m notified when a new file is added to the shared folder.<span style="color:#aaa;"> No messages needed.</span></p>
+      </div>
+
+      <!-- ➔ -->
+      <div style="font-size:18px; color:white; align-self:center;">➔</div>
+
+      <!-- Step 2 -->
+      <div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+           onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
+           style="flex:1; min-width:160px; max-width:200px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
+        <h3 style="margin:0 0 8px 0; font-size:1.05em; font-weight:700;">Step 2: Execution</h3>
+        <p style="margin:0; color:#ccc; font-weight:400;">I create the video based on the vision from our alignment call, ensuring it matches your goals and minimizes revisions.</p>
+      </div>
+
+      <!-- ➔ -->
+      <div style="font-size:18px; color:white; align-self:center;">➔</div>
+
+      <!-- Note 2 -->
+      <div style="flex:0 0 160px; max-width:180px; background:#1a1a1a; border:1px solid #333; border-radius:6px; padding:10px; color:#ddd; font-style:italic; box-shadow:0 1px 4px rgba(0,0,0,0.15);">
+        <p style="margin:0; font-weight:400;">Final video is uploaded to the shared folder.</p>
+      </div>
+
+      <!-- ➔ -->
+      <div style="font-size:18px; color:white; align-self:center;">➔</div>
+
+      <!-- Step 3 -->
+      <div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+           onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
+           style="flex:1; min-width:160px; max-width:200px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
+        <h3 style="margin:0 0 8px 0; font-size:1.05em; font-weight:700;">Step 3: Delivery</h3>
+        <p style="margin:0; color:#ccc; font-weight:400;">You review it. If aligns with your vision, you upload it. Revisions are rare, though.</p>
+      </div>
+    </div>
+
+    <!-- ========== 27 — How it works (mobile, interactive split-panel) ========== -->
+    <div id="steps-flow-mobile" aria-label="How it works steps (mobile)">
+      <!-- Step 1 -->
+      <div class="m-step" style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
+        <h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 1: Alignment</h3>
+        <p style="margin:0;color:#ccc;font-weight:400;">We start with a deep alignment call to align with your voice + set up all technical details.</p>
+      </div>
+
+      <!-- Note 1 -->
+      <div class="m-note" style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px;margin:6px 0;font-style:italic;color:#ddd;">
+        <p style="margin:0;">I’m notified when a new file is added to the shared folder.<span style="color:#aaa;"> No messages needed.</span></p>
+      </div>
+
+      <!-- Step 2 — split panel -->
+      <div class="m-step2" style="margin:6px 0;">
+        <button id="m-step2-toggle" class="m-toggle" aria-expanded="false" aria-controls="m-step2-panel" style="
+          width:100%; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; color:#fff; padding:10px;
+          display:flex; align-items:center; justify-content:space-between; gap:8px; font-weight:700;
+        ">
+          <span style="font-size:1.05em;">Step 2: Execution</span>
+          <span class="m-toggle-icon" aria-hidden="true" style="font-size:18px; line-height:1;">＋</span>
+        </button>
+
+        <div id="m-step2-panel" class="m-panel" hidden style="
+          overflow:hidden; border:1px solid #0C0C0C; border-top:none; border-radius:0 0 6px 6px;
+          background: #0b0b0b; color:#ddd;
+        ">
+          <div style="padding:10px;">
+            <p style="margin:0 0 8px 0; color:#ccc; font-weight:400;">
+              I create the video based on our alignment call, minimizing revisions.
+            </p>
+            <!-- diamond card representing the dashboard detail -->
+            <div style="display:flex; align-items:center; justify-content:center; padding:6px 0;">
+              <div style="
+                width:130px; height:130px; transform:rotate(45deg);
+                background:linear-gradient(180deg, #111, #0a0a0a);
+                border:1px solid #333; border-radius:8px;
+                box-shadow:0 6px 18px rgba(0,0,0,.35);
+                display:flex; align-items:center; justify-content:center;
+              ">
+                <div style="transform:rotate(-45deg); text-align:center; padding:8px;">
+                  <div style="font-weight:700; color:#e1e6ec; margin-bottom:6px;">Dashboard</div>
+                  <div style="font-size:.9em; color:#bbb;">Rough cuts → Music → Assets → Final</div>
+                </div>
+              </div>
+            </div>
+            <p style="margin:8px 0 0 0; color:#9aa3ac; font-size:.95em; text-align:center;">
+              Track progress in real time. Fewer pings, faster shipping.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note 2 -->
+      <div class="m-note" style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px;margin:6px 0;font-style:italic;color:#ddd;">
+        <p style="margin:0;">Final video is uploaded to the shared folder.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="m-step" style="background:#00000091;border:1px solid #0C0C0C;border-radius:6px;padding:10px;margin:6px 0;">
+        <h3 style="margin:0 0 6px 0;font-size:1.05em;font-weight:700;">Step 3: Delivery</h3>
+        <p style="margin:0;color:#ccc;font-weight:400;">You review it. If aligns with your vision, you upload it. Revisions are rare, though.</p>
+      </div>
+    </div>
+
+    <style>
+      /* show only one flow per breakpoint */
+      @media (min-width:768px){ #steps-flow-mobile{ display:none !important; } }
+      @media (max-width:767px){ #steps-flow{ display:none !important; } }
+
+      /* animated height for mobile panel */
+      .m-panel.animating{ transition: height .28s ease; }
+      .m-toggle:focus-visible{ outline:2px solid #9ad1ff; outline-offset:2px; }
+    </style>
+
+    <script>
+      // Mobile Step 2 split-panel expand/collapse with height animation + ARIA
+      (function(){
+        const btn = document.getElementById('m-step2-toggle');
+        const panel = document.getElementById('m-step2-panel');
+        const icon = btn?.querySelector('.m-toggle-icon');
+        if(!btn || !panel) return;
+
+        let open = false;
+        function setOpen(next){
+          if(next === open) return;
+          open = next;
+          btn.setAttribute('aria-expanded', String(open));
+          icon.textContent = open ? '−' : '＋';
+
+          // height animation
+          panel.hidden = false;
+          const start = panel.offsetHeight; // current
+          panel.style.height = 'auto';
+          const end = panel.offsetHeight;
+          panel.style.height = start + 'px';
+          panel.classList.add('animating');
+          requestAnimationFrame(()=> {
+            panel.style.height = (open ? end : 0) + 'px';
+          });
+
+          const done = () => {
+            panel.classList.remove('animating');
+            panel.style.height = '';
+            if(!open){ panel.hidden = true; }
+            panel.removeEventListener('transitionend', done);
+          };
+          panel.addEventListener('transitionend', done);
+        }
+
+        btn.addEventListener('click', ()=> setOpen(!open));
+
+        // close with Escape when focused inside
+        panel.addEventListener('keydown', (e)=> {
+          if(e.key === 'Escape' && open){ setOpen(false); btn.focus(); }
+        });
+      })();
+    </script>
 
   </div>
 </section>
