@@ -119,14 +119,6 @@ html, body { overflow-x: hidden; }
 }
 
 /* =========================
-   Container #3 specifics
-   ========================= */
-
-/* Solid dark band and readable text */
-/* =========================
-   Container #3 specifics
-   ========================= */
-/* =========================
    Container #3 specifics (final)
    ========================= */
 #container-3{
@@ -146,18 +138,16 @@ html, body { overflow-x: hidden; }
 #container-3 .content-75{
   max-width:min(1200px,75vw);
   margin-inline:auto;
-  padding:0; /* <-- remove inner padding so you SEE the section's padding */
+  padding:0; /* remove inner padding so you SEE the section's padding */
 }
 
-/* If this full-bleed section is nested inside a padded .page wrapper,
-   neutralize the wrapper's side padding to avoid the left gap/right tuck. */
-.page > #container-3.full-bleed{
+/* Neutralize parent .page padding if this sits inside one */
+:where(.page) #container-3.full-bleed{
   margin-left:calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
   margin-right:calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
 }
 
-
-/* Headline and blurb (moved from inline styles) */
+/* Headline and blurb */
 #container-3 .whoami{
   margin:auto;
   font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -175,7 +165,7 @@ html, body { overflow-x: hidden; }
   font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   font-weight:400;
   font-size:1.125rem;
-  line-height:1.35;
+  line-height:1.125; /* Carrd-accurate */
   color:#8a8a8a;
   text-align:center;
   max-width:57%;
@@ -203,7 +193,6 @@ html, body { overflow-x: hidden; }
 /* =========================
    Container #6 specifics
    ========================= */
-/* Inner wrapper for #container-6 */
 #container-6 .content-75{
   padding: 3.25rem var(--pad-h);
 }
@@ -214,7 +203,7 @@ html, body { overflow-x: hidden; }
   margin-top:17px;
   padding:18px 48px;
   background:#ffd510;
-  color:#0B0B0B; /* better contrast on yellow */
+  color:#0B0B0B;
   font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   font-weight:600;
   font-size:1.4rem;
@@ -324,21 +313,19 @@ html, body { overflow-x: hidden; }
 /* =========================
    Container #5 (FAQ) specifics
    ========================= */
-/* Wrapper: keep full-bleed for background only; content goes in .inner-wrap */
 #container-5{
   border:1px solid var(--border-transparent);
   background:none;
-  margin-top:0;          /* instead de 'auto' inválido */
+  margin-top:0;
   margin-bottom:2.5rem;
 }
 #container-5 .inner-wrap{
   width:100%;
   max-width:75rem;
   margin:0 auto;
-  padding: 2.25rem var(--pad-h); /* substitui 'padding: auto' inválido */
+  padding: 2.25rem var(--pad-h);
 }
 
-/* Title */
 #container-5 .questions-title{
   margin: 1.375rem auto;
   font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -354,7 +341,6 @@ html, body { overflow-x: hidden; }
   #container-5 .questions-title{ margin-bottom: calc(1.375rem + 10px) }
 }
 
-/* Section container */
 #container-5 .faq-section{
   width:100%;
   max-width:800px;
@@ -362,7 +348,6 @@ html, body { overflow-x: hidden; }
   padding: 0 var(--pad-h);
 }
 
-/* Links dentro da FAQ (sem afetar o site inteiro) */
 #container-5 .faq-section a{
   text-decoration:none;
   color:#e1e6ec;
@@ -372,7 +357,6 @@ html, body { overflow-x: hidden; }
   color:#e1e6ec;
 }
 
-/* Accordion */
 #container-5 .accordion{
   display:flex;
   justify-content:space-between;
@@ -458,31 +442,4 @@ html, body { overflow-x: hidden; }
     animation:rotateGradient 31s ease infinite;
   }
   #container-5 .accordion:nth-of-type(6){
-    background:linear-gradient(100deg,rgba(25,25,25,0.93),rgba(0,0,0,0.88));
-    animation:rotateGradient 36s ease infinite;
-  }
-  #container-5 .accordion:nth-of-type(7){
-    background:linear-gradient(150deg,rgba(24,24,24,0.92),rgba(0,0,0,0.89));
-    animation:rotateGradient 33s ease infinite;
-  }
-  #container-5 .accordion-header{ justify-content:center }
-  #container-5 .accordion-header .question{ flex:1; text-align:center }
-  #container-5 .accordion-header .icon{ display:none!important }
-}
-
-/* Fake gradient motion (optional) */
-@keyframes rotateGradient{
-  0%{ background-position:0% 50% }
-  50%{ background-position:100% 50% }
-  100%{ background-position:0% 50% }
-}
-
-/* =========================
-   Scrollbar styling
-   ========================= */
-::-webkit-scrollbar { width: 18px }
-::-webkit-scrollbar-track { background: transparent !important }
-::-webkit-scrollbar-thumb { background-color: rgba(68,68,68,.8); border-radius: 8px; border: 3px solid transparent }
-::-webkit-scrollbar-thumb:hover { background-color: rgba(102,102,102,.9) }
-/* Firefox */
-*{ scrollbar-width:auto; scrollbar-color: rgba(68,68,68,.8) transparent }
+    background:linear-gradient(100deg,rgba(25,25,25,
