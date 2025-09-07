@@ -1,6 +1,5 @@
 <!-- ======================== FOOTER / LOGOS & SETTINGS ======================== -->
 <footer id="footer-logos" class="mx-auto center">
-
   <!-- Bottom Gabriel Edits Logo -->
   <div class="footer-logo">
     <img src="https://i.imgur.com/Hi9k0uo.png"
@@ -8,7 +7,6 @@
          draggable="false"
          style="width:120px; margin:40px auto; display:block;" />
   </div>
-
 </footer>
 
 <!-- Inject TOP Gabriel Edits Logo into #logo-1 (or prepend to <main>) -->
@@ -17,12 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const src = "https://i.imgur.com/Hi9k0uo.png";
   const imgHTML = '<img src="' + src + '" alt="Gabriel Edits Logo" draggable="false" style="width:88px; margin:0px auto 12px; display:block;" />';
 
-  // Prefer an existing #logo-1 placeholder (from container-1)
   let anchor = document.getElementById("logo-1");
   if (anchor) {
     anchor.innerHTML = imgHTML;
   } else {
-    // Fallback: prepend to the top of <main>
     const main = document.querySelector("main.page") || document.querySelector("main");
     if (main) {
       const wrapper = document.createElement("div");
@@ -33,30 +29,31 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- Lenis Smooth Scroll (EXACT as you provided) -->
-<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+<!-- Lenis Smooth Scroll (same config) -->
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js" defer></script>
 <script>
-if (window.innerWidth > 768) { // only enable on tablets/desktops
-  const lenis = new Lenis({
-    duration: 1.2, // Adjust scroll speed
-    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing
-    smooth: true,
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smoothTouch: false, // explicitly off for mobile
-    touchMultiplier: 1.5,
-  });
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.innerWidth > 768 && window.Lenis) { // only enable on tablets/desktops
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smoothTouch: false,
+      touchMultiplier: 1.5,
+    });
 
-  function raf(time) {
-    lenis.raf(time);
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
     requestAnimationFrame(raf);
   }
-
-  requestAnimationFrame(raf);
-}
+});
 </script>
 
-<!-- Smooth anchors for <a data-smooth href="#..."> (EXACT as you provided) -->
+<!-- Smooth anchors for <a data-smooth href="#..."> (same config) -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('a[data-smooth][href^="#"]').forEach(anchor => {
@@ -94,23 +91,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- Scrollbar styling (EXACT as you provided) -->
+<!-- Scrollbar styling (same values) -->
 <style>
 /* Scrollbar styling for WebKit browsers (Chrome, Edge, Safari) */
-::-webkit-scrollbar {
-  width: 18px; /* thicker scrollbar */
-}
-::-webkit-scrollbar-track {
-  background: transparent !important; /* ensure no background */
-}
+::-webkit-scrollbar { width: 18px; }
+::-webkit-scrollbar-track { background: transparent !important; }
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(68, 68, 68, 0.8); /* semi-transparent thumb */
+  background-color: rgba(68, 68, 68, 0.8);
   border-radius: 8px;
-  border: 3px solid transparent; /* keep spacing but see-through */
+  border: 3px solid transparent;
 }
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(102, 102, 102, 0.9); /* lighter on hover */
-}
+::-webkit-scrollbar-thumb:hover { background-color: rgba(102, 102, 102, 0.9); }
 /* Scrollbar styling for Firefox */
 * {
   scrollbar-width: auto;
