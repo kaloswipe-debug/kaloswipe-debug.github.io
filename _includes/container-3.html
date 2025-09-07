@@ -51,202 +51,207 @@
       }
     </style>
 
-    <!-- ========== 20 — Life Pictures (slideshow) ========== -->
+    <!-- ========== 20 — Life Pictures (CARRD-PARITY VERSION) ========== -->
     <style>
       /* sane box model */
-      *,*::before,*::after{ box-sizing:border-box; }
+      *, *::before, *::after { box-sizing: border-box; }
 
-      /* wrapper centers and contains */
-      .slideshow-wrapper{
-        display:flex; justify-content:center; align-items:center; width:100%;
-        padding-left: max(12px, env(safe-area-inset-left));
-        padding-right:max(12px, env(safe-area-inset-right));
+      .slideshow-wrapper {
+        all: initial;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 30px auto 190px auto;
       }
 
-      /* outer frame: constrain width and disable selection */
-      .slideshow-frame{
-        width:min(700px,92vw);
-        user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+      .slideshow-frame {
+        width: 100%;
+        display: flex;
+        justify-content: center;
       }
 
-      /* container with overlay arrows */
-      .slideshow-container{
-        position:relative; width:100%;
-        margin:30px auto 190px auto;
+      @media (max-width: 600px) {
+        .slideshow-wrapper {
+          margin: 30px auto 30px auto;
+        }
+        .slideshow-frame {
+          padding-left: calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-left));
+          padding-right: calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-right));
+          overflow: hidden;
+        }
       }
 
-      /* slide track with aspect ratio and rounded mask */
-      .slide-track{
-        position:relative; width:100%;
-        aspect-ratio:16/9;
-        overflow:hidden; border-radius:10px;
-        border:1px solid rgba(12,12,12,1);
-        box-shadow:0 0 16px rgba(0,0,0,0.15);
-        touch-action:pan-y;
-        background:#000; /* prevents flash on load */
+      .slideshow-container {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        aspect-ratio: 16 / 9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: visible;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        touch-action: pan-y;
       }
 
-      /* slides */
-      .slide{
-        position:absolute; inset:0;
-        opacity:0; transform:scale(0.985);
-        background-size:cover; background-position:center;
-        transition:opacity .5s ease, transform .5s ease, filter .5s ease;
-        filter:saturate(88%) contrast(105%) brightness(98%);
-        will-change:opacity, transform, filter;
-      }
-      .slide.active{ opacity:1; transform:scale(1); filter:none; }
-      .slide.left, .slide.right{ opacity:0; transform:scale(0.985); }
-
-      /* arrows (overlay) */
-      .arrow{
-        position:absolute; top:50%; translate:0 -50%;
-        width:46px; height:46px; border-radius:8px;
-        border:1px solid rgba(12,12,12,1);
-        background:#00000091; color:#E1E6EC;
-        font-size:22px; font-weight:700; line-height:46px; text-align:center;
-        cursor:pointer; outline:none;
-        transition: box-shadow .3s ease, border-color .3s ease, transform .15s ease, background .2s ease;
-        box-shadow:0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02);
-      }
-      .arrow:hover{ border-color:#ffffff33; box-shadow:0 0 8px rgba(255,255,255,0.08), 0 0 16px rgba(255,255,255,0.04); background:#000000b0; }
-      .arrow:active{ transform:scale(0.97); }
-      .arrow-left{ left:10px; }
-      .arrow-right{ right:10px; }
-
-      /* a11y focus */
-      .arrow:focus-visible{
-        outline:2px solid #9ad1ff; outline-offset:2px;
+      .slide-track {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        /* IMPORTANT: don't eat clicks */
+        pointer-events: none;
       }
 
-      /* transparent click-guard to keep arrows on top on weird mobile browsers */
-      .protect-guard{ position:absolute; inset:0; pointer-events:none; background:transparent; }
+      .slide {
+        position: absolute;
+        inset: 0;
+        background-position: center;
+        background-size: cover;
+        opacity: 0;
+        transform: scale(0.5);
+        filter: blur(4px);
+        transition: all 0.6s ease-in-out;
+        pointer-events: none;
+      }
+      .slide.active { opacity: 1; transform: scale(1); filter: none; z-index: 2; }
+      .slide.left   { opacity: 0.6; z-index: 1; transform: translateX(-40%) scale(0.6); }
+      .slide.right  { opacity: 0.6; z-index: 1; transform: translateX( 40%) scale(0.6); }
 
-      /* mobile spacing tweaks */
-      @media (max-width:768px){
-        .slideshow-container{ margin-bottom:120px; }
-        .arrow{ width:44px; height:44px; line-height:44px; }
+      /* --- ARROWS --- */
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        /* Force above everything */
+        z-index: 9999;
+        /* Make sure they can be clicked */
+        pointer-events: auto;
+
+        user-select: none;
+        -webkit-user-select: none;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+
+        /* tap animation */
+        transition: transform 0.15s ease;
+      }
+      .arrow:active { transform: translateY(-50%) scale(0.85); }
+      .arrow-left  { left:  clamp(10px, 3vw, 40px); }
+      .arrow-right { right: clamp(10px, 3vw, 40px); }
+
+      .protect-guard {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        background: transparent;
+        /* IMPORTANT: ghost mode */
+        pointer-events: none;
+      }
+
+      .slideshow-container, .slideshow-container * {
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      @media (max-width: 600px) {
+        .slide.left  { transform: translateX(-30%) scale(0.82); opacity: 0.6; z-index: 1; }
+        .slide.right { transform: translateX( 30%) scale(0.82); opacity: 0.6; z-index: 1; }
+
+        .arrow { font-size: 24px; }
+        .arrow-left  { left:  clamp(6px, 3vw, 16px); }
+        .arrow-right { right: clamp(6px, 3vw, 16px); }
       }
     </style>
 
     <div class="slideshow-wrapper">
       <div class="slideshow-frame">
-        <div class="slideshow-container" id="slideshow" aria-roledescription="carousel" aria-label="Life pictures">
+        <div class="slideshow-container" id="slideshow">
+          <button type="button" class="arrow arrow-left" aria-label="Anterior">&#10094;</button>
           <div class="slide-track" id="slideTrack"></div>
-
-          <!-- overlay arrows -->
-          <button type="button" class="arrow arrow-left" aria-label="Previous slide" title="Previous">&#10094;</button>
-          <button type="button" class="arrow arrow-right" aria-label="Next slide" title="Next">&#10095;</button>
-
+          <button type="button" class="arrow arrow-right" aria-label="Próximo">&#10095;</button>
           <div class="protect-guard" aria-hidden="true"></div>
         </div>
       </div>
     </div>
 
     <script>
-      (function(){
-        const IMAGE_URLS = [
-          "https://i.imgur.com/M3iYH0R.jpeg",
-          "https://i.imgur.com/iTgs8Nm.jpeg",
-          "https://i.imgur.com/xqhNrMc.jpeg",
-          "https://i.imgur.com/JIZwpKT.jpeg",
-          "https://i.imgur.com/kYj36ZY.jpeg"
-        ];
+      const IMAGE_URLS = [
+        "https://i.imgur.com/M3iYH0R.jpeg",
+        "https://i.imgur.com/iTgs8Nm.jpeg",
+        "https://i.imgur.com/xqhNrMc.jpeg",
+        "https://i.imgur.com/JIZwpKT.jpeg",
+        "https://i.imgur.com/kYj36ZY.jpeg",
+      ];
 
-        const track = document.getElementById("slideTrack");
-        const prevBtn = document.querySelector(".arrow-left");
-        const nextBtn = document.querySelector(".arrow-right");
-        const container = document.getElementById("slideshow");
+      const track = document.getElementById("slideTrack");
+      const slideshow = document.getElementById("slideshow");
+      const slides = [];
 
-        const slides = IMAGE_URLS.map((url, i) => {
-          const d = document.createElement("div");
-          d.className = "slide";
-          d.style.backgroundImage = `url("${url}")`;
-          d.setAttribute("role","group");
-          d.setAttribute("aria-roledescription","slide");
-          d.setAttribute("aria-label", `${i+1} of ${IMAGE_URLS.length}`);
-          track.appendChild(d);
-          return d;
+      IMAGE_URLS.forEach((url) => {
+        const d = document.createElement("div");
+        d.className = "slide";
+        track.appendChild(d);
+        slides.push(d);
+      });
+
+      requestAnimationFrame(() => {
+        slides.forEach((el, i) => {
+          el.style.backgroundImage = `url("${IMAGE_URLS[i]}")`;
         });
+      });
 
-        let current = 0;
-        let timer = null;
-        const INTERVAL = 7000; // 7s autoplay
-        let isPaused = false;
+      let current = 0;
+      let autoplayTimer = null;
+      const intervalDuration = 7000;
 
-        function update(){
-          slides.forEach((s,i)=>{
-            s.classList.remove("active","left","right");
-            if(i===current) s.classList.add("active");
-            else if(i===(current+1)%slides.length) s.classList.add("right");
-            else if(i===(current-1+slides.length)%slides.length) s.classList.add("left");
-          });
-        }
-
-        function goto(idx){
-          current = (idx + slides.length) % slides.length;
-          update();
-        }
-
-        function move(delta){
-          goto(current + delta);
-          restart();
-        }
-
-        function play(){
-          if(timer) return;
-          timer = setInterval(()=> goto(current+1), INTERVAL);
-        }
-
-        function pause(){
-          clearInterval(timer); timer = null;
-        }
-
-        function restart(){
-          pause(); if(!isPaused) play();
-        }
-
-        // Buttons
-        prevBtn.addEventListener("click", ()=> move(-1));
-        nextBtn.addEventListener("click", ()=> move(1));
-
-        // Keyboard
-        container.addEventListener("keydown", (e)=>{
-          if(e.key === "ArrowLeft"){ e.preventDefault(); move(-1); }
-          if(e.key === "ArrowRight"){ e.preventDefault(); move(1); }
-          if(e.key === " "){ e.preventDefault(); isPaused = !isPaused; isPaused ? pause() : play(); }
+      function updateSlides() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove("active", "left", "right");
+          if (index === current) slide.classList.add("active");
+          else if (index === (current + 1) % slides.length) slide.classList.add("right");
+          else if (index === (current - 1 + slides.length) % slides.length) slide.classList.add("left");
         });
-        container.setAttribute("tabindex","0");
+      }
 
-        // Hover pause
-        container.addEventListener("mouseenter", ()=>{ isPaused = true; pause(); });
-        container.addEventListener("mouseleave", ()=>{ isPaused = false; play(); });
+      function moveSlide(dir) { current = (current + dir + slides.length) % slides.length; updateSlides(); }
+      function manualSlide(dir) { moveSlide(dir); resetAutoplay(); }
+      function resetAutoplay() { clearInterval(autoplayTimer); autoplayTimer = setInterval(() => moveSlide(1), intervalDuration); }
 
-        // Visibility pause (new tab / lock screen)
-        document.addEventListener("visibilitychange", ()=> {
-          if(document.hidden) pause(); else if(!isPaused) play();
-        });
+      /* Clicks */
+      document.querySelector(".arrow-left").addEventListener("click", () => manualSlide(-1));
+      document.querySelector(".arrow-right").addEventListener("click", () => manualSlide(1));
 
-        // Swipe (pointer events)
-        let startX = 0, startY = 0, dragging = false;
-        track.addEventListener("pointerdown", (e)=>{
-          dragging = true; startX = e.clientX; startY = e.clientY; track.setPointerCapture(e.pointerId);
-        });
-        track.addEventListener("pointermove", (e)=>{
-          if(!dragging) return;
-          const dx = e.clientX - startX, dy = e.clientY - startY;
-          if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){
-            dragging = false;
-            if(dx > 0) move(-1); else move(1);
-          }
-        });
-        const end = (e)=>{ if(dragging){ dragging = false; track.releasePointerCapture?.(e.pointerId); } };
-        track.addEventListener("pointerup", end);
-        track.addEventListener("pointercancel", end);
-        track.addEventListener("pointerleave", end);
+      /* Touch swipe */
+      let touchStartX = 0, touchEndX = 0;
+      slideshow.addEventListener("touchstart", e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+      slideshow.addEventListener("touchend", e => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) >= 50) manualSlide(diff > 0 ? 1 : -1);
+      }, { passive: true });
 
-        update(); play();
-      })();
+      /* Misc blockers you had */
+      ["contextmenu","copy","cut"].forEach(evt =>
+        slideshow.addEventListener(evt, e => e.preventDefault())
+      );
+      slideshow.addEventListener("dragstart", e => e.preventDefault());
+      document.addEventListener("keydown", e => {
+        if ((e.ctrlKey || e.metaKey) && ["s","u","p"].includes(e.key.toLowerCase())) e.preventDefault();
+      });
+      let pressTimer;
+      slideshow.addEventListener("touchstart", () => { pressTimer = setTimeout(()=>{}, 600); }, { passive: true });
+      slideshow.addEventListener("touchend", () => clearTimeout(pressTimer), { passive: true });
+
+      updateSlides();
+      resetAutoplay();
     </script>
 
     <!-- ========== 21 — Mobile-only goal line ========== -->
@@ -321,11 +326,9 @@
       </div>
       <div style="font-size:13px;color:#e1e6ec;margin-top:6px;opacity:0.6;">↑</div>
     </div>
-    <style>
-      @media (max-width:767px){ #no-select{ display:none !important; } }
-    </style>
+    <style>@media (max-width:767px){ #no-select{ display:none !important; } }</style>
     <script>
-      // optional: gentle anti-copy parity like Carrd often adds to little notes
+      // optional tiny guards for parity
       (function(){
         const el = document.querySelector('#no-select .dash-note');
         if(!el) return;
@@ -338,10 +341,7 @@
     </script>
 
     <!-- ========== 26 — How it works (desktop) ========== -->
-    <style>
-      @media (max-width:767px){ #steps-flow{ display:none !important; } }
-    </style>
-
+    <style>@media (max-width:767px){ #steps-flow{ display:none !important; } }</style>
     <div id="steps-flow" style="
       display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px;
       font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -419,13 +419,12 @@
 
         <div id="m-step2-panel" class="m-panel" hidden style="
           overflow:hidden; border:1px solid #0C0C0C; border-top:none; border-radius:0 0 6px 6px;
-          background: #0b0b0b; color:#ddd;
+          background:#0b0b0b; color:#ddd;
         ">
           <div style="padding:10px;">
             <p style="margin:0 0 8px 0; color:#ccc; font-weight:400;">
               I create the video based on our alignment call, minimizing revisions.
             </p>
-            <!-- diamond card representing the dashboard detail -->
             <div style="display:flex; align-items:center; justify-content:center; padding:6px 0;">
               <div style="
                 width:130px; height:130px; transform:rotate(45deg);
@@ -460,17 +459,14 @@
     </div>
 
     <style>
-      /* show only one flow per breakpoint */
       @media (min-width:768px){ #steps-flow-mobile{ display:none !important; } }
       @media (max-width:767px){ #steps-flow{ display:none !important; } }
-
-      /* animated height for mobile panel */
       .m-panel.animating{ transition: height .28s ease; }
       .m-toggle:focus-visible{ outline:2px solid #9ad1ff; outline-offset:2px; }
     </style>
 
     <script>
-      // Mobile Step 2 split-panel expand/collapse with height animation + ARIA
+      // Mobile Step 2 split-panel with height animation + ARIA
       (function(){
         const btn = document.getElementById('m-step2-toggle');
         const panel = document.getElementById('m-step2-panel');
@@ -484,16 +480,13 @@
           btn.setAttribute('aria-expanded', String(open));
           icon.textContent = open ? '−' : '＋';
 
-          // height animation
           panel.hidden = false;
-          const start = panel.offsetHeight; // current
+          const start = panel.offsetHeight;
           panel.style.height = 'auto';
           const end = panel.offsetHeight;
           panel.style.height = start + 'px';
           panel.classList.add('animating');
-          requestAnimationFrame(()=> {
-            panel.style.height = (open ? end : 0) + 'px';
-          });
+          requestAnimationFrame(()=> { panel.style.height = (open ? end : 0) + 'px'; });
 
           const done = () => {
             panel.classList.remove('animating');
@@ -505,11 +498,7 @@
         }
 
         btn.addEventListener('click', ()=> setOpen(!open));
-
-        // close with Escape when focused inside
-        panel.addEventListener('keydown', (e)=> {
-          if(e.key === 'Escape' && open){ setOpen(false); btn.focus(); }
-        });
+        panel.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && open){ setOpen(false); btn.focus(); } });
       })();
     </script>
 
