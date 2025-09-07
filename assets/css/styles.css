@@ -123,10 +123,24 @@ html, body { overflow-x: hidden; }
    ========================= */
 
 /* Solid dark band and readable text */
-#container-3{
-  background:#02060A;
-  color:#E1E6EC;
+/* =========================
+   Container #3 specifics
+   ========================= */
+#container-3 {
+  background: #02060A;
+  color: #E1E6EC;
+
+  /* Carrd-like spacing */
+  margin-top: 2.25rem;
+  margin-bottom: 1.875rem;
+
+  /* Use your auto-padding utilities */
+  padding-top: clamp(1rem, 4vw, 3rem);
+  padding-bottom: clamp(1rem, 4vw, 3rem);
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
 }
+
 
 /* Inner content width + padding */
 #container-3 .content-75{
