@@ -9,7 +9,6 @@ background:linear-gradient(90deg,rgba(225,230,236,0) 0%,#e1e6ec 20%,#e1e6ec 80%,
 
 <!-- ===== “Do you struggle with video editors…” ===== -->
 <style>
-/* Escopo fechado neste ID */
 #alx-headline{
   margin:1.375rem auto;
   font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -36,14 +35,13 @@ background:linear-gradient(90deg,rgba(225,230,236,0) 0%,#e1e6ec 20%,#e1e6ec 80%,
 </div>
 
 <script>
-// Intersection Observer para ativar no scroll
 document.addEventListener("DOMContentLoaded", () => {
   const headline = document.getElementById("alx-headline");
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         headline.classList.add("alx-visible");
-        obs.unobserve(headline); // só anima 1x
+        obs.unobserve(headline);
       }
     });
   }, { threshold: 0.2 });
@@ -55,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <style>
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
-/* ===== SCOPED: container ===== */
+/* SCOPED: container */
 #features{
   --card-bg:#00000091;
   --card-brd:#0C0C0C;
@@ -64,14 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
   font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   color:#e1e6ec;
 
-  /* Match Carrd's downscaled base so all text inside mirrors Carrd */
+  /* match Carrd’s inner base so body text lines up */
   font-size:0.9rem;
 
   user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
 }
 #features *{ -webkit-user-drag:none; }
 
-/* ===== HARD NO-SELECT ===== */
+/* HARD NO-SELECT */
 #features,
 #features *:not(input, textarea){
   user-select:none !important;
@@ -105,17 +103,17 @@ document.addEventListener("DOMContentLoaded", () => {
   box-shadow:0 0 6px rgba(255,255,255,.04), 0 0 12px rgba(255,255,255,.02);
 }
 
-/* Lock title to Carrd: 20.16px = 1.26rem on a 16px root */
+/* lock title to Carrd size */
 .features__title{
   color:#e1e6ec; margin:0 0 15px; font-size:1.26rem; font-weight:700;
 }
 
-/* Body text inherits the 0.9rem base (14.4px) like Carrd */
+/* body text inherits 0.9rem base */
 .features__text{
   color:#e1e6ec; line-height:1.6; font-weight:400; margin:0;
 }
 
-/* ===== PROTECT: icons as background-image (scoped class) ===== */
+/* icons */
 .features__icon{
   width:40px; height:40px; margin:0 0 10px 0; display:block;
   --bg:none;
@@ -124,14 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
   vertical-align:top;
 }
 
-/* ===== MOBILE ONLY CHANGES ===== */
+/* mobile */
 @media (max-width:768px){
   #features{ flex-direction:column; gap:20px; padding:15px; }
   .features__item{ padding:20px; }
   .features__text{ font-size:1.2em; font-weight:500; }
 }
 
-/* ===== DESKTOP ONLY CHANGES ===== */
+/* desktop-only tweaks */
 @media (min-width:769px){
   #features{ margin-bottom:40px; }
 }
@@ -170,10 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "https://i.imgur.com/0XgLEJ5.png",
     "https://i.imgur.com/OAVRPFc.png",
   ];
-
   const container = document.getElementById('features');
 
-  // Set background images via per-element CSS variable.
   requestAnimationFrame(() => {
     container.querySelectorAll('.features__icon').forEach(el => {
       const idx = Number(el.getAttribute('data-img-index'));
@@ -182,7 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Fade-up animation on scroll (scoped)
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -191,10 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, { threshold: 0.3 });
-
   container.querySelectorAll('.features__item').forEach(el => observer.observe(el));
 
-  // ===== MOBILE TEXT SWAP (real content, not CSS 'content') =====
   const descEls = Array.from(container.querySelectorAll('.features__item .features__text'));
   const desktopTexts = descEls.map(el => el.textContent.trim());
   const mobileTexts = [
@@ -210,13 +203,11 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTextSwap(mq);
   (mq.addEventListener ? mq.addEventListener('change', applyTextSwap) : mq.addListener(applyTextSwap));
 
-  // ===== Carrd-style friction (scoped to the container) =====
   ["contextmenu","copy","cut"].forEach(evt => container.addEventListener(evt, e => e.preventDefault()));
   container.addEventListener("dragstart", e => e.preventDefault());
   container.addEventListener("keydown", e => {
     if ((e.ctrlKey||e.metaKey) && ["s","u","p"].includes(e.key.toLowerCase())) e.preventDefault();
   }, true);
-  // Touch long-press mitigation
   let pressTimer;
   container.addEventListener("touchstart", () => { pressTimer=setTimeout(()=>{},600); }, { passive:true });
   container.addEventListener("touchend", () => clearTimeout(pressTimer));
@@ -249,19 +240,16 @@ document.addEventListener("DOMContentLoaded", () => {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <div class="headline">Long-form editing work</div>
 <style>
-/* Base — match Carrd visual on 16px root */
+/* EXACT Carrd computed: size 44px, line-height 33px, weight 500, NO tracking */
 .headline{
   margin:auto;
   font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-
-  /* Carrd weight confirmed as 500 */
   font-weight:500;
+  font-size:44px;          /* Carrd computed */
+  line-height:33px;        /* Carrd computed */
+  letter-spacing:0;        /* Carrd computed 'normal' */
 
-  /* Carrd uses 2.625rem on a 17px root = 44.625px
-     Convert to your 16px root: 44.625 / 16 = 2.7890625rem */
-  font-size:2.7890625rem;
-
-  line-height:1.125; letter-spacing:-0.1rem; color:#E1E6EC;
+  color:#E1E6EC;
   text-align:center; max-width:100%; position:relative;
 
   font-synthesis:none;
@@ -273,12 +261,13 @@ document.addEventListener("DOMContentLoaded", () => {
   .headline{ margin-top:20px; margin-bottom:0; }
   .headline::after{ content:""; }
 }
-/* Mobile — Carrd uses 2.4rem on 17px = 40.8px.
-   Convert to 16px root: 40.8 / 16 = 2.55rem */
+/* Mobile — keep your smaller size but also px-lock it */
 @media (max-width:1023px){
   div.headline{
-    font-size:2.55rem !important;
-    letter-spacing:-0.08rem; line-height:1.2; margin-bottom:4px !important;
+    font-size:41px !important;   /* ~Carrd’s 2.4rem on its base, px-locked */
+    line-height:1.2;             /* you had this; keeps rhythm tighter */
+    letter-spacing:0;
+    margin-bottom:4px !important;
     font-weight:500 !important;
   }
   .headline::after{ content:":"; }
