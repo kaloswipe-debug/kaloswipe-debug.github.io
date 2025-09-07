@@ -56,10 +56,19 @@ img{
 
 /* Utilities */
 .full-bleed {
-  width: var(--vw-safe);
-  margin-left: calc(50% - (var(--vw-safe) / 2));
-  margin-right: calc(50% - (var(--vw-safe) / 2));
+  position: relative;
+  left: 50%;
+  right: 50%;
+
+  /* Scrollbar-safe width */
+  width: calc(100vw - (100vw - 100%));
+
+  /* Center background to viewport edges */
+  margin-left: calc(-50vw + (100vw - 100%) / 2);
+  margin-right: calc(-50vw + (100vw - 100%) / 2);
 }
+
+
 
 .mx-auto{margin-left:auto;margin-right:auto}
 .center{text-align:center}
