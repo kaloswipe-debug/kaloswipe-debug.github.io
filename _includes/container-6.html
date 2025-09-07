@@ -1,112 +1,36 @@
 <!-- ======================== BIG CONTAINER #6 ======================== -->
 <section id="container-6" class="bg-02060A pattern-lines">
 
-  <!-- 🔧 Scoped fixes just for this section -->
-  <style>
-    /* layout: center the inner wrapper and block any off-screen overflow */
-    #container-6 { display:block; width:100%; overflow-x:hidden; position:relative; }
-
-    /* if your .full-bleed utility uses negative margins, neutralize them here */
-    #container-6.full-bleed { margin-inline:0 !important; width:100% !important; }
-
-    /* inner max-width + side padding */
-    #container-6 .mx-auto { 
-      max-width: 1200px; 
-      margin-inline: auto; 
-      padding-inline: clamp(16px, 4vw, 32px);
-    }
-
-    /* some codebases use .content-75 to clamp width with transforms; kill offsets */
-    #container-6 .content-75, 
-    #container-6 .content-75 * {
-      left:auto !important; right:auto !important; transform:none !important;
-    }
-
-    /* decorative backgrounds shouldn’t cause horizontal scroll */
-    #container-6.pattern-lines,
-    #container-6.pattern-lines::before,
-    #container-6.pattern-lines::after {
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    /* calendly: keep it fluid */
-    #container-6 .calendly-inline-widget {
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 850px;
-      border: 0;
-    }
-
-    /* reveal card basics (safe defaults if not already in your global CSS) */
-    #container-6 .reveal-card {
-      display: inline-block;
-      position: relative;
-      cursor: pointer;
-      border-radius: 12px;
-      overflow: hidden;
-      outline: none;
-      user-select: none;
-      -webkit-user-drag: none;
-      max-width: 100%;
-    }
-    #container-6 .rc-media img { 
-      display:block; 
-      width:100%; 
-      height:auto; 
-    }
-    #container-6 .rc-overlay {
-      position:absolute; inset:0;
-      display:grid; place-items:center;
-      opacity:0; transition:opacity .2s;
-      background:rgba(0,0,0,.25);
-    }
-    #container-6 .reveal-card:focus .rc-overlay,
-    #container-6 .reveal-card:hover .rc-overlay { opacity:1; }
-
-    /* footnote */
-    #container-6 .disclaim {
-      opacity:.75; 
-      font-size: .9rem; 
-      line-height: 1.4;
-      margin-top: 20px;
-    }
-
-    /* spacing utilities fallback (if your tokens differ, keep these) */
-    #container-6 .pv-325 { padding-block: clamp(48px, 8vw, 120px); }
-    #container-6 .ph-auto { padding-inline: 0; }
-    #container-6 .center { text-align:center; }
-
-    /* button normalization (in case .scroll-button isn’t globally styled) */
-    #container-6 .scroll-button {
-      display:inline-block;
-      padding: 12px 18px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      line-height: 1;
-      border: 1px solid currentColor;
-    }
-
-    /* responsive tweaks */
-    @media (max-width: 768px) {
-      #container-6 .calendly-inline-widget { height: 900px; }
-    }
-  </style>
-
-  <!-- INNER CONTENT: centered, constrained -->
+  <!-- Inner: centered, constrained (uses your global wrappers/utilities) -->
   <div class="mx-auto content-75 center pv-325 ph-auto">
 
-    <!-- Button -->
+    <!-- Headline (use same font stack as original Carrd) -->
+    <div class="headline" style="
+      margin:auto;
+      font-family: var(--font-ui, 'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue', Arial, sans-serif);
+      font-weight: 500;
+      font-size: 2.75rem;
+      line-height: .75;
+      letter-spacing: 0;
+      color: #e1e6ec;
+      text-align: center;
+      max-width: 100%;
+    ">
+      BOOK YOUR <span style="font-weight:700; color:#FFD510;">DISCOVERY AUDIT:</span>
+    </div>
+
+    <!-- CTA button (uses .scroll-button from styles.css) -->
     <a href="#book-your-call" class="scroll-button" data-smooth>
       Book Your Discovery Audit
     </a>
 
-    <!-- Reveal card -->
-    <div class="reveal-card" 
-         data-src="https://i.imgur.com/LaQ7YLf.png" 
-         role="button" aria-expanded="false" 
-         aria-label="View image" tabindex="0">
+    <!-- Booking confirmation preview: Carrd “skinny glass” reveal-card (matches your original CSS) -->
+    <div class="reveal-card"
+         data-src="https://i.imgur.com/LaQ7YLf.png"
+         role="button"
+         aria-expanded="false"
+         aria-label="View image"
+         tabindex="0">
       <div class="rc-media">
         <img src="https://i.imgur.com/LaQ7YLf.png" alt="Preview" loading="lazy" draggable="false" />
       </div>
@@ -114,30 +38,68 @@
       <div class="protect-guard" aria-hidden="true"></div>
     </div>
 
-    <!-- Calendly -->
+    <!-- Calendly (keep the same semantics & height as your original Carrd block) -->
     <div id="book-your-call"
          class="calendly-inline-widget"
-         data-url="https://calendly.com/gabriel-edits/30min">
+         data-url="https://calendly.com/gabriel-edits/30min"
+         style="min-width:320px; height:850px;">
     </div>
 
-    <!-- Footnote -->
+    <!-- Footnote (desktop-only style comes from styles.css) -->
     <div class="desktop-only disclaim">
       *Regardless of whether we end up working together or not, after our call you'll have clarity on what actionable steps you need to take to scale past your upload bottleneck. It's a win-win no matter what.*
     </div>
-
   </div>
 
-  <!-- Optional: tiny enhancer for keyboard-activation of the reveal card (no dependency) -->
+  <!-- Scoped behavior: identical to your original Carrd reveal-card toggle (no globals touched) -->
   <script>
     (function(){
-      var card = document.currentScript && document.currentScript.previousElementSibling?.querySelector('.reveal-card');
-      if (!card) return;
-      var src = card.getAttribute('data-src');
-      function openImg(){ if(src) window.open(src, '_blank', 'noopener'); }
-      card.addEventListener('click', openImg);
-      card.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openImg(); }
+      const root = document.currentScript.closest('#container-6');
+      if(!root) return;
+      const card  = root.querySelector('.reveal-card');
+      if(!card) return;
+
+      const img   = card.querySelector('.rc-media img');
+      const guard = card.querySelector('.protect-guard');
+      if(!img || !guard) return;
+
+      const src = card.getAttribute('data-src');
+      if (src) img.src = src;
+
+      const cs = getComputedStyle(card);
+      const collapsedH = cs.getPropertyValue('--collapsed-h').trim() || '78px';
+      card.style.minBlockSize = collapsedH;
+
+      const toggle = () => {
+        const willOpen = !card.classList.contains('open');
+        card.classList.toggle('open', willOpen);
+        card.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      };
+
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
       });
+
+      ['contextmenu','copy','cut','dragstart'].forEach(evt => {
+        card.addEventListener(evt, e => e.preventDefault());
+        guard.addEventListener(evt, e => e.preventDefault());
+      });
+
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && ['s','u','p'].includes(e.key.toLowerCase())) {
+          e.preventDefault();
+        }
+      });
+
+      let pressTimer;
+      const startPress = () => { pressTimer = setTimeout(()=>{}, 600); };
+      const endPress   = () => clearTimeout(pressTimer);
+      card.addEventListener('touchstart', startPress, { passive: true });
+      card.addEventListener('touchend',   endPress,   { passive: true });
+
+      img.setAttribute('draggable', 'false');
     })();
   </script>
+
 </section>
