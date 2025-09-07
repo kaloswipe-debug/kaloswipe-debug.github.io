@@ -55,11 +55,12 @@ img{
 }
 
 /* Utilities */
-.full-bleed{
-  width:var(--vw-safe);
-  margin-left:calc(50% - (var(--vw-safe) / 2));
-  margin-right:calc(50% - (var(--vw-safe) / 2));
+.full-bleed {
+  width: var(--vw-safe);
+  margin-left: calc(50% - (var(--vw-safe) / 2));
+  margin-right: calc(50% - (var(--vw-safe) / 2));
 }
+
 .mx-auto{margin-left:auto;margin-right:auto}
 .center{text-align:center}
 .content-100{max-width:100%;width:100%}
