@@ -656,3 +656,10 @@ html, body {
   max-width: 100%;
 }
 
+/* gap da pilha do container-3 */
+#container-3 .whoami-block { --stack-gap: 14px; }
+
+/* garante que elementos dentro da inner ocupem a largura da inner */
+#container-3 .inner > * { max-width: 100%; }
+
+
