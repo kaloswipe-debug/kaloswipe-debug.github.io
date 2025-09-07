@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
   font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   color:#e1e6ec;
 
+  /* Match Carrd's downscaled base so all text inside mirrors Carrd */
+  font-size:0.9rem;
+
   user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
 }
 /* Make sure nothing in here is draggable (scoped) */
@@ -109,8 +112,15 @@ document.addEventListener("DOMContentLoaded", () => {
   box-shadow:0 0 6px rgba(255,255,255,.04), 0 0 12px rgba(255,255,255,.02);
 }
 
-.features__title{ color:#e1e6ec; margin:0 0 15px; font-size:1.4em; font-weight:700; }
-.features__text{ color:#e1e6ec; line-height:1.6; font-weight:400; margin:0; }
+/* Lock title to Carrd: 20.16px = 1.26rem on a 16px root */
+.features__title{
+  color:#e1e6ec; margin:0 0 15px; font-size:1.26rem; font-weight:700;
+}
+
+/* Body text inherits the 0.9rem base (14.4px) like Carrd */
+.features__text{
+  color:#e1e6ec; line-height:1.6; font-weight:400; margin:0;
+}
 
 /* ===== PROTECT: icons as background-image (scoped class) ===== */
 .features__icon{
@@ -125,6 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
 @media (max-width:768px){
   #features{ flex-direction:column; gap:20px; padding:15px; }
   .features__item{ padding:20px; }
+
+  /* Slightly larger on mobile, same as Carrd's 1.2em behavior */
   .features__text{ font-size:1.2em; font-weight:500; }
 }
 
@@ -202,87 +214,3 @@ document.addEventListener("DOMContentLoaded", () => {
   const mq = window.matchMedia('(max-width: 768px)');
   function applyTextSwap(e){
     const isMobile = e.matches;
-    descEls.forEach((el, i) => { el.textContent = isMobile ? mobileTexts[i] : desktopTexts[i]; });
-  }
-  applyTextSwap(mq);
-  (mq.addEventListener ? mq.addEventListener('change', applyTextSwap) : mq.addListener(applyTextSwap));
-
-  // ===== Carrd-style friction (scoped to the container) =====
-  ["contextmenu","copy","cut"].forEach(evt => container.addEventListener(evt, e => e.preventDefault()));
-  container.addEventListener("dragstart", e => e.preventDefault());
-  container.addEventListener("keydown", e => {
-    if ((e.ctrlKey||e.metaKey) && ["s","u","p"].includes(e.key.toLowerCase())) e.preventDefault();
-  }, true);
-  // Touch long-press mitigation
-  let pressTimer;
-  container.addEventListener("touchstart", () => { pressTimer=setTimeout(()=>{},600); }, { passive:true });
-  container.addEventListener("touchend", () => clearTimeout(pressTimer));
-  // Disable drag on any <img> that might appear inside
-  container.querySelectorAll('img').forEach(img => img.setAttribute('draggable','false'));
-  // BLOQUEIA seleção (extra contra iOS)
-  container.addEventListener('selectstart', (e) => e.preventDefault(), { passive: false });
-  document.addEventListener('selectionchange', () => {
-    const sel = window.getSelection && window.getSelection();
-    if (!sel || sel.isCollapsed) return;
-    const anchor = sel.anchorNode && (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentNode : sel.anchorNode);
-    if (anchor && container.contains(anchor)) sel.removeAllRanges();
-  });
-  container.addEventListener('gesturestart', (e) => e.preventDefault());
-  container.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'touch') { if (document.activeElement) document.activeElement.blur?.(); }
-  });
-})();
-</script>
-
-<!-- ===== Divider 2 (mobile-only fade divider) ===== -->
-<style>
-/* Mostra por padrão, esconde em telas >= 768px (desktop/tablet landscape) */
-#mobile-fade-divider{
-  display:block; width:85%; height:1px; margin:24px auto 55px;
-  background:linear-gradient(90deg, rgba(225,230,236,0) 0%, #e1e6ec 20%, #e1e6ec 80%, rgba(225,230,236,0) 100%);
-}
-@media (min-width:768px){ #mobile-fade-divider{ display:none !important; } }
-</style>
-<div id="mobile-fade-divider" role="separator" aria-hidden="true"></div>
-
-<!-- ===== Long-form editing work (heading, mobile adds colon) ===== -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<div class="headline">Long-form editing work</div>
-<style>
-/* Base */
-.headline{
-  margin:auto;
-  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  font-weight:300; font-size:2.625rem; /* desktop default */
-  line-height:1.125; letter-spacing:-0.1rem; color:#E1E6EC;
-  text-align:center; max-width:100%; position:relative;
-}
-/* Desktop (no colon) */
-@media (min-width:1024px){
-  .headline{ margin-top:20px; margin-bottom:0; }
-  .headline::after{ content:""; }
-}
-/* Mobile (add colon + smaller size) */
-@media (max-width:1023px){
-  /* increase specificity + !important to beat stubborn builders */
-  div.headline{
-    font-size:2.4rem !important; letter-spacing:-0.08rem; line-height:1.2; margin-bottom:4px !important;
-  }
-  .headline::after{ content:":"; }
-}
-</style>
-
-<!-- ===== Credibility/measurable conversions (desktop-only blurb) ===== -->
-<style>
-.trust-text{
-  margin:.5rem auto;
-  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  font-weight:300; font-size:1.125rem; line-height:1.3; letter-spacing:0; color:#8a8a8a;
-  text-align:center; max-width:100%;
-}
-/* Mobile only: hide */
-@media (max-width:768px){ .trust-text{ display:none; } }
-</style>
-<div class="trust-text">
-  This is the type of content that establishes credibility and drives conversions.
-</div>
