@@ -83,7 +83,7 @@ img{
 .border-1-solid-0c{border:1px solid var(--border-0c)}
 .shadow-none{box-shadow:none}
 
-/* Noise pattern (optional utility you had) */
+/* Optional noise utility */
 .pattern-noise{
   background-image:
     radial-gradient(1px 1px at 25% 20%, var(--pattern-noise) 50%, transparent 51%),
@@ -93,7 +93,9 @@ img{
   background-size:64px 64px;
 }
 
-/* Full-bleed: for background wrappers ONLY (prevents right-shift) */
+/* =========================
+   Full-bleed wrapper (backgrounds only)
+   ========================= */
 .full-bleed{
   position:relative;
   left:50%;
@@ -103,7 +105,7 @@ img{
   margin-right: calc(-50vw + (100vw - 100%) / 2);
 }
 
-/* Background grid-lines used on #container-6 */
+/* Background grid-lines used on container-6 */
 .pattern-lines{
   background-color: var(--bg-02060A);
   background-image: repeating-linear-gradient(0deg, #00000026 1px, transparent 1px);
@@ -112,8 +114,14 @@ img{
 }
 
 /* =========================
-   Button (moved from inline)
+   Container #6 specifics
    ========================= */
+/* Inner wrapper for #container-6 */
+#container-6 .content-75{
+  padding: 3.25rem var(--pad-h);
+}
+
+/* CTA button */
 .scroll-button{
   display:inline-block;
   margin-top:17px;
@@ -136,9 +144,7 @@ img{
   box-shadow:0 0 32px rgba(255,213,16,.38);
 }
 
-/* =========================
-   Reveal Card (from inline)
-   ========================= */
+/* Reveal Card */
 .reveal-card{
   --collapsed-h:78px;
   --max-open-h:80vh;
@@ -196,9 +202,7 @@ img{
 .reveal-card.open .rc-icon-eye{opacity:0}
 .protect-guard{position:absolute;inset:0;z-index:5;background:transparent;pointer-events:auto}
 
-/* =========================
-   Calendly embed (from inline)
-   ========================= */
+/* Calendly embed */
 .calendly-inline-widget iframe{
   pointer-events:none;
   width:100%;
@@ -214,9 +218,7 @@ img{
   #book-your-call{margin-bottom:30px}
 }
 
-/* =========================
-   Desktop-only note (from inline)
-   ========================= */
+/* Desktop-only note */
 .desktop-only.disclaim{
   margin:1rem auto;
   font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -230,6 +232,162 @@ img{
 }
 @media(max-width:767px){
   .desktop-only{display:none}
+}
+
+/* =========================
+   Container #5 (FAQ) specifics
+   ========================= */
+/* Wrapper: keep full-bleed for background only; content goes in .inner-wrap */
+#container-5{
+  border:1px solid var(--border-transparent);
+  background:none;
+  margin-top:0;          /* instead de 'auto' inválido */
+  margin-bottom:2.5rem;
+}
+#container-5 .inner-wrap{
+  width:100%;
+  max-width:75rem;
+  margin:0 auto;
+  padding: 2.25rem var(--pad-h); /* substitui 'padding: auto' inválido */
+}
+
+/* Title */
+#container-5 .questions-title{
+  margin: 1.375rem auto;
+  font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-weight:300;
+  font-size:2.25rem;
+  line-height:1.125;
+  letter-spacing:-0.1rem;
+  color:#E1E6EC;
+  text-align:center;
+  max-width:100%;
+}
+@media (max-width:768px){
+  #container-5 .questions-title{ margin-bottom: calc(1.375rem + 10px) }
+}
+
+/* Section container */
+#container-5 .faq-section{
+  width:100%;
+  max-width:800px;
+  margin: 0 auto;
+  padding: 0 var(--pad-h);
+}
+
+/* Links dentro da FAQ (sem afetar o site inteiro) */
+#container-5 .faq-section a{
+  text-decoration:none;
+  color:#e1e6ec;
+}
+#container-5 .faq-section a:hover{
+  text-decoration:none;
+  color:#e1e6ec;
+}
+
+/* Accordion */
+#container-5 .accordion{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background-color:rgba(0,0,0,0.55);
+  color:#e1e6ec;
+  border:1px solid rgba(255,255,255,0.1);
+  cursor:pointer;
+  padding:18px;
+  width:100%;
+  margin:0 auto 10px;
+  font-weight:500;
+  border-radius:10px;
+  font-size:1.1rem;
+  transition:background-color 0.3s ease;
+  user-select:none;
+  overflow:hidden;
+  flex-direction:column;
+}
+#container-5 .accordion-header{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+#container-5 .question{
+  line-height:1;
+  font-size:1.1rem;
+  position:relative;
+  top:1.4px;
+}
+#container-5 .icon{
+  font-weight:300;
+  font-size:1.4rem;
+  transition:transform 0.23s ease-out;
+  margin-left:10px;
+}
+#container-5 .icon.rotate{ transform:rotate(180deg) }
+
+#container-5 .extra-content{
+  overflow:hidden;
+  max-height:0;
+  transition:max-height 0.3s cubic-bezier(0.25,0.8,0.5,1);
+  width:100%;
+}
+#container-5 .inner{
+  padding-top:20px;
+  font-size:0.9rem;
+  font-weight:400;
+  text-align:left;
+  color:#e1e6ec;
+  line-height:1.4;
+}
+#container-5 .bullet-list{ list-style-type:disc; padding-left:1.5em }
+
+@media(max-width:600px){
+  #container-5 .accordion{
+    max-width:100%;
+    margin:0 auto 12px;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 2px 6px rgba(0,0,0,0.35);
+    transition:transform 0.15s ease,box-shadow 0.15s ease,background 0.3s ease;
+    background:linear-gradient(120deg,rgba(28,28,28,0.94),rgba(0,0,0,0.9));
+    background-size:200% 200%;
+    animation:rotateGradient 30s ease infinite;
+  }
+  #container-5 .accordion:nth-of-type(2){
+    background:linear-gradient(160deg,rgba(27,27,27,0.93),rgba(0,0,0,0.89));
+    animation:rotateGradient 35s ease infinite;
+  }
+  #container-5 .accordion:nth-of-type(3){
+    background:linear-gradient(200deg,rgba(26,26,26,0.92),rgba(0,0,0,0.88));
+    animation:rotateGradient 32s ease infinite;
+  }
+  #container-5 .accordion:nth-of-type(4){
+    background:linear-gradient(135deg,rgba(25,25,25,0.93),rgba(0,0,0,0.89));
+    animation:rotateGradient 34s ease infinite;
+  }
+  #container-5 .accordion:nth-of-type(5){
+    background:linear-gradient(180deg,rgba(26,26,26,0.92),rgba(0,0,0,0.87));
+    animation:rotateGradient 31s ease infinite;
+  }
+  #container-5 .accordion:nth-of-type(6){
+    background:linear-gradient(100deg,rgba(25,25,25,0.93),rgba(0,0,0,0.88));
+    animation:rotateGradient 36s ease infinite;
+  }
+  #container-5 .accordion:nth-of-type(7){
+    background:linear-gradient(150deg,rgba(24,24,24,0.92),rgba(0,0,0,0.89));
+    animation:rotateGradient 33s ease infinite;
+  }
+  #container-5 .accordion-header{ justify-content:center }
+  #container-5 .accordion-header .question{ flex:1; text-align:center }
+  #container-5 .accordion-header .icon{ display:none!important }
+}
+
+/* Fake gradient motion (optional) */
+@keyframes rotateGradient{
+  0%{ background-position:0% 50% }
+  50%{ background-position:100% 50% }
+  100%{ background-position:0% 50% }
 }
 
 /* =========================
