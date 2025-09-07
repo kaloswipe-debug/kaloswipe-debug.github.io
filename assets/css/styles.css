@@ -102,13 +102,14 @@ html, body { overflow-x: hidden; }
 
 /* Make full-bleed actually bleed, but not trigger scrollbars */
 .full-bleed{
-  position:relative;
-  left:50%;
-  right:50%;
-  width:var(--vw-safe); /* accounts for scrollbar width */
+  position: relative;
+  left: 50%;
+  width: 100vw;
   margin-left: calc(-50vw + (100vw - 100%) / 2);
   margin-right: calc(-50vw + (100vw - 100%) / 2);
+  overflow-x: clip;
 }
+
 
 /* Background grid-lines used on container-6 */
 .pattern-lines{
