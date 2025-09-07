@@ -13,7 +13,7 @@
 html{
   scroll-behavior:smooth;
   /* Make 1rem = 17px to match Carrd “Size = 17” */
-  font-size:17px;
+  font-size:16px;
 }
 
 /* Box sizing + basic defaults */
