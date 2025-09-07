@@ -159,15 +159,6 @@ html, body {
   overflow-x: hidden;
 }
 
-.full-bleed {
-  position: relative;
-  left: 50%;
-  width: 100vw;
-  margin-left: calc(-50vw + (100vw - 100%) / 2);
-  margin-right: calc(-50vw + (100vw - 100%) / 2);
-  overflow-x: clip; /* belt-and-suspenders */
-}
-
 /* Background grid-lines used on container-6 */
 .pattern-lines {
   background-color: var(--bg-02060A);
