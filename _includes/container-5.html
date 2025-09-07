@@ -142,8 +142,6 @@
       #container-5 .accordion:nth-of-type(6) { background: linear-gradient(100deg,rgba(25,25,25,0.93),rgba(0,0,0,0.88)); animation: c5RotateGradient 36s ease infinite; }
       #container-5 .accordion:nth-of-type(7) { background: linear-gradient(150deg,rgba(24,24,24,0.92),rgba(0,0,0,0.89)); animation: c5RotateGradient 33s ease infinite; }
 
-      #container-5 .accordion:active { transform: scale(0.98); box-shadow: 0 1px 3px rgba(0,0,0,0.6); }
-      #container-5 .accordion:hover { filter: brightness(1.05); }
       #container-5 .accordion-header { position: relative; justify-content: center; padding-right: 6px; }
       #container-5 .accordion-header .question { flex:1; text-align: center; }
       #container-5 .accordion-header .icon { display: none !important; }
@@ -252,62 +250,5 @@
     </div>
   </div>
 
-  <!-- Scoped script so multiple includes don't fight each other -->
-  <script>
-    (function(){
-      const section = document.currentScript.closest('#container-5');
-      if (!section) return;
-
-      const accordions = section.querySelectorAll('.accordion');
-
-      function updateQuestionsForMobile(){
-        if(window.innerWidth<=600){
-          section.querySelectorAll('.question').forEach(q=>{
-            const original=q.getAttribute('data-text');
-            if(original) q.textContent=original;
-          });
-          const d1 = section.querySelector('#desc1');
-          const d2 = section.querySelector('#desc2');
-          const d3 = section.querySelector('#desc3');
-          if (d1) d1.innerHTML="In contrast to most editors, who are only interested in pumping out the bare minimum video editing service to collect their money, I work very closely with you to consistently push the limits with my editing while staying true to your brand and vision. Creating the best content and maximizing ROI.";
-          if (d2) d2.innerHTML="After we start working together, we'll have an alignment meeting to get on the same page about how your content should be. I'll ask questions like:<ul class='bullet-list'><li>“If someone binge-watched 5 of your videos, what word should they walk away with?”</li><li>“What emotion should still land even if the video had no visuals?”</li><li>“What’s totally off-brand for you, even if it could go viral?”</li></ul>These types of questions allow me to edit in your voice, <em>but better.</em>";
-          if (d3) d3.innerHTML="Revisions usually happen for one of two reasons:<ul class='bullet-list'><li>Your editor is sloppy and doesn't pay attention to detail.</li><li>They're misaligned and disconnected from you and your brand.</li></ul>This is why the alignment call is so important.";
-        } else {
-          section.querySelectorAll('.question').forEach((q,i)=>{
-            const original=q.getAttribute('data-text');
-            if(original) q.textContent=(i+1)+". "+original;
-          });
-        }
-      }
-
-      updateQuestionsForMobile();
-      window.addEventListener('resize', updateQuestionsForMobile);
-
-      accordions.forEach(acc=>{
-        const icon=acc.querySelector('.icon');
-        const content=acc.querySelector('.extra-content');
-        const inner=acc.querySelector('.inner');
-
-        acc.addEventListener('click',()=>{
-          const isActive=acc.classList.contains('active');
-
-          accordions.forEach(other=>{
-            if(other!==acc){
-              other.classList.remove('active');
-              const oIcon=other.querySelector('.icon');
-              const oContent=other.querySelector('.extra-content');
-              if(oIcon){ oIcon.textContent='+'; oIcon.classList.remove('rotate'); }
-              if(oContent){ oContent.style.maxHeight=null; }
-            }
-          });
-
-          acc.classList.toggle('active');
-          if(icon){ icon.textContent=isActive?'+':'–'; icon.classList.toggle('rotate'); }
-          if(content && inner){
-            content.style.maxHeight = isActive ? null : inner.scrollHeight+'px';
-          }
-        });
-      });
-    })();
-  </script>
+  <!-- No inline script here. main.js handles the accordion behavior. -->
 </section>
