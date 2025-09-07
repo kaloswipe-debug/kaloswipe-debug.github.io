@@ -1,43 +1,59 @@
 <!-- ======================== AFTER CONTAINER #3 ======================== -->
-<section id="after-c3" class="mx-auto center">
+<section id="after-c3" class="mx-auto center" style="margin:0; padding:0;">
 
-  <!-- 28What success sounds like.txt -->
+  <!-- (from both originals) SF Pro Display -->
+  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
-  <div id="success-sounds" style="
-    font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-    font-weight:300;
-    font-size:2.625rem;
-    line-height:1.125;
-    letter-spacing:-0.1rem;
+  <!-- ======= Original: 28What success sounds like.txt ======= -->
+  <div id="hero-headline" style="
+    margin:auto;
+    font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight:300; /* Light */
+    font-size:2.625rem; /* Desktop default */
+    line-height:1.125; /* Carrd line spacing */
+    letter-spacing:-0.1rem; /* tighter spacing */
     color:#E1E6EC;
     text-align:center;
     max-width:100%;
   ">
-    What success sounds like
-  </div>
-
-  <!-- 29The unfiltered version of how it really feels to work with me.txt -->
-  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-
-  <div id="unfiltered-version" style="
-    font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-    font-weight:400;
-    font-size:1.125rem;
-    line-height:1.3;
-    color:#8a8a8a;
-    text-align:center;
-    max-width:57%;
-  ">
-    <span class="desktop-only">
-      The unfiltered version of how it really feels to work with me.
-    </span>
+    What <span style="color:#ffd510;">success</span> sounds like:
   </div>
 
   <style>
-    @media (max-width:768px){
-      #unfiltered-version { display:none !important; }
+    /* Only affects the element with this ID (original) */
+    @media (max-width: 768px) {
+      #hero-headline { font-size: 2.4rem !important; }
     }
+  </style>
+
+  <!-- ======= Original: 29The unfiltered version of how it really feels to work with me.txt ======= -->
+  <style>
+    /* Hide on small screens (mobile), show on desktop (original) */
+    @media (max-width: 768px) {
+      .pc-only { display: none; }
+    }
+  </style>
+
+  <div class="pc-only" style="
+    margin:auto;
+    font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight:300; /* Light */
+    font-size:1.125rem; /* Carrd size 1.125 */
+    line-height:1.125; /* Carrd line spacing */
+    letter-spacing:0;
+    color:#8a8a8a;
+    text-align:center; /* centered as requested */
+    max-width:100%;
+  ">
+    The unfiltered version of how it really feels to work with me.
+  </div>
+
+  <!-- ======= Margin override to honor "no margins" without deleting originals ======= -->
+  <style>
+    #after-c3, #hero-headline, .pc-only { margin: 0 !important; }
   </style>
 
 </section>
