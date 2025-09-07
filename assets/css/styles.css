@@ -12,7 +12,7 @@
   --pad-v: 1.375rem;
   --pad-h: 2.125rem;
 
-  /* Scrollbar-safe viewport width */
+  /* Scrollbar-safe viewport width (kept if you need it elsewhere) */
   --vw-safe: calc(100vw - (100vw - 100%));
 }
 
@@ -42,8 +42,8 @@ body{
 h1,h2,h3,h4,h5,h6,p,blockquote,figure{ margin:0 }
 ul,ol{ margin:0; padding-left:1.25em }
 
-/* Page shell */
-main.page{
+/* Page shell (wrapping groups of sections that need padding) */
+.page{
   margin:0 auto;
   max-width:100%;
   padding:var(--pad-v) var(--pad-h);
@@ -100,20 +100,15 @@ img{
 /* Kill accidental side-scroll globally (transforms, 100vw calc issues, etc.) */
 html, body { overflow-x: hidden; }
 
-/* Make full-bleed actually bleed, but not trigger scrollbars */
-/* Full-bleed that truly spans the viewport, with scrollbar compensation */
+/* Rock-solid full-bleed: spans viewport, compensates scrollbar via margins */
 .full-bleed{
   position: relative;
   left: 50%;
-  /* Pull the element to the viewport edges regardless of parent width */
-  width: calc(100vw - (100vw - 100%)); /* = 100vw on classic scrollbars, = 100% on overlay BUT we fix via margins */
+  width: 100vw;
   margin-left: calc(-50vw + (100vw - 100%) / 2);
   margin-right: calc(-50vw + (100vw - 100%) / 2);
-  /* optional: keep any internal overflow from causing side-scroll */
-  overflow-x: clip;
+  overflow-x: clip; /* belt-and-suspenders */
 }
-
-
 
 /* Background grid-lines used on container-6 */
 .pattern-lines{
