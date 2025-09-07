@@ -15,6 +15,51 @@
 }
 
 /* ========================= Base / Reset ========================= */
+/* ===== Mini Section Kit (drop-in) ===== */
+:root{
+  --space-1: 0.5rem;  /* optional scale for later */
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+}
+
+/* Full-bleed primitive (works inside .page too) */
+.full-bleed{
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: calc(-50vw + (100vw - 100%) / 2);
+  margin-right: calc(-50vw + (100vw - 100%) / 2);
+  overflow-x: clip;
+}
+/* If the full-bleed section sits inside a padded .page, subtract pad */
+:where(.page) .full-bleed{
+  margin-left: calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
+  margin-right: calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
+}
+
+/* Generic section pattern */
+.section{ 
+  margin-top: 2.25rem;     /* Carrd mt-225 */
+  margin-bottom: 1.875rem; /* Carrd mb-1875 */
+  padding: clamp(1rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+}
+.wrapper{
+  max-width: min(1200px, 75vw);
+  margin-inline: auto;
+}
+.inner{
+  /* local content padding if you want extra breathing room per section */
+  padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 40px);
+}
+
+/* Simple vertical stack helper (optional) */
+.stack > * + *{ margin-top: var(--stack-gap, 1rem); }
+
+/* Optional “prose” width limiter for long text blocks */
+.prose{ max-width: 60ch; margin-inline: auto; }
+
 html {
   font-size: 16px; /* rem base */
   -webkit-text-size-adjust: 100%;
@@ -132,64 +177,40 @@ html, body {
 }
 
 /* ========================= Container #3 specifics ========================= */
-#container-3 {
+/* Container #3: only the unique stuff */
+#container-3{
   background: #02060A;
   color: #E1E6EC;
-  margin-top: 2.25rem;   /* mt-225 */
-  margin-bottom: 1.875rem; /* mb-1875 */
-  padding-top: clamp(1rem, 4vw, 3rem);
-  padding-bottom: clamp(1rem, 4vw, 3rem);
-  padding-left: clamp(1rem, 4vw, 2rem);
-  padding-right: clamp(1rem, 4vw, 2rem);
 }
 
-#container-3 .content-75 {
-  max-width: min(1200px, 75vw);
-  margin-inline: auto;
-  padding: 0; /* <-- remove inner padding so you SEE the section's padding */
+/* Keep your existing typography for the heading + blurb */
+#container-3 .whoami{
+  margin:auto;
+  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-weight:300;
+  font-size:clamp(2rem, 4.5vw, 2.625rem);
+  line-height:1.125;
+  letter-spacing:-0.1rem;
+  text-align:center;
+  max-width:100%;
 }
 
-.page > #container-3.full-bleed {
-  margin-left: calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
-  margin-right: calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
+#container-3 #gs-blurb{
+  margin:auto;
+  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-weight:400;
+  font-size:1.125rem;
+  line-height:1.125; /* Carrd-accurate */
+  color:#8a8a8a;
+  text-align:center;
+  max-width:57%;
 }
-
-/* Headline and blurb */
-#container-3 .whoami {
-  margin: auto;
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 300;
-  font-size: clamp(2rem, 4.5vw, 2.625rem);
-  line-height: 1.125;
-  letter-spacing: -0.1rem;
-  color: #E1E6EC;
-  text-align: center;
-  max-width: 100%;
+@media (max-width:768px){
+  #container-3 #gs-blurb{ max-width:90% !important; margin-top:10px !important; }
+  #container-3 #gs-blurb .desktop-only{ display:none; }
 }
-
-#container-3 #gs-blurb {
-  margin: auto;
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 400;
-  font-size: 1.125rem;
-  line-height: 1.35;
-  color: #8a8a8a;
-  text-align: center;
-  max-width: 57%;
-}
-
-@media (max-width: 768px) {
-  #container-3 #gs-blurb {
-    max-width: 90% !important;
-    margin-top: 10px !important;
-  }
-  #container-3 #gs-blurb .desktop-only { display: none; }
-}
-
-@media (min-width: 769px) {
-  #container-3 #gs-blurb .mobile-only { display: none; }
+@media (min-width:769px){
+  #container-3 #gs-blurb .mobile-only{ display:none; }
 }
 
 /* Slideshow safety */
