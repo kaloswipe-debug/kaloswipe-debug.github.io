@@ -1,12 +1,8 @@
 <!-- ======================== BIG CONTAINER #3 ======================== -->
-<section id="container-3"
-  class="bg-02060A pattern-noise pv-auto mt-225 mb-1875 center"
+<section
+  id="container-3"
+  class="full-bleed bg-02060A pattern-noise pv-auto mt-225 mb-1875"
 >
-  <!-- Head-ish bits -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-
   <div class="mx-auto center content-75">
 
     <!-- ========== 18 — Who am I? ========== -->
@@ -24,7 +20,7 @@
       Who am I?
     </div>
 
-    <!-- ========== 19 — Intro blurb ========== -->
+    <!-- ========== 19 — Intro blurb (desktop + mobile variants) ========== -->
     <div id="gs-blurb" style="
       margin:auto;
       font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -36,8 +32,13 @@
       text-align:center;
       max-width:57%;
     ">
-      <span class="mobile-only">My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.</span>
-      <span class="desktop-only">My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil. My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong></span>
+      <span class="mobile-only">
+        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+      </span>
+      <span class="desktop-only">
+        My name is Gabriel Santana. I'm a 16-year-old running an online video editing business based in Brazil.
+        My goal is <em>simple</em>: make video editing so frictionless that it <strong>never even crosses your mind.</strong>
+      </span>
     </div>
 
     <style>
@@ -50,8 +51,67 @@
       }
     </style>
 
-    <!-- ========== 20 — Life Pictures (Full-bleed slideshow) ========== -->
-    <div class="slideshow-wrapper full-bleed">
+    <!-- ========== 20 — Life Pictures (Carrd-parity) ========== -->
+    <style>
+      .slideshow-wrapper { display: flex; justify-content: center; width: 100%; margin: 30px auto 190px auto; }
+      .slideshow-frame { width: 100%; display: flex; justify-content: center; }
+      @media (max-width: 600px) {
+        .slideshow-wrapper { margin: 30px auto 30px auto; }
+        .slideshow-frame {
+          padding-left: calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-left));
+          padding-right: calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-right));
+          overflow: hidden;
+        }
+      }
+      .slideshow-container {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        aspect-ratio: 16 / 9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: visible;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        touch-action: pan-y;
+      }
+      .slide-track { position: relative; width: 100%; height: 100%; pointer-events: none; }
+      .slide {
+        position: absolute; inset: 0;
+        background-position: center; background-size: cover;
+        opacity: 0; transform: scale(0.5); filter: blur(4px);
+        transition: all 0.6s ease-in-out;
+        pointer-events: none;
+      }
+      .slide.active { opacity: 1; transform: scale(1); filter: none; z-index: 2; }
+      .slide.left { opacity: 0.6; z-index: 1; transform: translateX(-40%) scale(0.6); }
+      .slide.right { opacity: 0.6; z-index: 1; transform: translateX(40%) scale(0.6); }
+
+      /* Arrows */
+      .arrow {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        font-size: 30px; color: white; background: none; border: none;
+        cursor: pointer; z-index: 9999; pointer-events: auto;
+        user-select: none; outline: none; -webkit-tap-highlight-color: transparent;
+        transition: transform 0.15s ease;
+      }
+      .arrow:active { transform: translateY(-50%) scale(0.85); }
+      .arrow-left { left: clamp(10px, 3vw, 40px); }
+      .arrow-right { right: clamp(10px, 3vw, 40px); }
+      .protect-guard { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+
+      @media (max-width: 600px) {
+        .slide.left { transform: translateX(-30%) scale(0.82); opacity: 0.6; z-index: 1; }
+        .slide.right { transform: translateX(30%) scale(0.82); opacity: 0.6; z-index: 1; }
+        .arrow { font-size: 24px; }
+        .arrow-left { left: clamp(6px, 3vw, 16px); }
+        .arrow-right { right: clamp(6px, 3vw, 16px); }
+      }
+    </style>
+
+    <div class="slideshow-wrapper">
       <div class="slideshow-frame">
         <div class="slideshow-container" id="slideshow">
           <button type="button" class="arrow arrow-left" aria-label="Anterior">&#10094;</button>
@@ -62,6 +122,67 @@
       </div>
     </div>
 
-    <!-- Slideshow JS/CSS stays the same -->
+    <script>
+      const IMAGE_URLS = [
+        "https://i.imgur.com/M3iYH0R.jpeg",
+        "https://i.imgur.com/iTgs8Nm.jpeg",
+        "https://i.imgur.com/xqhNrMc.jpeg",
+        "https://i.imgur.com/JIZwpKT.jpeg",
+        "https://i.imgur.com/kYj36ZY.jpeg",
+      ];
+      const track = document.getElementById("slideTrack");
+      const slideshow = document.getElementById("slideshow");
+      const slides = [];
+
+      IMAGE_URLS.forEach((url) => {
+        const d = document.createElement("div");
+        d.className = "slide";
+        track.appendChild(d);
+        slides.push(d);
+      });
+
+      requestAnimationFrame(() => {
+        slides.forEach((el, i) => { el.style.backgroundImage = `url("${IMAGE_URLS[i]}")`; });
+      });
+
+      let current = 0, autoplayTimer = null;
+      const intervalDuration = 7000;
+
+      function updateSlides() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove("active", "left", "right");
+          if (index === current) slide.classList.add("active");
+          else if (index === (current + 1) % slides.length) slide.classList.add("right");
+          else if (index === (current - 1 + slides.length) % slides.length) slide.classList.add("left");
+        });
+      }
+
+      function moveSlide(dir) {
+        current = (current + dir + slides.length) % slides.length;
+        updateSlides();
+      }
+
+      function manualSlide(dir) { moveSlide(dir); resetAutoplay(); }
+
+      function resetAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = setInterval(() => moveSlide(1), intervalDuration);
+      }
+
+      document.querySelector(".arrow-left").addEventListener("click", () => manualSlide(-1));
+      document.querySelector(".arrow-right").addEventListener("click", () => manualSlide(1));
+
+      let touchStartX = 0, touchEndX = 0;
+      slideshow.addEventListener("touchstart", e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+      slideshow.addEventListener("touchend", e => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) >= 50) manualSlide(diff > 0 ? 1 : -1);
+      }, { passive: true });
+
+      updateSlides();
+      resetAutoplay();
+    </script>
+
   </div>
 </section>
