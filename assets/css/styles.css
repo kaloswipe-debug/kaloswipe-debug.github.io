@@ -849,6 +849,15 @@
   #container-3 #steps-flow-mobile .diamond-icon,
   #container-3 #steps-flow-mobile .reveal-content { transition: opacity 200ms ease, transform 220ms ease; }
   #container-3 #steps-flow-mobile .diamond-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 1; }
+    /* Glow for diamond icon */
+  #container-3 #steps-flow-mobile .diamond-icon .icon-diamond {
+    stroke: #ffd510; /* brand accent */
+    filter: drop-shadow(0 0 6px rgba(255, 213, 16, 0.6));
+    transition: filter 0.25s ease;
+  }
+  #container-3 #steps-flow-mobile .diamond-icon .icon-diamond:hover {
+    filter: drop-shadow(0 0 10px rgba(255, 213, 16, 0.9));
+  }
   #container-3 #steps-flow-mobile .reveal-content {
     position: static; opacity: 0; transform: translateY(6px); white-space: normal; overflow-wrap: anywhere; word-break: break-word; display: none;
   }
