@@ -6,7 +6,6 @@
       <h2 class="whoami">Who am I?</h2>
 
       <!-- Blurb (desktop+mobile variants handled inside) -->
-      <!-- Uses your #gs-blurb styles from styles.css -->
       <div id="gs-blurb" style="
         margin:auto;
         font-family:'SF Pro Display', -apple-system, BlinkMacSystemFont,
@@ -136,29 +135,29 @@
         The exact system I use daily to produce client content with minimal input from them.
       </div>
       <style>@media (max-width:768px){ #hero-blurb{ display:none !important; } }</style>
-<!-- Desktop-only dashboard note (moved ABOVE the flow) -->
-<style>@media (max-width:767px){ #no-select{ display:none !important; } }</style>
-<div id="no-select" style="
-  display:flex; flex-direction:column; align-items:center;
-  font-family:'SF Pro Display', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  font-size:.65em; margin-bottom:10px; margin-top:18px; user-select:none;">
-  <div style="max-width:300px; background:rgba(30,30,30,.7); border:1px solid rgba(255,255,255,.05); border-radius:8px; padding:8px 14px;
-    color:#e1e6ec; font-style:italic; box-shadow:0 0 8px rgba(255,255,255,.05); backdrop-filter:blur(5px); text-align:center;">
-    <p style="margin:0; font-weight:400; font-size:9.36px;">
-      <span style="font-family:monospace;">✨</span>
-      You'll get access to a <strong style="font-weight:600;">private dashboard</strong>
-      with step-by-step project tracking. Rough cuts, music, asset gathering, final touches. Updates in real time, no need to ask about project status.
-    </p>
-  </div>
-  <!-- arrow now points DOWN to the boxes -->
-  <div style="font-size:13px; color:#e1e6ec; margin-top:6px; opacity:.6;">↑</div>
-</div>
-<script>
-  (function(){ const el=document.getElementById("no-select"); if(!el) return;
-    el.addEventListener("contextmenu", e=>e.preventDefault());
-    el.addEventListener("selectstart", e=>e.preventDefault());
-  })();
-</script>
+
+      <!-- Desktop-only dashboard note (moved ABOVE the flow) -->
+      <style>@media (max-width:767px){ #no-select{ display:none !important; } }</style>
+      <div id="no-select" style="
+        display:flex; flex-direction:column; align-items:center;
+        font-family:'SF Pro Display', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+        font-size:.65em; margin-bottom:10px; margin-top:18px; user-select:none;">
+        <div style="max-width:300px; background:rgba(30,30,30,.7); border:1px solid rgba(255,255,255,.05); border-radius:8px; padding:8px 14px;
+          color:#e1e6ec; font-style:italic; box-shadow:0 0 8px rgba(255,255,255,.05); backdrop-filter:blur(5px); text-align:center;">
+          <p style="margin:0; font-weight:400; font-size:9.36px;">
+            <span style="font-family:monospace;">✨</span>
+            You'll get access to a <strong style="font-weight:600;">private dashboard</strong>
+            with step-by-step project tracking. Rough cuts, music, asset gathering, final touches. Updates in real time, no need to ask about project status.
+          </p>
+        </div>
+        <div style="font-size:13px; color:#e1e6ec; margin-top:6px; opacity:.6;">↑</div>
+      </div>
+      <script>
+        (function(){ const el=document.getElementById("no-select"); if(!el) return;
+          el.addEventListener("contextmenu", e=>e.preventDefault());
+          el.addEventListener("selectstart", e=>e.preventDefault());
+        })();
+      </script>
 
       <!-- Desktop/tablet flow -->
       <style>@media (max-width:767px){ #steps-flow{ display:none !important; } }</style>
@@ -166,37 +165,54 @@
         display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px;
         font-family:'SF Pro Display', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
         margin-bottom:48px; font-size:.75em; user-select:none;">
-        <div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+
+        <!-- Step 1 (card) -->
+        <div class="how-step"
+             onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
              onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
-             style="flex:1; min-width:160px; max-width:200px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
+             style="flex:1; min-width:160px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
           <h3 style="margin-top:0; margin-bottom:8px; font-size:1.05em; font-weight:700;">Step 1: Alignment</h3>
           <p style="margin:0; color:#ccc; font-weight:400;">We start with a deep alignment call to align with your voice + set up all technical details.</p>
         </div>
+
         <div style="font-size:18px; color:white; align-self:center;">➔</div>
-        <div style="flex:0 0 160px; max-width:180px; background:#1a1a1a; border:1px solid #333; border-radius:6px; padding:10px; color:#ddd; font-style:italic; box-shadow:0 1px 4px rgba(0,0,0,0.15);">
+
+        <!-- Note box -->
+        <div class="how-note"
+             style="flex:0 0 auto; background:#1a1a1a; border:1px solid #333; border-radius:6px; padding:10px; color:#ddd; font-style:italic; box-shadow:0 1px 4px rgba(0,0,0,0.15);">
           <p style="margin:0; font-weight:400;">I’m notified when a new file is added to the shared folder.<span style="color:#aaa;"> No messages needed.</span></p>
         </div>
+
         <div style="font-size:18px; color:white; align-self:center;">➔</div>
-        <div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+
+        <!-- Step 2 (card) -->
+        <div class="how-step"
+             onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
              onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
-             style="flex:1; min-width:160px; max-width:200px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
+             style="flex:1; min-width:160px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
           <h3 style="margin-top:0; margin-bottom:8px; font-size:1.05em; font-weight:700;">Step 2: Execution</h3>
           <p style="margin:0; color:#ccc; font-weight:400;">I create the video based on the vision from our alignment call, ensuring it matches your goals and minimizes revisions.</p>
         </div>
+
         <div style="font-size:18px; color:white; align-self:center;">➔</div>
-        <div style="flex:0 0 160px; max-width:180px; background:#1a1a1a; border:1px solid #333; border-radius:6px; padding:10px; color:#ddd; font-style:italic; box-shadow:0 1px 4px rgba(0,0,0,0.15);">
+
+        <!-- Note box -->
+        <div class="how-note"
+             style="flex:0 0 auto; background:#1a1a1a; border:1px solid #333; border-radius:6px; padding:10px; color:#ddd; font-style:italic; box-shadow:0 1px 4px rgba(0,0,0,0.15);">
           <p style="margin:0; font-weight:400;">Final video is uploaded to the shared folder.</p>
         </div>
+
         <div style="font-size:18px; color:white; align-self:center;">➔</div>
-        <div onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
+
+        <!-- Step 3 (card) -->
+        <div class="how-step"
+             onmouseover="this.style.boxShadow='0 0 6px rgba(255,255,255,0.04), 0 0 12px rgba(255,255,255,0.02)'; this.style.borderColor='#ffffff33';"
              onmouseout="this.style.boxShadow='0 1px 5px rgba(0,0,0,0.1)'; this.style.borderColor='#0C0C0C';"
-             style="flex:1; min-width:160px; max-width:200px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
+             style="flex:1; min-width:160px; background:#00000091; border:1px solid #0C0C0C; border-radius:6px; padding:12px; color:white; box-shadow:0 1px 5px rgba(0,0,0,0.1); transition:all .3s ease;">
           <h3 style="margin-top:0; margin-bottom:8px; font-size:1.05em; font-weight:700;">Step 3: Delivery</h3>
           <p style="margin:0; color:#ccc; font-weight:400;">You review it. If aligns with your vision, you upload it. Revisions are rare, though.</p>
         </div>
       </div>
-
-    
 
       <!-- Mobile: interactive flow -->
       <style>
@@ -334,20 +350,16 @@
   #container-3 .inner.stack.whoami-block.center > :last-child  { margin-bottom: 0; }
 </style>
 
+<!-- Desktop-only widths for "How it works" (class-based; no inline-style selectors) -->
 <style>
-  /* Desktop-only: give the "How it works" boxes a touch more width */
   @media (min-width: 768px) {
-    /* The three main step cards: were max-width:200px */
-    #steps-flow > div[style*="max-width:200px"] {
-      max-width: 220px !important; /* ~10% wider */
-    }
+    /* Main step cards */
+    #steps-flow .how-step { max-width: 220px; }
 
-    /* The small italic note boxes: were max-width:180px and flex:0 0 160px */
-    #steps-flow > div[style*="max-width:180px"] {
-      max-width: 200px !important;
-    }
-    #steps-flow > div[style*="flex:0 0 160px"] {
-      flex: 0 0 170px !important; /* give them a bit more breathing room */
+    /* Small italic note boxes */
+    #steps-flow .how-note {
+      max-width: 200px;
+      flex: 0 0 170px;
     }
   }
 </style>
