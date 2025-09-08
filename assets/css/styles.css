@@ -37,11 +37,13 @@
 /* ========================= reset ========================= */
 @layer reset {
   html {
-    font-size: 16px;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    scroll-behavior: smooth;
-  }
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Let JS handle smooth scrolling (Lenis / tween) */
+  scroll-behavior: auto !important;
+}
+
   *, *::before, *::after { box-sizing: border-box; }
 
   body { margin: 0; line-height: 1.4; }
@@ -135,12 +137,6 @@
     margin-right: calc(-50vw + (100vw - 100%) / 2);
     overflow-x: clip;
   }
-
-  /* Width helpers act on wrapper level */
-  .content-100, .content-75, .content-40 { width: 100%; max-width: 100%; }
-  .container > .wrapper.content-75 { max-width: 75rem; }
-  .container > .wrapper.content-40 { max-width: 40rem; }
-}
 
 /* ========================= utilities ========================= */
 @layer utilities {
@@ -489,9 +485,6 @@
   /* Stack gap */
   :is(#container-3, .container-3) .whoami-block { --stack-gap: 14px; }
   :is(#container-3, .container-3) .inner > * { max-width: 100%; }
-
-  /* Container 6 */
-  :is(#container-6, .container-6) .content-75 { padding: 3.25rem var(--pad-h); }
 
   /* FAQ / Container 5 */
   :is(#container-5, .container-5) {
