@@ -934,31 +934,33 @@
   @media (prefers-reduced-motion: reduce) {
     #container-3 * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   }
-  /* === Container 3: mobile order + visibility === */
+  /* === Container 3: mobile order + visibility (strict) === */
 @media (max-width: 768px) {
-  .whoami-block {
+  /* Make the stack a flex container */
+  #container-3 .whoami-block {
     display: flex;
     flex-direction: column;
   }
 
-  /* Desired order on mobile */
-  h2.whoami { order: 0; }                 /* "Who am I?" */
-  #gs-blurb { order: 1; }                  /* "My name is Gabriel..." (mobile span shows) */
-  .slideshow-wrapper { order: 2; }         /* Life pictures */
-  #gs-blurb-mobile { order: 3; }           /* "My goal is simple..." */
-  #mobile-fade-divider { order: 4; }       /* Divider */
-  .responsive-text { order: 5; }           /* "Here's what working with me looks like:" */
-  #steps-flow-mobile { order: 6; }         /* How it works (mobile) */
+  /* Exact order of DIRECT children */
+  #container-3 .whoami-block > h2.whoami            { order: 0; } /* Who am I */
+  #container-3 .whoami-block > #gs-blurb            { order: 1 !important; } /* My name is Gabriel (mobile span) */
+  #container-3 .whoami-block > .slideshow-wrapper   { order: 2 !important; } /* Life pictures */
+  #container-3 .whoami-block > #gs-blurb-mobile     { order: 3; } /* My goal is simple */
+  #container-3 .whoami-block > #mobile-fade-divider { order: 4; } /* Divider */
+  #container-3 .whoami-block > .responsive-text     { order: 5; } /* Here's how I work with you */
+  #container-3 .whoami-block > #steps-flow-mobile   { order: 6; } /* Steps flow (mobile) */
 
-  /* Hide desktop/tablet-only stuff on mobile */
-  #hero-blurb { display: none !important; }  /* “The exact system…” */
-  #no-select { display: none !important; }   /* dashboard note card */
-  #steps-flow { display: none !important; }  /* desktop flow */
+  /* Hide desktop-only bits on mobile */
+  #container-3 #hero-blurb,
+  #container-3 #no-select,
+  #container-3 #steps-flow { display: none !important; }
 
-  /* Make sure helpers behave as intended */
-  #gs-blurb .desktop-only { display: none !important; }
-  #gs-blurb .mobile-only { display: inline !important; }
+  /* Ensure the right blurb variant shows */
+  #container-3 #gs-blurb .desktop-only { display: none !important; }
+  #container-3 #gs-blurb .mobile-only  { display: inline !important; }
 }
+
 
   /* ===== Container 4 ===== */
   :is(#container-4, .container-4) {
