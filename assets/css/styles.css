@@ -960,6 +960,33 @@
   #container-3 #gs-blurb .desktop-only { display: none !important; }
   #container-3 #gs-blurb .mobile-only  { display: inline !important; }
 }
+  /* === Container 3: mobile type sizes === */
+@media (max-width: 768px) {
+  /* Who am I? */
+  #container-3 h2.whoami {
+    font-size: 35px !important;
+    line-height: 1.15;
+  }
+
+  /* "My name is Gabriel Santana..." */
+  #container-3 #gs-blurb {
+    font-size: 15px !important;
+    line-height: 1.35;
+  }
+
+  /* "My goal is simple..." (mobile-only line) */
+  #container-3 #gs-blurb-mobile {
+    font-size: 12px !important;
+    line-height: 1.4;
+  }
+
+  /* "Here’s how I work with you:" */
+  #container-3 .responsive-text {
+    font-size: 28px !important;
+    line-height: 1.12;
+  }
+}
+
 
 
 
