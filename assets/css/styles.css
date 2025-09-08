@@ -934,8 +934,7 @@
   @media (prefers-reduced-motion: reduce) {
     #container-3 * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   }
-}
-/* ===== Container 4 ===== */
+  /* ===== Container 4 ===== */
   :is(#container-4, .container-4) {
     width: 48%;
     margin: 1.125rem auto;
@@ -1003,6 +1002,8 @@
   @media screen and (min-width: 1024px) {
     #container-4 .alex-text { letter-spacing: -0.2px; }
   }
+}
+
 
 /* Make the last page flush with the bottom */
 .page--no-pad {
