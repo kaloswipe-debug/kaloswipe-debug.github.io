@@ -853,7 +853,22 @@
     position: static; opacity: 0; transform: translateY(6px); white-space: normal; overflow-wrap: anywhere; word-break: break-word; display: none;
   }
   #container-3 #steps-flow-mobile .step-2-wrapper.expanded .reveal-content { opacity: 1; transform: translateY(0); padding-top: 5px; padding-bottom: 4px; display: block; }
-  #container-3 #steps-flow-mobile .reveal-content p { margin: 0; font-weight: 400; font-size: 1.10em; line-height: 1.55; color: #ccc; }
+  #container-3 #steps-flow-mobile .reveal-content p {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.02em; /* slightly smaller */
+  line-height: 1.52; /* tiny nudge to keep balance */
+  color: #ccc;
+  }
+
+  #container-3 #steps-flow-mobile .reveal-content h3 {
+  margin: 0 0 8px;
+  }
+  #container-3 #steps-flow-mobile .step-2-wrapper.expanded .diamond-icon {
+  opacity: 0;
+  transform: translateY(-2px);
+  }
+
 
   #container-3 #steps-flow-mobile .extra-box {
     box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 2px 6px rgba(0,0,0,.35);
