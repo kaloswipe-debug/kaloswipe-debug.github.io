@@ -1,36 +1,6 @@
 "use strict";
 
 /* ============================================================
-   Smooth scroll for <a data-smooth href="#section-id">
-   ============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('a[data-smooth][href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const id = a.getAttribute("href").slice(1);
-      const target = document.getElementById(id);
-      if (!target) return;
-
-      e.preventDefault();
-      const start = window.scrollY;
-      const end = start + target.getBoundingClientRect().top;
-      const duration = 900;
-      let t0 = null;
-
-      const ease = (t) => (t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2);
-
-      const step = (ts) => {
-        if (!t0) t0 = ts;
-        const p = Math.min((ts - t0) / duration, 1);
-        window.scrollTo(0, start + (end - start) * ease(p));
-        if (p < 1) requestAnimationFrame(step);
-      };
-
-      requestAnimationFrame(step);
-    });
-  });
-});
-
-/* ============================================================
    FAQ accordion (expects .accordion markup)
    - Numbers questions on desktop, plain text on mobile
    - Single-open behavior with animated height
