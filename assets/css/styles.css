@@ -475,16 +475,7 @@
     text-align: center;
     max-width: 100%;
   }
-  :is(#container-3, .container-3) #gs-blurb{
-    margin: auto;
-    font-family: var(--font-ui);
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.125;
-    color: var(--muted);
-    text-align: center;
-    max-width: 57%;
-  }
+  
   @media (max-width: 768px){
     :is(#container-3, .container-3) #gs-blurb { max-width: 90% !important; margin-top: 10px !important; }
     :is(#container-3, .container-3) #gs-blurb .desktop-only { display: none; }
