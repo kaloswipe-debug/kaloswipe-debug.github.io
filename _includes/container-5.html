@@ -4,7 +4,19 @@
   <!-- 🔧 Scoped layout fixes just for this section -->
   <style>
     /* keep the section in-bounds and prevent horizontal spill */
-    #container-5 { display:block; width:100%; overflow-x:hidden; position:relative; }
+    /* keep the section in-bounds and prevent horizontal spill */
+#container-5 {
+  display: block;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+
+  /* NEW: vertical padding */
+  padding-block: 22px;          /* modern logical property */
+  padding-top: 22px;            /* fallback */
+  padding-bottom: 22px;         /* fallback */
+}
+
 
     /* if your .full-bleed utility uses negative margins, neutralize them here */
     #container-5.full-bleed { margin-inline:0 !important; width:100% !important; }
