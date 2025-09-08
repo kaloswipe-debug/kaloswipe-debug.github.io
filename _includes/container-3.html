@@ -333,3 +333,21 @@
   #container-3 .inner.stack.whoami-block.center > :first-child { margin-top: 0; }
   #container-3 .inner.stack.whoami-block.center > :last-child  { margin-bottom: 0; }
 </style>
+
+<style>
+  /* Desktop-only: give the "How it works" boxes a touch more width */
+  @media (min-width: 768px) {
+    /* The three main step cards: were max-width:200px */
+    #steps-flow > div[style*="max-width:200px"] {
+      max-width: 220px !important; /* ~10% wider */
+    }
+
+    /* The small italic note boxes: were max-width:180px and flex:0 0 160px */
+    #steps-flow > div[style*="max-width:180px"] {
+      max-width: 200px !important;
+    }
+    #steps-flow > div[style*="flex:0 0 160px"] {
+      flex: 0 0 170px !important; /* give them a bit more breathing room */
+    }
+  }
+</style>
