@@ -813,7 +813,7 @@
     box-shadow: 0 1px 5px rgba(0,0,0,.1); transition: box-shadow .3s ease, border-color .3s ease;
   }
   #container-3 #steps-flow-mobile .step-box:hover { box-shadow: 0 0 6px rgba(255,255,255,.04), 0 0 12px rgba(255,255,255,.02); border-color: #ffffff33; }
-  #container-3 #steps-flow-mobile .step-box h3 { margin-top: 0; margin-bottom: 8px; font-size: 0.7875em; font-weight: 700; }
+  #container-3 #steps-flow-mobile .step-box h3 { margin-top: 0; margin-bottom: 8px; font-size: 13.86px; font-weight: 700; }
   #container-3 #steps-flow-mobile .step-box p  { margin: 0; color: #ccc; font-weight: 400; }
 
   #container-3 #steps-flow-mobile .note-box {
