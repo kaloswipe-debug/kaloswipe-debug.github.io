@@ -254,7 +254,7 @@
     text-align: center;
     max-width: 45%;
   }
-  @media (max-width: 767px) { .desktop-only { display: none; }
+  @media (max-width: 767px) { .desktop-only { display: none; } }
 
   /* Reveal Card (kept as-is) */
   .reveal-card {
@@ -474,14 +474,6 @@
     letter-spacing: -0.1rem;
     text-align: center;
     max-width: 100%;
-  }
-  
-  @media (max-width: 768px){
-    :is(#container-3, .container-3) #gs-blurb { max-width: 90% !important; margin-top: 10px !important; }
-    :is(#container-3, .container-3) #gs-blurb .desktop-only { display: none; }
-  }
-  @media (min-width: 769px){
-    :is(#container-3, .container-3) #gs-blurb .mobile-only { display: none; }
   }
 
   /* Slideshow safety */
