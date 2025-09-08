@@ -336,7 +336,7 @@
     display: block;
   }
   #container-2 wistia-player:first-of-type { margin-top: 15px; }
-  #container-2 wistia-player + wistia-player { margin-top: 25px; }
+  #container-2 wistia-player:not(:first-of-type) { margin-top: 25px; }
   @media (max-width: 768px) {
     #container-2 wistia-player:first-of-type { margin-top: 0 !important; }
   }
