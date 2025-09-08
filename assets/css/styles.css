@@ -847,12 +847,12 @@
   #container-3 #steps-flow-mobile .step-2-wrapper.collapsing .step-2-content{ opacity: 0; transform: translateY(6px); max-height: 0; }
 
   #container-3 #steps-flow-mobile .diamond-icon,
-  #container-3 #steps-flow-mobile .reveal-content { transition: opacity 220ms ease, transform 240ms ease; }
+  #container-3 #steps-flow-mobile .reveal-content { transition: opacity 200ms ease, transform 220ms ease; }
   #container-3 #steps-flow-mobile .diamond-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 1; }
   #container-3 #steps-flow-mobile .reveal-content {
     position: static; opacity: 0; transform: translateY(6px); white-space: normal; overflow-wrap: anywhere; word-break: break-word; display: none;
   }
-  #container-3 #steps-flow-mobile .step-2-wrapper.expanded .reveal-content { opacity: 1; transform: translateY(0); padding-top: 5px; padding-bottom: 4px; display: block; }
+  #container-3 #steps-flow-mobile .step-2-wrapper.expanded .reveal-content { opacity: 1; transform: translateY(0); display: block; padding-top: 5px; padding-bottom: 4px; transition-delay: 220ms; /* wait until diamond fade is done */}
   #container-3 #steps-flow-mobile .reveal-content p {
   margin: 0;
   font-weight: 400;
@@ -867,6 +867,7 @@
   #container-3 #steps-flow-mobile .step-2-wrapper.expanded .diamond-icon {
   opacity: 0;
   transform: translateY(-2px);
+  transition-delay: 0ms; /* no wait, fade right away */
   }
 
 
