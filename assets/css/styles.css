@@ -856,7 +856,7 @@
   #container-3 #steps-flow-mobile .reveal-content p {
   margin: 0;
   font-weight: 400;
-  font-size: 1.02em; /* slightly smaller */
+  font-size: 0.95em; /* slightly smaller */
   line-height: 1.52; /* tiny nudge to keep balance */
   color: #ccc;
   }
