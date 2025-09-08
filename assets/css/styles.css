@@ -934,6 +934,32 @@
   @media (prefers-reduced-motion: reduce) {
     #container-3 * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   }
+  /* === Container 3: mobile order + visibility === */
+@media (max-width: 768px) {
+  .whoami-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Desired order on mobile */
+  h2.whoami { order: 0; }                 /* "Who am I?" */
+  #gs-blurb { order: 1; }                  /* "My name is Gabriel..." (mobile span shows) */
+  .slideshow-wrapper { order: 2; }         /* Life pictures */
+  #gs-blurb-mobile { order: 3; }           /* "My goal is simple..." */
+  #mobile-fade-divider { order: 4; }       /* Divider */
+  .responsive-text { order: 5; }           /* "Here's what working with me looks like:" */
+  #steps-flow-mobile { order: 6; }         /* How it works (mobile) */
+
+  /* Hide desktop/tablet-only stuff on mobile */
+  #hero-blurb { display: none !important; }  /* “The exact system…” */
+  #no-select { display: none !important; }   /* dashboard note card */
+  #steps-flow { display: none !important; }  /* desktop flow */
+
+  /* Make sure helpers behave as intended */
+  #gs-blurb .desktop-only { display: none !important; }
+  #gs-blurb .mobile-only { display: inline !important; }
+}
+
   /* ===== Container 4 ===== */
   :is(#container-4, .container-4) {
     width: 48%;
