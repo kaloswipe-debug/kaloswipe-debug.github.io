@@ -121,7 +121,7 @@
   .container > .wrapper > .inner > * { max-width: 100%; }
 
   /* Simple stack helper */
-  .stack > * + * { margin-top: var(--stack-gap, 1rem); }
+  .stack > * + * { margin-top: 0px; }
 
   /* Prose limiter */
   .prose { max-width: 60ch; margin-inline: auto; }
