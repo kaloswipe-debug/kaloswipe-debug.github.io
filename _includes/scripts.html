@@ -99,3 +99,9 @@ html { scroll-behavior: auto !important; }
 * { scrollbar-width: auto; scrollbar-color: rgba(68, 68, 68, 0.8) transparent; }
 </style>
 
+<style>
+  /* Remove padding only from the page that contains scripts.html */
+  .page:has(script, style) {
+    padding: 0 !important;
+  }
+</style>
