@@ -91,11 +91,11 @@
     overflow-x: clip;
   }
   #container-1.full-bleed{
-  width: calc(100vw - (100vw - 100%));
-  margin-left: calc(-50vw + (100vw - 100%)/2);
-  margin-right: calc(-50vw + (100vw - 100%)/2);
-  box-sizing: border-box;
-}
+    width: calc(100vw - (100vw - 100%));
+    margin-left: calc(-50vw + (100vw - 100%)/2);
+    margin-right: calc(-50vw + (100vw - 100%)/2);
+    box-sizing: border-box;
+  }
   :where(.page) .full-bleed {
     margin-left: calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
     margin-right: calc(-50vw + (100vw - 100%) / 2 - var(--pad-h));
@@ -119,8 +119,6 @@
     padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 40px);
   }
   .container > .wrapper > .inner > * { max-width: 100%; }
-
-  /* Remove the “neutralize .wrapper” duplicate (you said “go”) */
 
   /* Simple stack helper */
   .stack > * + * { margin-top: var(--stack-gap, 1rem); }
@@ -208,7 +206,7 @@
 
 /* ========================= components ========================= */
 @layer components {
-  /* CTA button (moved to tokens for theme, per “go #12”) */
+  /* CTA button (global baseline) */
   .scroll-button {
     display: inline-block;
     margin-top: 17px;
@@ -235,7 +233,37 @@
     outline-offset: 3px;
   }
 
-  /* Reveal Card (standardize borders to tokens, per “go #13”) */
+  /* Calendly */
+  .calendly-inline-widget { overscroll-behavior: contain; user-select: none; }
+  .calendly-inline-widget iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+  }
+
+  /* Desktop-only note */
+  .desktop-only.disclaim {
+    margin: 1rem auto;
+    font-family: var(--font-ui);
+    font-weight: 100;
+    font-size: 0.625rem;
+    line-height: 1;
+    letter-spacing: 0;
+    color: #5a5d61;
+    text-align: center;
+    max-width: 45%;
+  }
+  @media (max-width: 767px) { .desktop-only { display: none; } }
+
+  /* Fake gradient motion */
+  @keyframes rotateGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Reveal Card (kept as-is) */
   .reveal-card {
     --collapsed-h: 78px;
     --max-open-h: 80vh;
@@ -303,44 +331,108 @@
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 5C7 5 2.73 8.11 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>');
   }
   .reveal-card.open .rc-icon-eye { opacity: 0; }
-
-  .protect-guard { position: absolute; inset: 0; z-index: 5; background: transparent; pointer-events: auto; }
-
-  /* Calendly (make it usable; removed pointer-events:none per “go #7”) */
-  .calendly-inline-widget { overscroll-behavior: contain; user-select: none; }
-  .calendly-inline-widget iframe {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border: none;
-  }
-
-  /* Desktop-only note */
-  .desktop-only.disclaim {
-    margin: 1rem auto;
-    font-family: var(--font-ui);
-    font-weight: 100;
-    font-size: 0.625rem;
-    line-height: 1;
-    letter-spacing: 0;
-    color: #5a5d61;
-    text-align: center;
-    max-width: 45%;
-  }
-  @media (max-width: 767px) { .desktop-only { display: none; } }
-
-  /* Fake gradient motion (keep; you said “no” to reduced motion) */
-  @keyframes rotateGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
 }
 
 /* ========================= pages ========================= */
 @layer pages {
-  /* Make selectors reusable without breaking current HTML (go #4 via lower specificity aliases) */
-  /* We keep IDs but add class aliases so you can reuse later if desired. */
+  /* ===== Container 1 (moved from inline; 1:1 visuals) ===== */
+  :is(#container-1, .container-1) {
+    padding-top: 0;
+    padding-bottom: 20.167px; /* exact */
+    min-height: 22rem;
+  }
+
+  /* 1) Hero #1 text */
+  :is(#container-1, .container-1) .hero-text { display: none; }
+  @media (min-width: 601px) {
+    :is(#container-1, .container-1) .hero-text{
+      display:block;
+      margin-top:70px; margin-bottom:27px;
+      font-family: var(--font-ui);
+      font-size:18px; line-height:1.5; text-align:center; color:#e1e6ec;
+    }
+    :is(#container-1, .container-1) .hero-text span{ font-weight:700; }
+  }
+
+  /* 2) Headline 1 */
+  :is(#container-1, .container-1) #hl1 .hero-title,
+  :is(#container-1, .container-1) #hl1 .mobile-title{
+    font-family: var(--font-ui);
+    font-weight:700; text-align:center; margin:0 auto; max-width:98%; color:#e1e6ec;
+  }
+  :is(#container-1, .container-1) #hl1 .hero-title{ font-size:clamp(20px,4vw,42px); line-height:1.2; }
+  :is(#container-1, .container-1) #hl1 .mobile-title{
+    display:none; font-size:clamp(22px,7vw,32px); line-height:1.25; margin-top:100px; margin-bottom:10px;
+  }
+  :is(#container-1, .container-1) #hl1 .hero-title .highlight{
+    color:#ffd510; text-decoration:underline; text-decoration-color:#e1e6ec; text-underline-offset:4px; font-weight:800;
+  }
+  @media only screen and (max-width:820px){
+    :is(#container-1, .container-1) #hl1 .hero-title{ display:none !important; }
+    :is(#container-1, .container-1) #hl1 .mobile-title{ display:block !important; }
+  }
+
+  /* 3) Subheadline 1 (desktop only) */
+  :is(#container-1, .container-1) .subhead-1{
+    margin:1.125rem auto 30px auto;
+    font-family: var(--font-ui);
+    font-weight:300; font-size:1rem; line-height:1; letter-spacing:0; color:#9DA5B0; text-align:center; max-width:100%;
+  }
+  @media (max-width: 767px){ :is(#container-1, .container-1) .desktop-only{ display:none !important; } }
+
+  /* 4) VSL embed */
+  :is(#container-1, .container-1) .vsl-embed{
+    position: relative; width: 100%; max-width: 1240px; margin: 0 auto 50px;
+  }
+  :is(#container-1, .container-1) .vsl-embed__frame{
+    position: relative; padding-top: 56.25%;
+  }
+  :is(#container-1, .container-1) wistia-player{
+    position:absolute; top:0; left:0; width:100%; height:100%;
+  }
+  :is(#container-1, .container-1) wistia-player[media-id='egx13g6ba1']:not(:defined){
+    background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/egx13g6ba1/swatch');
+    display:block; filter:blur(5px); width:100%; height:100%;
+  }
+
+  /* 5) Headline 2 (mobile headline) */
+  :is(#container-1, .container-1) .hl2-mobile-title{
+    font-family: var(--font-ui);
+    font-weight:500; text-align:center; margin:-30px auto 0 auto; max-width:100%;
+    color:#e1e6ec; display:none; font-size:clamp(13px,4vw,18px); line-height:1.3;
+  }
+  :is(#container-1, .container-1) .hl2-highlight{ background-color:#ffd510; color:#000; padding:0 4px; border-radius:0.5px; font-weight:600; }
+  @media only screen and (max-width:820px){
+    :is(#container-1, .container-1) .hl2-mobile-title{ display:block !important; }
+  }
+
+  /* 6) Subheadline 2 (mobile only) */
+  :is(#container-1, .container-1) .mobile-only { display: none; }
+  :is(#container-1, .container-1) .subhead-2{
+    margin:0.5rem auto 30px auto;
+    font-family: var(--font-ui);
+    font-weight:300; font-size:0.75rem; line-height:1.4; letter-spacing:0; color:#9DA5B0; text-align:center; max-width:100%;
+  }
+  @media (max-width:768px){
+    :is(#container-1, .container-1) .mobile-only{ display:block; }
+  }
+
+  /* 7) CTA (preserve container-1 visual overrides) */
+  :is(#container-1, .container-1) .scroll-button{
+    background:#ffd510; color:#E1E6EC;
+    box-shadow: 0 0 22px rgba(255,213,16,.28);
+  }
+  :is(#container-1, .container-1) .scroll-button:hover{
+    box-shadow: 0 0 32px rgba(255,213,16,.38);
+  }
+  @media screen and (max-width:600px){
+    :is(#container-1, .container-1) .scroll-button{
+      padding:10px 20px !important; font-size:1.6rem !important; border-radius:7px !important;
+      background:#ffd510 !important; color:#fff !important;
+    }
+  }
+
+  /* ===== Container 3 (existing) ===== */
   :is(#container-3, .container-3){
     background: #02060A;
     color: #E1E6EC;
@@ -353,7 +445,7 @@
     font-weight: 300;
     font-size: clamp(2rem, 4.5vw, 2.625rem);
     line-height: 1.125;
-    letter-spacing: -0.1rem; /* kept (you said “no” to changing it) */
+    letter-spacing: -0.1rem;
     text-align: center;
     max-width: 100%;
   }
@@ -390,7 +482,7 @@
   :is(#container-3, .container-3) .inner > * { max-width: 100%; }
 
   /* Container 6 */
-  :is(#container-6, .container-6) .content-75 { padding: 3.25rem var(--pad-h); } /* (kept intent) */
+  :is(#container-6, .container-6) .content-75 { padding: 3.25rem var(--pad-h); }
 
   /* FAQ / Container 5 */
   :is(#container-5, .container-5) {
@@ -431,9 +523,8 @@
     text-decoration: none;
     color: #e1e6ec;
   }
-  /* hover was identical; removed per “go #3” */
 
-  /* Accordion component (kept gradients per your “no” on #8) */
+  /* Accordion component */
   :is(#container-5, .container-5) .accordion {
     display: flex;
     justify-content: space-between;
@@ -540,7 +631,7 @@
     :is(#container-5, .container-5) .accordion-header .icon { display: none !important; }
   }
 
-  /* Container margins/padding cleanup, no !important (go #5) */
+  /* Container margins/padding cleanup */
   :is(#container-3, .container-3),
   :is(#container-5, .container-5),
   :is(#container-6, .container-6) {
@@ -548,7 +639,7 @@
     margin: var(--space-4) auto;
   }
 
-  /* Move #6 padding intent to .inner (already handled in layout); keep helper */
+  /* Move #6 padding intent to .inner (helper kept) */
   :is(#container-6, .container-6) .content-75 { padding: 3.25rem var(--pad-h); }
 
   /* FAQ structure alignment */
