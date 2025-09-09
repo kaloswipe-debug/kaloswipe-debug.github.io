@@ -664,4 +664,21 @@
   container.addEventListener("pointerdown", (e) => {
     if (e.pointerType === "touch") { if (document.activeElement) document.activeElement.blur?.(); }
   });
+
+   // Drop this anywhere after Lenis is created (e.g., in main.js after Lenis init)
+(() => {
+  const wrap = document.getElementById('book-your-call');
+  if (!wrap) return;
+
+  const stop = () => window.__lenis && window.__lenis.stop();
+  const start = () => window.__lenis && window.__lenis.start();
+
+  wrap.addEventListener('mouseenter', stop, {passive: true});
+  wrap.addEventListener('mouseleave', start, {passive: true});
+
+  // If the iframe grabs focus, also stop Lenis
+  window.addEventListener('blur', stop, true);
+  window.addEventListener('focus', start, true);
+})();
+
 })();
