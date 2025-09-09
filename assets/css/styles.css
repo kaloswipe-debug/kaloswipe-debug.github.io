@@ -1575,9 +1575,6 @@
   #container-1 h1 { margin-top: 0; }
   #container-1 .scroll-button { display: inline-block; }
 
-  #container-1 { outline: 1px solid #f00; }
-  #container-1 > .content-100 { outline: 1px solid #0f0; }
-
  /* Gradient motion (shared) */
   @keyframes rotateGradient {
     0% { background-position: 0% 50%; }
