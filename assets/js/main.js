@@ -315,3 +315,81 @@
     });
   }
 })();
+
+/* ============================================================
+   container-6: reveal-card + bottom logo protection
+   (moved from container-6.html inline script; scoped & idempotent)
+   ============================================================ */
+(() => {
+  const section = document.getElementById("container-6");
+  if (!section) return;
+
+  /* ---------- Reveal card ---------- */
+  (function initRevealCard() {
+    const card  = section.querySelector(".reveal-card");
+    if (!card || card.hasAttribute("data-ge-reveal-init")) return;
+    card.setAttribute("data-ge-reveal-init", "1");
+
+    const img   = card.querySelector(".rc-media img");
+    const guard = card.querySelector(".protect-guard");
+    if (!img || !guard) return;
+
+    const src = card.getAttribute("data-src");
+    if (src) img.src = src;
+
+    // Respect CSS variable fallback used in your stylesheet
+    const cs = getComputedStyle(card);
+    const collapsedH = (cs.getPropertyValue("--collapsed-h") || "").trim() || "78px";
+    card.style.minBlockSize = collapsedH;
+
+    const toggle = () => {
+      const willOpen = !card.classList.contains("open");
+      card.classList.toggle("open", willOpen);
+      card.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    };
+
+    card.addEventListener("click", toggle);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+
+    // Block context menu / selection on card and guard only
+    const block = (e) => e.preventDefault();
+    ["contextmenu","copy","cut","dragstart","selectstart"].forEach((evt) => {
+      card.addEventListener(evt, block);
+      guard.addEventListener(evt, block);
+    });
+
+    // Long-press soak (mobile)
+    let pressTimer;
+    const startPress = () => { pressTimer = setTimeout(()=>{}, 600); };
+    const endPress   = () => clearTimeout(pressTimer);
+    card.addEventListener("touchstart", startPress, { passive: true });
+    card.addEventListener("touchend",   endPress,   { passive: true });
+
+    img.setAttribute("draggable","false");
+  })();
+
+  /* ---------- Bottom logo protect ---------- */
+  (function initLogoProtect() {
+    const wrap  = section.querySelector("#ge-logo");
+    if (!wrap || wrap.hasAttribute("data-ge-logo-protect")) return;
+    wrap.setAttribute("data-ge-logo-protect", "1");
+
+    const img   = wrap.querySelector("img");
+    const guard = wrap.querySelector(".protect-guard");
+    if (img) img.setAttribute("draggable","false");
+
+    const block = (e) => e.preventDefault();
+    ["contextmenu","copy","cut","dragstart","selectstart"].forEach((evt) => {
+      wrap.addEventListener(evt, block);
+      if (guard) guard.addEventListener(evt, block);
+    });
+
+    let pressTimer;
+    const startPress = () => { pressTimer = setTimeout(()=>{}, 600); };
+    const endPress   = () => clearTimeout(pressTimer);
+    wrap.addEventListener("touchstart", startPress, { passive: true });
+    wrap.addEventListener("touchend",   endPress,   { passive: true });
+  })();
+})();
