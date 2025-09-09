@@ -802,12 +802,7 @@
   z-index: 3;
   background: transparent;
   pointer-events: auto; /* absorbs interactions to block menu/drag */
-}
-#book-your-call {
-  min-width: 320px;
-}
-
-  
+}  
 
   #container-6 #ge-logo img {
   max-width: 94px;
@@ -1532,7 +1527,24 @@
   #after-c5 .desktop-only { display: none !important; }
 }
 
+/* Let wrapper expand naturally */
+  #book-your-call {
+    min-width: 320px;
+  }
 
+  /* Force the Calendly iframe tall enough to show full description */
+  .calendly-inline-widget iframe {
+    width: 100% !important;
+    height: 1500px !important; /* adjust until inner scroll disappears */
+    display: block;
+    border: none;
+  }
+
+  @media (max-width: 768px) {
+    .calendly-inline-widget iframe {
+      height: 1700px !important;
+    }
+  }
 }
 
  /* Gradient motion (shared) */
