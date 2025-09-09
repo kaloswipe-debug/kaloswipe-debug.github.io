@@ -847,6 +847,36 @@
     #container-3 #gs-blurb-mobile      { display: none !important; }
     #container-3 #mobile-fade-divider  { display: none !important; }
   }
+/* ===== After container 3 (no-visual-change refactor) ===== */
+#after-c3 { margin: 0 !important; padding: 0 !important; }
+#after-c3 .hero-headline {
+  margin: 0 !important;
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: 2.625rem;   /* desktop default */
+  line-height: 1.125;
+  letter-spacing: -0.1rem;
+  color: #E1E6EC;
+  text-align: center;
+  max-width: 100%;
+}
+#after-c3 .hero-headline .accent { color: var(--accent); }
+
+#after-c3 .subhead-desktop {
+  margin: 0 !important;
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.125;
+  letter-spacing: 0;
+  color: var(--muted);
+  text-align: center;
+  max-width: 100%;
+}
+/* Reuse existing desktop-only convention instead of a new .pc-only */
+@media (max-width: 768px) {
+  #after-c3 .desktop-only { display: none; }
+}
 
   /* === Container 3 — all mobile rules merged === */
 @media (max-width: 768px) {
@@ -1031,41 +1061,25 @@
 }
 
 @media (max-width: 768px) {
-  /* container-2: sem padding + margem-top 1.5rem */
-  #container-2,
-  .container-2 { padding: 0 !important; margin-top: 2rem !important; }
-  #container-2 .wrapper,
-  #container-2 .inner { padding-left: 0 !important; padding-right: 0 !important; }
+  /* container-2 */
+  #container-2, .container-2 { padding: 0 !important; margin-top: 2rem !important; }
+  #container-2 .wrapper, #container-2 .inner { padding-left: 0 !important; padding-right: 0 !important; }
 
-  .headline { font-size: 29px !important; line-height: 0.8 !important; }
-
+  /* after-c3 */
   #hero-headline { font-size: 1.9rem !important; }
-  
+
+  /* container-5 */
   :is(#container-5, .container-5) .faq-section { padding-left: 0 !important; padding-right: 0 !important; }
+  :is(#container-5, .container-5) .questions-title { margin-bottom: 30px !important; font-size: 1.75rem !important; line-height: 1.1; }
 
-  :is(#container-5, .container-5) .questions-title {
-    margin-bottom: 30px !important;
-    font-size: 1.75rem !important;
-    line-height: 1.1;
-  }
+  /* container-6 */
+  #container-6 .headline { font-size: 29px !important; line-height: 0.9 !important; }
 
-  #container-6 .headline { font-size: 29px !important; line-height: 0.9 !important; }  
+  /* container-4 text */
+  #container-4 .testimonial { font-size: 0.8rem; line-height: 0.95; }
+  #container-4 .sf-text { font-size: 0.6rem; letter-spacing: -0.6px; }
 }
 
-
-@media (max-width: 768px) {
-  /* 1) Testimonial text — mobile tweak (.9rem → .8rem) */
-  #container-4 .testimonial { 
-    font-size: 0.8rem; 
-    line-height: 0.95; /* keep your existing rhythm */
-  }
-
-  /* 2) sf-text (“Liam, Content”) — mobile font + tracking */
-  #container-4 .sf-text {
-    font-size: 0.6rem;
-    letter-spacing: -0.6px;
-  }
-}
 
 /* ======================== CONTAINER #5 ======================== */
 /* keep the section in-bounds and prevent horizontal spill */
