@@ -39,7 +39,6 @@
     acc.forEach((el) => {
       const icon  = el.querySelector(".icon");
       const wrap  = el.querySelector(".extra-content");
-      const inner = el.querySelector(".inner");
 
       // Make each accordion focusable & announce state
       el.setAttribute("role", "button");
