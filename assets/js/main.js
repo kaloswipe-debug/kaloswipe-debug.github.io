@@ -37,7 +37,6 @@
 
     const acc = document.querySelectorAll(".accordion");
     acc.forEach((el) => {
-      const icon  = el.querySelector(".icon");
       const wrap  = el.querySelector(".extra-content");
 
       // Make each accordion focusable & announce state
@@ -85,6 +84,9 @@
           e.preventDefault();
           toggleSelf();
         }
+      // after el.addEventListener(...), add:
+setState(el, el.classList.contains("active"));
+
       });
     });
   }
@@ -359,6 +361,35 @@ document.addEventListener("visibilitychange", () => {
     });
   }
 })();
+(() => {
+  function initProtectedZone(root, { guardSelector = ".protect-guard" } = {}) {
+    if (!root || root.dataset.protectInit === "1") return;
+    root.dataset.protectInit = "1";
+
+    const guard = root.querySelector(guardSelector);
+    const target = guard || root;
+
+    // Block context menu / selection / drag on the protected zone
+    const block = (e) => e.preventDefault();
+    ["contextmenu", "copy", "cut", "dragstart", "selectstart"].forEach((evt) => {
+      target.addEventListener(evt, block);
+    });
+
+    // Long-press soak (mobile)
+    let pressTimer;
+    const startPress = () => { pressTimer = setTimeout(() => {}, 650); };
+    const endPress   = () => clearTimeout(pressTimer);
+    target.addEventListener("touchstart", startPress, { passive: true });
+    target.addEventListener("touchend",   endPress,   { passive: true });
+
+    // Make any images inside non-draggable
+    root.querySelectorAll("img").forEach((img) => img.setAttribute("draggable", "false"));
+  }
+
+  // expose for other scripts if needed
+  window.GE = window.GE || {};
+  window.GE.initProtectedZone = initProtectedZone;
+})();
 
 /* ============================================================
    container-6: reveal-card + bottom logo protection
@@ -397,43 +428,21 @@ document.addEventListener("visibilitychange", () => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
 
-    // Block context menu / selection on card and guard only
-    const block = (e) => e.preventDefault();
-    ["contextmenu","copy","cut","dragstart","selectstart"].forEach((evt) => {
-      card.addEventListener(evt, block);
-      guard.addEventListener(evt, block);
-    });
-
-    // Long-press soak (mobile)
-    let pressTimer;
-    const startPress = () => { pressTimer = setTimeout(()=>{}, 600); };
-    const endPress   = () => clearTimeout(pressTimer);
-    card.addEventListener("touchstart", startPress, { passive: true });
-    card.addEventListener("touchend",   endPress,   { passive: true });
-
-    img.setAttribute("draggable","false");
+    GE.initProtectedZone(card, { guardSelector: ".protect-guard" });
   })();
 
-  /* ---------- Bottom logo protect ---------- */
-  (function initLogoProtect() {
-    const wrap  = section.querySelector("#ge-logo");
-    if (!wrap || wrap.hasAttribute("data-ge-logo-protect")) return;
-    wrap.setAttribute("data-ge-logo-protect", "1");
+/* ---------- Bottom logo protect ---------- */
+(function initLogoProtect() {
+  const wrap = section.querySelector("#ge-logo");
+  if (!wrap || wrap.hasAttribute("data-ge-logo-protect")) return;
+  wrap.setAttribute("data-ge-logo-protect", "1");
 
-    const img   = wrap.querySelector("img");
-    const guard = wrap.querySelector(".protect-guard");
-    if (img) img.setAttribute("draggable","false");
-
-    const block = (e) => e.preventDefault();
-    ["contextmenu","copy","cut","dragstart","selectstart"].forEach((evt) => {
-      wrap.addEventListener(evt, block);
-      if (guard) guard.addEventListener(evt, block);
-    });
-
-    let pressTimer;
-    const startPress = () => { pressTimer = setTimeout(()=>{}, 600); };
-    const endPress   = () => clearTimeout(pressTimer);
-    wrap.addEventListener("touchstart", startPress, { passive: true });
-    wrap.addEventListener("touchend",   endPress,   { passive: true });
-  })();
+  if (window.GE && typeof GE.initProtectedZone === "function") {
+    GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
+  } else {
+    // optional: keep it silent or log for debugging
+    // console.warn("GE.initProtectedZone is not available yet.");
+  }
 })();
+})();
+
