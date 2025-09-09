@@ -325,8 +325,7 @@
   @media (max-width: 768px) {
     #container-2 wistia-player:first-of-type { margin-top: 0 !important; }
   }
-}
-/* Generic logo protect (re-usable outside container-6) */
+  /* Generic logo protect (re-usable outside container-6) */
 .logo-protect {
   position: relative;
   inline-size: 78px; /* matches your 78px width */
@@ -348,6 +347,21 @@
   z-index: 2;
   background: transparent;
   pointer-events: auto;
+}
+
+   @media (min-width: 1024px) {
+    .scroll-button {
+      padding: 22px 40px;
+      font-size: 1.25rem;
+      line-height: 1;
+      border-radius: 10px;
+      box-shadow: 0 0 28px color-mix(in oklab, var(--accent) 32%, transparent);
+    }
+    .scroll-button:hover {
+      padding: 22px 38px;
+      box-shadow: 0 0 40px color-mix(in oklab, var(--accent) 42%, transparent);
+    }
+  }
 }
 
 
@@ -1033,10 +1047,7 @@
   @media screen and (min-width: 1024px) {
     #container-4 .alex-text { letter-spacing: -0.2px; }
   }
-}
-
-
-/* Make the last page flush with the bottom */
+  /* Make the last page flush with the bottom */
 .page--no-pad {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
@@ -1046,27 +1057,13 @@
   #container-6 .headline::after { content: none !important; }
 }
 
-@media (min-width: 1024px) {
-  .scroll-button {
-    padding: 22px 40px;   /* era 18px 30px */
-    font-size: 1.25rem;   /* era 1.1rem */
-    line-height: 1;       /* evita ficar “achatado” com fonte maior */
-    border-radius: 10px;  /* opcional: mais encorpado */
-    box-shadow: 0 0 28px color-mix(in oklab, var(--accent) 32%, transparent);
-  }
-  .scroll-button:hover {
-    padding: 22px 38px;   /* mantém o “nudge” no hover sem pular layout */
-    box-shadow: 0 0 40px color-mix(in oklab, var(--accent) 42%, transparent);
-  }
-}
-
 @media (max-width: 768px) {
   /* container-2 */
   #container-2, .container-2 { padding: 0 !important; margin-top: 2rem !important; }
   #container-2 .wrapper, #container-2 .inner { padding-left: 0 !important; padding-right: 0 !important; }
 
   /* after-c3 */
-  #hero-headline { font-size: 1.9rem !important; }
+  #after-c3 #hero-headline { font-size: 1.9rem !important; }
 
   /* container-5 */
   :is(#container-5, .container-5) .faq-section { padding-left: 0 !important; padding-right: 0 !important; }
@@ -1208,14 +1205,6 @@
   list-style-type: disc;
   padding-left: 1.5em;
 }
-
-/* keyframes live outside media to keep code organized */
-@keyframes c5RotateGradient {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 @media (max-width: 600px) {
   #container-5 .accordion {
     max-width: 100%;
@@ -1270,4 +1259,16 @@
     display: none !important; 
   }
 }
+
+}
+
+
+
+/* keyframes live outside media to keep code organized */
+@keyframes c5RotateGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
