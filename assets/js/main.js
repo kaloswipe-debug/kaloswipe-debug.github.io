@@ -6,10 +6,7 @@
    - Single-open behavior with animated height
    ============================================================ */
 (() => {
-  // Intent-only constants (no behavior change)
   const MOBILE_MAX = 600;
-
-  // Prevent accidental double-binding (defensive, noop if called once)
   let faqInited = false;
 
   function updateMobileLabels() {
@@ -27,7 +24,6 @@
     }
   }
 
-  // Keep open panels sized correctly after viewport changes
   function syncOpenHeights() {
     document.querySelectorAll(".accordion.active .extra-content").forEach((wrap) => {
       const inner = wrap.querySelector(".inner");
@@ -36,56 +32,89 @@
   }
 
   function initAccordions() {
-    if (faqInited) return; // guard
+    if (faqInited) return;
     faqInited = true;
 
-    // NOTE: remains global to all .accordion (on purpose; do not scope to container)
     const acc = document.querySelectorAll(".accordion");
     acc.forEach((el) => {
-      const icon = el.querySelector(".icon");
-      const wrap = el.querySelector(".extra-content");
+      const icon  = el.querySelector(".icon");
+      const wrap  = el.querySelector(".extra-content");
       const inner = el.querySelector(".inner");
 
-      el.addEventListener("click", () => {
+      // Make each accordion focusable & announce state
+      el.setAttribute("role", "button");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("aria-expanded", el.classList.contains("active") ? "true" : "false");
+      if (wrap) wrap.setAttribute("aria-hidden", el.classList.contains("active") ? "false" : "true");
+
+      // Helper to set visual + ARIA state for any item
+      const setState = (target, active) => {
+        target.classList.toggle("active", active);
+
+        const tIcon  = target.querySelector(".icon");
+        const tWrap  = target.querySelector(".extra-content");
+        const tInner = tWrap && tWrap.querySelector(".inner");
+
+        if (tIcon) {
+          tIcon.textContent = active ? "–" : "+";
+          tIcon.classList.toggle("rotate", active);
+        }
+        if (tWrap) {
+          tWrap.style.maxHeight = active && tInner ? tInner.scrollHeight + "px" : null;
+          tWrap.setAttribute("aria-hidden", active ? "false" : "true");
+        }
+        target.setAttribute("aria-expanded", active ? "true" : "false");
+      };
+
+      // Shared toggle for click + keyboard
+      const toggleSelf = () => {
         const isActive = el.classList.contains("active");
 
-        // Close others
+        // Close others (single-open behavior)
         acc.forEach((o) => {
           if (o === el) return;
-          o.classList.remove("active");
-          const io = o.querySelector(".icon");
-          const wo = o.querySelector(".extra-content");
-          if (io) {
-            io.textContent = "+";
-            io.classList.remove("rotate");
-          }
-          if (wo) wo.style.maxHeight = null;
+          setState(o, false);
         });
 
-        // Toggle clicked
-        el.classList.toggle("active");
-        if (icon) {
-          icon.textContent = isActive ? "+" : "–";
-          icon.classList.toggle("rotate");
-        }
-        if (wrap && inner) {
-          wrap.style.maxHeight = isActive ? null : inner.scrollHeight + "px";
+        // Toggle this one
+        setState(el, !isActive);
+      };
+
+      el.addEventListener("click", toggleSelf);
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleSelf();
         }
       });
     });
   }
 
-  // Resize: keep labels in sync and re-measure any open panel
-  window.addEventListener("resize", () => {
-    updateMobileLabels();
-    syncOpenHeights();
-  });
+  // rAF-throttled resize/orientation handler (defined ONCE)
+  let resizeRaf = null;
+  function onResize() {
+    if (resizeRaf) return;
+    resizeRaf = requestAnimationFrame(() => {
+      updateMobileLabels();
+      syncOpenHeights();
+      resizeRaf = null;
+    });
+  }
+  window.addEventListener("resize", onResize);
+  window.addEventListener("orientationchange", onResize);
+
+  // When web fonts finish loading, remeasure any open panels
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncOpenHeights);
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     updateMobileLabels();
     initAccordions();
+    syncOpenHeights(); // ensure correct initial height if any are open by default
   });
 })();
+
 
 /* ============================================================
    container-3: desktop "no-select" box (prevent selection / context menu)
