@@ -2,53 +2,40 @@
 <section id="container-6" class="bg-02060A pattern-lines">
 
   <div class="mx-auto content-75 center ph-auto" style="padding-bottom: 52;">
-
     <!-- Headline -->
-    <div class="headline" style="
-      margin:auto;
-      font-family: var(--font-ui, 'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue', Arial, sans-serif);
-      font-weight: 500;
-      font-size: 2.75rem;
-      line-height: .75;
-      letter-spacing: 0;
-      color: #e1e6ec;
-      text-align: center;
-      max-width: 100%;
-    ">
-      BOOK YOUR <span style="font-weight:700; color:#FFD510;">DISCOVERY AUDIT:</span>
+    <div class="headline">
+      BOOK YOUR <span class="headline-strong">DISCOVERY AUDIT:</span>
     </div>
 
     <!-- Calendly -->
-    <div id="book-your-call"
-         class="calendly-inline-widget"
-         data-url="https://calendly.com/gabriel-edits/30min"
-         style="min-width:320px; height:850px;">
-    </div>
+    <div
+      id="book-your-call"
+      class="calendly-inline-widget"
+      data-url="https://calendly.com/gabriel-edits/30min"
+      style="min-width:320px; height:850px;"
+    ></div>
 
     <!-- Booking confirmation preview label -->
-    <div style="
-      margin:auto;
-      font-family: var(--font-ui, 'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue', Arial, sans-serif);
-      font-weight:400;
-      font-size:1rem;
-      line-height:.75;
-      letter-spacing:0;
-      color:#e1e6ec;
-      text-align:center;
-      max-width:100%;
-    ">
+    <div class="booking-label">
       Booking Confirmation Email (Preview):
     </div>
 
     <!-- Booking image (reveal-card) -->
-    <div class="reveal-card"
-         data-src="https://i.imgur.com/LaQ7YLf.png"
-         role="button"
-         aria-expanded="false"
-         aria-label="View image"
-         tabindex="0">
+    <div
+      class="reveal-card"
+      data-src="https://i.imgur.com/LaQ7YLf.png"
+      role="button"
+      aria-expanded="false"
+      aria-label="View image"
+      tabindex="0"
+    >
       <div class="rc-media">
-        <img src="https://i.imgur.com/LaQ7YLf.png" alt="Preview" loading="lazy" draggable="false" />
+        <img
+          src="https://i.imgur.com/LaQ7YLf.png"
+          alt="Preview"
+          loading="lazy"
+          draggable="false"
+        />
       </div>
       <div class="rc-overlay"><span class="rc-icon-eye" aria-hidden="true"></span></div>
       <div class="protect-guard" aria-hidden="true"></div>
@@ -59,40 +46,13 @@
       Book Your Discovery Audit
     </a>
 
-    <div class="desktop-only disclaim" style="
-      max-width:50%;
-      margin:16px auto;
-      text-align:center;
-    ">
+    <div class="desktop-only disclaim">
       *Regardless of whether we end up working together or not, after our call you'll have clarity on what actionable steps you need to take to scale past your upload bottleneck. It's a win-win no matter what.*
     </div>
-
   </div>
 
-  <!-- Scoped styles JUST for the bottom logo protection -->
-  <style>
-    #container-6 .logo-protect {
-      position: relative;
-      display: inline-block;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
-      touch-action: pan-y;
-    }
-    #container-6 .logo-protect img {
-      pointer-events: none; /* evita pegar drag em cima do img */
-    }
-    #container-6 .logo-protect .protect-guard {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      background: transparent;
-      pointer-events: auto; /* recebe toques/cliques pra bloquear menu/drag */
-    }
-  </style>
-
   <!-- Logo at the bottom (protected like Life Pictures) -->
-  <div style="text-align:center; margin-top:40px; margin-bottom:0; padding-bottom:20px;">
+  <div class="logo-row">
     <div id="ge-logo" class="logo-protect" aria-label="Gabriel Edits Logo" role="img">
       <img
         src="https://i.imgur.com/Hi9k0uo.png"
@@ -104,103 +64,79 @@
     </div>
   </div>
 
+  <!-- Scoped styles for container-6 (exact visual parity) -->
+  <style>
+    /* Keep container spacing overrides */
+    #container-6 {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    #container-6 .headline {
+      margin: auto;
+      font-family: var(--font-ui, 'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue', Arial, sans-serif);
+      font-weight: 500;
+      font-size: 2.75rem;
+      line-height: .75;
+      letter-spacing: 0;
+      color: #e1e6ec;
+      text-align: center;
+      max-width: 100%;
+    }
+    #container-6 .headline-strong {
+      font-weight: 700;
+      color: #FFD510;
+    }
+
+    #container-6 .booking-label {
+      margin: auto;
+      font-family: var(--font-ui, 'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue', Arial, sans-serif);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: .75;
+      letter-spacing: 0;
+      color: #e1e6ec;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    #container-6 .desktop-only.disclaim {
+      max-width: 50%;
+      margin: 16px auto;
+      text-align: center;
+    }
+
+    #container-6 .logo-row {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 0;
+      padding-bottom: 20px;
+    }
+
+    /* Logo-protect (scoped) */
+    #container-6 .logo-protect {
+      position: relative;
+      display: inline-block;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      touch-action: pan-y;
+    }
+    #container-6 .logo-protect img {
+      pointer-events: none; /* avoid dragging on the img itself */
+    }
+    #container-6 .logo-protect .protect-guard {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: transparent;
+      pointer-events: auto; /* absorbs interactions to block menu/drag */
+    }
+
+    /* Mobile tweaks that already exist in styles.css kept consistent */
+    @media (max-width: 768px) {
+      #book-your-call { margin-bottom: 30px; }
+      #container-6 .headline { margin-bottom: 20px !important; }
+    }
+  </style>
 </section>
-
-<!-- Scoped reveal-card + logo-protect script -->
-<script>
-  (function(){
-    const root = document.currentScript.previousElementSibling; // #container-6 section
-    // fallback caso DOM mude
-    const section = root && root.id === 'container-6'
-      ? root
-      : document.getElementById('container-6');
-    if(!section) return;
-
-    // ===== Reveal-card behavior (já existia) =====
-    (function(){
-      const card  = section.querySelector('.reveal-card');
-      if(!card) return;
-
-      const img   = card.querySelector('.rc-media img');
-      const guard = card.querySelector('.protect-guard');
-      if(!img || !guard) return;
-
-      const src = card.getAttribute('data-src');
-      if (src) img.src = src;
-
-      const cs = getComputedStyle(card);
-      const collapsedH = cs.getPropertyValue('--collapsed-h').trim() || '78px';
-      card.style.minBlockSize = collapsedH;
-
-      const toggle = () => {
-        const willOpen = !card.classList.contains('open');
-        card.classList.toggle('open', willOpen);
-        card.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-      };
-
-      card.addEventListener('click', toggle);
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-      });
-
-      ['contextmenu','copy','cut','dragstart','selectstart'].forEach(evt => {
-        card.addEventListener(evt, e => e.preventDefault());
-        guard.addEventListener(evt, e => e.preventDefault());
-      });
-
-      document.addEventListener('keydown', e => {
-        if ((e.ctrlKey || e.metaKey) && ['s','u','p'].includes(e.key.toLowerCase())) {
-          e.preventDefault();
-        }
-      });
-
-      let pressTimer;
-      const startPress = () => { pressTimer = setTimeout(()=>{}, 600); };
-      const endPress   = () => clearTimeout(pressTimer);
-      card.addEventListener('touchstart', startPress, { passive: true });
-      card.addEventListener('touchend',   endPress,   { passive: true });
-
-      img.setAttribute('draggable', 'false');
-    })();
-
-    // ===== Bottom logo protection (modelado do Life Pictures) =====
-    (function(){
-      const wrap  = section.querySelector('#ge-logo');
-      if(!wrap) return;
-      const img   = wrap.querySelector('img');
-      const guard = wrap.querySelector('.protect-guard');
-
-      if(img) img.setAttribute('draggable','false');
-
-      // Bloqueios principais
-      const block = e => e.preventDefault();
-      ['contextmenu','copy','cut','dragstart','selectstart'].forEach(evt => {
-        wrap.addEventListener(evt, block);
-        if (guard) guard.addEventListener(evt, block);
-      });
-
-      // Teclas comuns de “salvar/inspecionar/imprimir”
-      document.addEventListener('keydown', e => {
-        if ((e.ctrlKey || e.metaKey) && ['s','u','p'].includes(e.key.toLowerCase())) {
-          e.preventDefault();
-        }
-      });
-
-      // Long-press mobile (sufoca menu do OS)
-      let pressTimer;
-      const startPress = () => { pressTimer = setTimeout(()=>{}, 600); };
-      const endPress   = () => clearTimeout(pressTimer);
-      wrap.addEventListener('touchstart', startPress, { passive: true });
-      wrap.addEventListener('touchend',   endPress,   { passive: true });
-    })();
-  })();
-</script>
-
-<style>
-  /* Override container-6 spacing */
-  #container-6 {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-</style>
-
