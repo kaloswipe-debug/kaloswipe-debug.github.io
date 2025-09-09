@@ -462,6 +462,9 @@
       color:#fff !important;
     }
   }
+  .hide-on-mobile {
+    line-height: 0.93; /* tighter rhythm */
+  }
   /* ===== Container 2 ===== */
   #container-2 wistia-player[media-id='7fabk90kiw']:not(:defined),
   #container-2 wistia-player[media-id='ckjt9hifsx']:not(:defined),
