@@ -40,14 +40,13 @@ layout: null
 </main>
 
 <!-- External libs FIRST -->
-<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
-<script src="https://fast.wistia.com/player.js" async></script>
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+<script async src="https://fast.wistia.com/player.js"></script>
+<script async src="https://assets.calendly.com/assets/external/widget.js"></script>
 
-<!-- Then your inlined scripts that depend on Lenis -->
 {% include scripts.html %}
 
-<!-- Finally your app code -->
-<script src="/assets/js/main.js"></script>
+<script defer src="/assets/js/main.js"></script>
+
 </body>
 </html>
