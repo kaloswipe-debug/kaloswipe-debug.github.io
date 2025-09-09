@@ -1,31 +1,11 @@
 <!-- TOP: Gabriel Edits Logo (isolated) -->
-<style>
-  /* Scoped, minimal, and tougher to long-press/save */
-  #ge-logo-wrap{
-    position:relative;
-    width:78px;
-    margin:18px auto 12px;
-    user-select:none; -webkit-user-select:none; -ms-user-select:none;
-    -webkit-touch-callout:none; /* iOS long-press menu */
-    touch-action:manipulation;
-  }
-  #ge-logo-wrap img{
-    display:block; width:100%; height:auto;
-    pointer-events:none; /* overlay catches all events */
-  }
-  #ge-logo-wrap .protect-guard{
-    position:absolute; inset:0; z-index:2;
-    background:transparent; pointer-events:auto;
-  }
-</style>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const src = "https://i.imgur.com/Hi9k0uo.png";
 
-  // Build protected wrapper
-  const wrap = document.createElement("div");
-  wrap.id = "ge-logo-wrap";
+ const wrap = document.createElement("div");
+wrap.id = "ge-logo-wrap";         // keep the id if you want an anchor
+wrap.className = "logo-protect";  // use shared styles
 
   const img  = document.createElement("img");
   img.src = src;
