@@ -207,13 +207,13 @@
   .scroll-button {
     display: inline-block;
     margin-top: 17px;
-    padding: 18px 48px;
+    padding: 18px 30px;
     background: var(--accent);
-    color: #E1E6EC;
+    color: #fff;
     font-family: var(--font-ui);
     font-weight: 600;
-    font-size: 1.4rem;
-    line-height: 1.2;
+    font-size: 1.1rem;
+    line-height: 0.6;
     text-decoration: none;
     border: none;
     border-radius: 8px;
@@ -222,7 +222,7 @@
     box-shadow: 0 0 22px color-mix(in oklab, var(--accent) 28%, transparent);
   }
   .scroll-button:hover {
-    padding: 18px 50px;
+    padding: 18px 28px;
     box-shadow: 0 0 32px color-mix(in oklab, var(--accent) 38%, transparent);
   }
   .scroll-button:focus-visible {
