@@ -37,7 +37,7 @@
 
     const acc = document.querySelectorAll(".accordion");
     acc.forEach((el) => {
-      const wrap  = el.querySelector(".extra-content");
+      const wrap = el.querySelector(".extra-content");
 
       // Make each accordion focusable & announce state
       el.setAttribute("role", "button");
@@ -84,11 +84,10 @@
           e.preventDefault();
           toggleSelf();
         }
-      
-
       });
-       // after el.addEventListener(...), add:
-setState(el, el.classList.contains("active"));
+
+      // ✅ INIT state for pre-opened items (this was misplaced before)
+      setState(el, el.classList.contains("active"));
     });
   }
 
@@ -117,7 +116,6 @@ setState(el, el.classList.contains("active"));
   });
 })();
 
-
 /* ============================================================
    container-3: desktop "no-select" box (prevent selection / context menu)
    ============================================================ */
@@ -145,7 +143,6 @@ setState(el, el.classList.contains("active"));
    container-3: slideshow (autoplay, arrows, swipe)
    ============================================================ */
 (() => {
-  // Intent-only constants (no behavior change)
   const SLIDESHOW_INTERVAL = 7000;
   const SWIPE_THRESHOLD = 50;
 
@@ -161,7 +158,6 @@ setState(el, el.classList.contains("active"));
     "https://i.imgur.com/kYj36ZY.jpeg",
   ];
 
-  // Tiny readability nudge; behavior unchanged
   const slides = IMAGE_URLS.map(() => {
     const d = document.createElement("div");
     d.className = "slide";
@@ -169,7 +165,6 @@ setState(el, el.classList.contains("active"));
     return d;
   });
 
-  // Defer background image assignment to next frame
   requestAnimationFrame(() => {
     slides.forEach((el, i) => {
       el.style.backgroundImage = `url("${IMAGE_URLS[i]}")`;
@@ -228,14 +223,15 @@ setState(el, el.classList.contains("active"));
 
   update();
   reset();
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    clearInterval(autoplayTimer);
-  } else {
-    reset();
-  }
-});
 
+  // Pause autoplay when the tab is hidden
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      clearInterval(autoplayTimer);
+    } else {
+      reset();
+    }
+  });
 })();
 
 /* ============================================================
@@ -261,40 +257,39 @@ document.addEventListener("visibilitychange", () => {
   }
 
   function expand() {
-  if (wrap.classList.contains("expanded") || wrap.classList.contains("expanding")) return;
+    if (wrap.classList.contains("expanded") || wrap.classList.contains("expanding")) return;
 
-  lockH();
-  revealText.style.display = "none";
-  revealText.setAttribute("aria-hidden", "true");
-  step2text.style.display = "none";
+    lockH();
+    revealText.style.display = "none";
+    revealText.setAttribute("aria-hidden", "true");
+    step2text.style.display = "none";
 
-  wrap.classList.add("expanding");
-  diamond.setAttribute("aria-expanded", "true");
-  diamond.setAttribute("aria-disabled", "true");
+    wrap.classList.add("expanding");
+    diamond.setAttribute("aria-expanded", "true");
+    diamond.setAttribute("aria-disabled", "true");
 
-  const onEnd = (e) => {
-    if (e.propertyName !== "flex-basis") return;
-    cleanup();
-  };
+    const onEnd = (e) => {
+      if (e.propertyName !== "flex-basis") return;
+      cleanup();
+    };
 
-  const fallback = setTimeout(cleanup, 380); // mirrors collapse timing
+    const fallback = setTimeout(cleanup, 380); // mirrors collapse timing
 
-  function cleanup() {
-    wrap.removeEventListener("transitionend", onEnd, true);
-    clearTimeout(fallback);
-    wrap.classList.remove("expanding");
+    function cleanup() {
+      wrap.removeEventListener("transitionend", onEnd, true);
+      clearTimeout(fallback);
+      wrap.classList.remove("expanding");
 
-    revealText.style.display = "block";
-    revealText.setAttribute("aria-hidden", "false");
-    void revealText.offsetWidth; // reflow
-    wrap.classList.add("expanded");
+      revealText.style.display = "block";
+      revealText.setAttribute("aria-hidden", "false");
+      void revealText.offsetWidth; // reflow
+      wrap.classList.add("expanded");
 
-    requestAnimationFrame(unlockH);
+      requestAnimationFrame(unlockH);
+    }
+
+    wrap.addEventListener("transitionend", onEnd, true);
   }
-
-  wrap.addEventListener("transitionend", onEnd, true);
-}
-
 
   function collapse() {
     if (!wrap.classList.contains("expanded")) return;
@@ -336,7 +331,6 @@ document.addEventListener("visibilitychange", () => {
       if (!wrap.classList.contains("expanded")) expand();
     });
 
-    // Make sure keyboard users can trigger via Enter/Space if diamond is focusable
     diamond.addEventListener("keydown", (e) => {
       if (wrap.classList.contains("expanded")) return;
       if (e.key === "Enter" || e.key === " ") {
@@ -362,6 +356,10 @@ document.addEventListener("visibilitychange", () => {
     });
   }
 })();
+
+/* ============================================================
+   GE helper: initProtectedZone (shared)
+   ============================================================ */
 (() => {
   function initProtectedZone(root, { guardSelector = ".protect-guard" } = {}) {
     if (!root || root.dataset.protectInit === "1") return;
@@ -387,14 +385,12 @@ document.addEventListener("visibilitychange", () => {
     root.querySelectorAll("img").forEach((img) => img.setAttribute("draggable", "false"));
   }
 
-  // expose for other scripts if needed
   window.GE = window.GE || {};
   window.GE.initProtectedZone = initProtectedZone;
 })();
 
 /* ============================================================
    container-6: reveal-card + bottom logo protection
-   (moved from container-6.html inline script; scoped & idempotent)
    ============================================================ */
 (() => {
   const section = document.getElementById("container-6");
@@ -406,12 +402,10 @@ document.addEventListener("visibilitychange", () => {
     if (!card || card.hasAttribute("data-ge-reveal-init")) return;
     card.setAttribute("data-ge-reveal-init", "1");
 
-    // CHANGED: no guard query/require; img is optional
     const img = card.querySelector(".rc-media img");
     const src = card.getAttribute("data-src");
     if (img && src) img.src = src;
 
-    // (unchanged)
     const cs = getComputedStyle(card);
     const collapsedH = (cs.getPropertyValue("--collapsed-h") || "").trim() || "78px";
     card.style.minBlockSize = collapsedH;
@@ -427,10 +421,7 @@ document.addEventListener("visibilitychange", () => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
 
-    // CHANGED: use your helper; works with or without .protect-guard present
     GE.initProtectedZone(card, { guardSelector: ".protect-guard" });
-
-    // CHANGED: only if img exists
     if (img) img.setAttribute("draggable","false");
   })();
 
@@ -440,23 +431,6 @@ document.addEventListener("visibilitychange", () => {
     if (!wrap || wrap.hasAttribute("data-ge-logo-protect")) return;
     wrap.setAttribute("data-ge-logo-protect", "1");
 
-    // keep using the helper (also OK if the guard is missing)
     GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
   })();
 })();
-
-/* ---------- Bottom logo protect ---------- */
-(function initLogoProtect() {
-  const wrap = section.querySelector("#ge-logo");
-  if (!wrap || wrap.hasAttribute("data-ge-logo-protect")) return;
-  wrap.setAttribute("data-ge-logo-protect", "1");
-
-  if (window.GE && typeof GE.initProtectedZone === "function") {
-    GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
-  } else {
-    // optional: keep it silent or log for debugging
-    // console.warn("GE.initProtectedZone is not available yet.");
-  }
-})();
-})();
-
