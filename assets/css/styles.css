@@ -1549,8 +1549,9 @@
 #container-1 {
   background: #00080f;           /* matches Carrd background */
   padding: 0 !important;          /* kill any utility padding (e.g., .full-bleed/section defaults) */
-  margin: 0;                      /* avoid accidental top offset */
 }
+
+    #container-1.ph-auto { padding-inline: 0; }
 
 #container-1 > .content-100 {
   max-width: 1240px;              /* or your desired content width */
