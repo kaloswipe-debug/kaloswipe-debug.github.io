@@ -616,8 +616,8 @@
     :is(#container-1, .container-1) #hl1 .mobile-title{ display:block !important; }
   }
    #container-1 #hl1 .hero-title {
-    width: 100%;
-    max-width: none !important;
+    max-width: 1700px !important;   /* expand beyond Carrd’s default */
+    width: min(1700px, 100%);
     text-wrap: balance;
   }
 
