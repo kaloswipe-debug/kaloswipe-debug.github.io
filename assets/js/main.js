@@ -366,6 +366,17 @@
     });
   }
 })();
+// ======================== AFTER CONTAINER #5 ========================
+(function initAfterC5() {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAfterC5);
+    return;
+  }
+  var wrap = document.getElementById("after-c5-logo");
+  if (!wrap || !(window.GE && typeof GE.initProtectedZone === "function")) return;
+  GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
+})();
+
 
 /* ============================================================
    GE helper: initProtectedZone (shared)
