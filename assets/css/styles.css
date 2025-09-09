@@ -1535,7 +1535,7 @@
   /* Force the Calendly iframe tall enough to show full description */
   .calendly-inline-widget iframe {
     width: 100% !important;
-    height: 1500px !important; /* adjust until inner scroll disappears */
+    height: 850px !important; /* adjust until inner scroll disappears */
     display: block;
     border: none;
   }
