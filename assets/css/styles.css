@@ -1105,3 +1105,18 @@
 
   #container-6 .headline { font-size: 29px !important; line-height: 0.9 !important; }  
 }
+
+
+@media (max-width: 768px) {
+  /* 1) Testimonial text — mobile tweak (.9rem → .8rem) */
+  #container-4 .testimonial { 
+    font-size: 0.8rem; 
+    line-height: 0.95; /* keep your existing rhythm */
+  }
+
+  /* 2) sf-text (“Liam, Content”) — mobile font + tracking */
+  #container-4 .sf-text {
+    font-size: 0.6rem;
+    letter-spacing: -0.6px;
+  }
+}
