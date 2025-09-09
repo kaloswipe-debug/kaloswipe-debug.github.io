@@ -1087,7 +1087,7 @@
 @media (max-width: 768px) {
   /* container-2: sem padding + margem-top 1.5rem */
   #container-2,
-  .container-2 { padding: 0 !important; margin-top: 1.5rem !important; }
+  .container-2 { padding: 0 !important; margin-top: 2rem !important; }
   #container-2 .wrapper,
   #container-2 .inner { padding-left: 0 !important; padding-right: 0 !important; }
 
