@@ -45,7 +45,7 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     scroll-behavior: auto !important;
-    scrollbar-gutter: stable both-edges; 
+    scrollbar-gutter: stable; 
   }
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -1574,6 +1574,9 @@
 
   #container-1 h1 { margin-top: 0; }
   #container-1 .scroll-button { display: inline-block; }
+
+  #container-1 { outline: 1px solid #f00; }
+  #container-1 > .content-100 { outline: 1px solid #0f0; }
 
  /* Gradient motion (shared) */
   @keyframes rotateGradient {
