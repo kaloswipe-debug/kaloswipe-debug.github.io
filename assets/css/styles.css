@@ -560,49 +560,6 @@
   opacity: .8;
 }
 
-  @media (max-width: 600px) {
-    :is(#container-5, .container-5) .accordion {
-      max-width: 100%;
-      margin: 0 auto 12px;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
-      background: linear-gradient(120deg, rgba(28,28,28,0.94), rgba(0,0,0,0.9));
-      background-size: 200% 200%;
-      animation: rotateGradient 30s ease infinite;
-    }
-    :is(#container-5, .container-5) .accordion:nth-of-type(2) {
-      background: linear-gradient(160deg, rgba(27,27,27,0.93), rgba(0,0,0,0.89));
-      animation: rotateGradient 35s ease infinite;
-    }
-    :is(#container-5, .container-5) .accordion:nth-of-type(3) {
-      background: linear-gradient(200deg, rgba(26,26,26,0.92), rgba(0,0,0,0.88));
-      animation: rotateGradient 32s ease infinite;
-    }
-    :is(#container-5, .container-5) .accordion:nth-of-type(4) {
-      background: linear-gradient(135deg, rgba(25,25,25,0.93), rgba(0,0,0,0.89));
-      animation: rotateGradient 34s ease infinite;
-    }
-    :is(#container-5, .container-5) .accordion:nth-of-type(5) {
-      background: linear-gradient(180deg, rgba(26,26,26,0.92), rgba(0,0,0,0.87));
-      animation: rotateGradient 31s ease infinite;
-    }
-    :is(#container-5, .container-5) .accordion:nth-of-type(6) {
-      background: linear-gradient(100deg, rgba(25,25,25,0.93), rgba(0,0,0,0.88));
-      animation: rotateGradient 36s ease infinite;
-    }
-    :is(#container-5, .container-5) .accordion:nth-of-type(7) {
-      background: linear-gradient(150deg, rgba(24,24,24,0.92), rgba(0,0,0,0.89));
-      animation: rotateGradient 33s ease infinite;
-    }
-
-    :is(#container-5, .container-5) .accordion-header { justify-content: center; }
-    :is(#container-5, .container-5) .accordion-header .question { flex: 1; text-align: center; }
-    :is(#container-5, .container-5) .accordion-header .icon { display: none !important; }
-  }
-
   /* Container margins/padding cleanup */
   :is(#container-3, .container-3),
   :is(#container-5, .container-5),
