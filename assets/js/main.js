@@ -390,6 +390,43 @@
 })();
 
 /* ============================================================
+   Top-of-page Gabriel Edits logo (moved from footer-logos.html)
+   ============================================================ */
+(() => {
+  document.addEventListener("DOMContentLoaded", () => {
+    // Prevent duplicate insert
+    if (document.getElementById("ge-logo-wrap")) return;
+
+    const src = "https://i.imgur.com/Hi9k0uo.png";
+
+    const wrap = document.createElement("div");
+    wrap.id = "ge-logo-wrap";            // keep the same id
+    wrap.className = "logo-protect";     // uses your shared CSS
+    wrap.innerHTML = `
+      <img src="${src}" alt="Gabriel Edits Logo" draggable="false">
+      <div class="protect-guard" aria-hidden="true"></div>
+    `;
+
+    // Mount priority: #logo-1 → <main.page> → <main> → <body>
+    const anchor = document.getElementById("logo-1");
+    const mount =
+      anchor ||
+      document.querySelector("main.page") ||
+      document.querySelector("main") ||
+      document.body;
+
+    if (anchor) anchor.innerHTML = "";   // clear any placeholder
+    mount.insertBefore(wrap, mount.firstChild);
+
+    // Apply your shared protection helper
+    if (window.GE && typeof GE.initProtectedZone === "function") {
+      GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
+    }
+  });
+})();
+
+
+/* ============================================================
    container-6: reveal-card + bottom logo protection
    ============================================================ */
 (() => {
@@ -433,4 +470,5 @@
 
     GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
   })();
+   
 })();
