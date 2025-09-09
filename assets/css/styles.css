@@ -45,6 +45,7 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     scroll-behavior: auto !important;
+    scrollbar-gutter: stable both-edges; 
   }
   *, *::before, *::after { box-sizing: border-box; }
 
