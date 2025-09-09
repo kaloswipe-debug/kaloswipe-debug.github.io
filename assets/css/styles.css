@@ -426,8 +426,7 @@
   }
   @media screen and (max-width:600px){
     :is(#container-1, .container-1) .scroll-button{
-      padding:10px 20px !important; font-size:1.6rem !important; border-radius:7px !important;
-      background:#ffd510 !important; color:#fff !important;
+      color:#fff !important;
     }
   }
   /* ===== Container 2 ===== */
