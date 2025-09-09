@@ -1545,29 +1545,39 @@
       height: 1700px !important;
     }
   }
-  /* Container #1: make it truly full-bleed and centered like Carrd */
-#container-1 {
-  background: #00080f;           /* matches Carrd background */
-  padding: 0 !important;          /* kill any utility padding (e.g., .full-bleed/section defaults) */
-}
+  @layer pages {
+  /* Container 1 — fix slight right/down drift without breaking full-bleed */
+  #container-1 {
+    position: relative;
+    padding: 0;                 /* neutralize ph-auto’s inline padding */
+    background: transparent;    /* we'll paint via ::before to avoid offset */
+  }
 
-    #container-1.ph-auto { padding-inline: 0; }
+  /* If the section still has ph-auto, make sure inline padding is zero */
+  #container-1.ph-auto { padding-inline: 0; }
 
-#container-1 > .content-100 {
-  max-width: 1240px;              /* or your desired content width */
-  margin: 0 auto;                 /* center the stack */
-  padding-left: 0 !important;     /* neutralize utility “ph-*” padding */
-  padding-right: 0 !important;
-  text-align: center;             /* mirrors Carrd’s content alignment */
-}
+  /* Paint a true edge-to-edge background under the centered content */
+  #container-1::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0; bottom: 0;
+    left: calc(50% - 50vw);
+    right: calc(50% - 50vw);
+    background: #00080f;        /* Carrd color */
+  }
 
-/* Remove default heading top margin if scoped headline CSS isn’t taking effect */
-#container-1 h1 { margin-top: 0; }
+  /* Inner wrapper stays centered by margin:auto */
+  #container-1 > .content-100 {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+  }
 
-/* Keep the CTAs perfectly centered */
-#container-1 .scroll-button { display: inline-block; }
-
-}
+  #container-1 h1 { margin-top: 0; }
+  #container-1 .scroll-button { display: inline-block; }
 
  /* Gradient motion (shared) */
   @keyframes rotateGradient {
