@@ -1563,9 +1563,9 @@
 
     /* Narrower horizontal padding only for container-1 */
   .page > #container-1 {
-    /* 20px target – 34px page pad = -14px */
-  margin-left:  calc(20px - var(--pad-h));
-  margin-right: calc(20px - var(--pad-h));
+    /* 2px target – 34px page pad = -32px */
+  margin-left:  calc(2px - var(--pad-h));
+  margin-right: calc(2px - var(--pad-h));
   /* keep its own padding at 0 so the net left/right offset is 20px */
   padding-left: 0;
   padding-right: 0;
