@@ -1090,3 +1090,18 @@
   .container-2 { padding: 0 !important; margin-top: 1.5rem !important; }
   #container-2 .wrapper,
   #container-2 .inner { padding-left: 0 !important; padding-right: 0 !important; }
+
+  .headline { font-size: 29px !important; line-height: 0.8 !important; }
+
+  #hero-headline { font-size: 1.9rem !important; }
+  
+  :is(#container-5, .container-5) .faq-section { padding-left: 0 !important; padding-right: 0 !important; }
+
+  :is(#container-5, .container-5) .questions-title {
+    margin-bottom: 0 !important;
+    font-size: 1.7rem !important;
+    line-height: 1.1;
+  }
+
+  #container-6 .headline { font-size: 29px !important; line-height: 0.9 !important; }  
+}
