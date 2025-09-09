@@ -1071,3 +1071,8 @@
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+@media (max-width: 1024px) {
+  #container-6 .headline::after { content: none !important; }
+}
+
