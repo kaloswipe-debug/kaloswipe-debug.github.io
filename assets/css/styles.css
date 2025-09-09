@@ -1544,33 +1544,25 @@
       height: 1700px !important;
     }
   }
-  /* Container 1 — fix slight right/down drift without breaking full-bleed */
-  #container-1 {
-    position: relative;
-    padding: 0;                 /* neutralize ph-auto’s inline padding */
-    background: transparent;    /* we'll paint via ::before to avoid offset */
+  /* Container 1 — opt out of full-bleed math */
+  #container-1.full-bleed {
+    left: auto;           /* cancel the 50% shift */
+    width: 100%;          /* normal flow width */
+    margin-left: 0;       /* cancel negative margins */
+    margin-right: 0;
   }
 
-  /* If the section still has ph-auto, make sure inline padding is zero */
+  /* Keep background on the section itself */
+  #container-1 {
+    padding: 0; 
+    background: var(--bg-00080F); /* matches Carrd */
+  }
+
   #container-1.ph-auto { padding-inline: 0; }
 
-  /* Paint a true edge-to-edge background under the centered content */
-  #container-1::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0; bottom: 0;
-    left: calc(50% - 50vw);
-    right: calc(50% - 50vw);
-    background: #00080f;        /* Carrd color */
-  }
-
-  /* Inner wrapper stays centered by margin:auto */
   #container-1 > .content-100 {
     max-width: 1240px;
     margin: 0 auto;
-    padding-left: 0;
-    padding-right: 0;
     text-align: center;
   }
 
