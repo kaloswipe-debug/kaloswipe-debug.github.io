@@ -68,16 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
   guard.addEventListener("touchend", disarm, {passive:true});
   guard.addEventListener("touchcancel", disarm, {passive:true});
 
-  // Block typical save-source/print combos while armed
-  document.addEventListener("keydown", function(e){
-    if (!armed) return;
-    const k = e.key && e.key.toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && (k === "s" || k === "u" || k === "p")){
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }, true);
-
   // Cheap long-press deterrent on some Android browsers (iOS handled via CSS)
   let pressTimer;
   guard.addEventListener("touchstart", () => {
