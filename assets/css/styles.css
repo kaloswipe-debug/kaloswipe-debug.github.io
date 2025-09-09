@@ -144,6 +144,10 @@
 
 /* ========================= utilities ========================= */
 @layer utilities {
+    .content-100 { max-width: 100%; width: 100%; }
+  .content-75  { max-width: 75rem;  width: 100%; }
+  .content-40  { max-width: 40rem;  width: 100%; }
+  
   .mx-auto { margin-inline: auto; }
   .center { text-align: center; }
 
@@ -904,93 +908,89 @@
     #container-3 #mobile-fade-divider  { display: none !important; }
   }
 
-  /* Mobile adaptations */
-  @media (max-width: 768px) {
-    #container-3 #gs-blurb { max-width: 90% !important; margin-top: 10px !important; }
-    #container-3 #gs-blurb .desktop-only { display: none; }
-    #container-3 #gs-blurb-mobile { max-width: 90% !important; margin-top: 10px !important; display: block !important; }
-
-    #container-3 .slideshow-wrapper { margin: 30px auto; }
-    #container-3 .slideshow-frame {
-      padding-left:  calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-left));
-      padding-right: calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-right));
-      overflow: hidden;
-    }
-    #container-3 .slide.left  { transform: translateX(-30%) scale(.82); opacity: .6; z-index: 1; }
-    #container-3 .slide.right { transform: translateX(30%)  scale(.82); opacity: .6; z-index: 1; }
-    #container-3 .arrow       { font-size: 24px; }
-    #container-3 .arrow-left  { left:  clamp(6px, 3vw, 16px); }
-    #container-3 .arrow-right { right: clamp(6px, 3vw, 16px); }
-
-    #container-3 .responsive-text { font-size: 2.1rem; line-height: 1.05; margin-bottom: 10px; }
-    #container-3 .responsive-text::before { content: "Here’s how I work with you:"; display: block; }
-    #container-3 .responsive-text span { display: none; }
-
-    #container-3 #no-select { display: none !important; }
-    #container-3 #steps-flow { display: none !important; }
-    #container-3 #steps-flow-mobile {
-      display: flex; flex-direction: column; align-items: center;
-      margin-bottom: 48px; font-size: 0.825em; user-select: none; -webkit-user-select: none;
-      -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
-    }
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    #container-3 * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  }
-  /* === Container 3: mobile order + visibility (strict) === */
+  /* === Container 3 — all mobile rules merged === */
 @media (max-width: 768px) {
-  /* Make the stack a flex container */
-  #container-3 .whoami-block {
-    display: flex;
-    flex-direction: column;
+  /* Blurb variants */
+  #container-3 #gs-blurb {
+    max-width: 90% !important;
+    margin-top: 10px !important;
+    font-size: 15px !important;  /* from type-size block */
+    line-height: 1.35;           /* from type-size block */
   }
-
-  /* Exact order of DIRECT children */
-  #container-3 .whoami-block > h2.whoami            { order: 0; } /* Who am I */
-  #container-3 .whoami-block > #gs-blurb            { order: 1 !important; } /* My name is Gabriel (mobile span) */
-  #container-3 .whoami-block > .slideshow-wrapper   { order: 2 !important; } /* Life pictures */
-  #container-3 .whoami-block > #gs-blurb-mobile     { order: 3; } /* My goal is simple */
-  #container-3 .whoami-block > #mobile-fade-divider { order: 4; } /* Divider */
-  #container-3 .whoami-block > .responsive-text     { order: 5; } /* Here's how I work with you */
-  #container-3 .whoami-block > #steps-flow-mobile   { order: 6; } /* Steps flow (mobile) */
-
-  /* Hide desktop-only bits on mobile */
-  #container-3 #hero-blurb,
-  #container-3 #no-select,
-  #container-3 #steps-flow { display: none !important; }
-
-  /* Ensure the right blurb variant shows */
   #container-3 #gs-blurb .desktop-only { display: none !important; }
   #container-3 #gs-blurb .mobile-only  { display: inline !important; }
-}
-  /* === Container 3: mobile type sizes === */
-@media (max-width: 768px) {
-  /* Who am I? */
+  #container-3 #gs-blurb-mobile {
+    max-width: 90% !important;
+    margin-top: 10px !important;
+    display: block !important;
+    font-size: 12px !important;  /* from type-size block */
+    line-height: 1.4;            /* from type-size block */
+  }
+
+  /* Slideshow tweaks */
+  #container-3 .slideshow-wrapper { margin: 30px auto; }
+  #container-3 .slideshow-frame {
+    padding-left:  calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-left));
+    padding-right: calc(clamp(12px, 6vw, 24px) + env(safe-area-inset-right));
+    overflow: hidden;
+  }
+  #container-3 .slide.left  { transform: translateX(-30%) scale(.82); opacity: .6; z-index: 1; }
+  #container-3 .slide.right { transform: translateX(30%)  scale(.82);  opacity: .6; z-index: 1; }
+  #container-3 .arrow       { font-size: 24px; }
+  #container-3 .arrow-left  { left:  clamp(6px, 3vw, 16px); }
+  #container-3 .arrow-right { right: clamp(6px, 3vw, 16px); }
+
+  /* Section headline text swap */
+  #container-3 .responsive-text {
+    font-size: 28px !important; /* keep stricter override from type-size block */
+    line-height: 1.12;
+    margin-bottom: 10px;
+  }
+  #container-3 .responsive-text::before { content: "Here’s how I work with you:"; display: block; }
+  #container-3 .responsive-text span { display: none; }
+
+  /* Hide desktop-only bits on mobile */
+  #container-3 #hero-blurb { display: none !important; }
+  #container-3 #no-select  { display: none !important; }
+  #container-3 #steps-flow { display: none !important; }
+
+  /* Mobile flow container */
+  #container-3 #steps-flow-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 48px;
+    font-size: 0.825em;
+    user-select: none; -webkit-user-select: none;
+    -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Turn stack into flex + exact child order */
+  #container-3 .whoami-block { display: flex; flex-direction: column; }
+  #container-3 .whoami-block > h2.whoami            { order: 0; }
+  #container-3 .whoami-block > #gs-blurb            { order: 1 !important; }
+  #container-3 .whoami-block > .slideshow-wrapper   { order: 2 !important; }
+  #container-3 .whoami-block > #gs-blurb-mobile     { order: 3; }
+  #container-3 .whoami-block > #mobile-fade-divider { order: 4; }
+  #container-3 .whoami-block > .responsive-text     { order: 5; }
+  #container-3 .whoami-block > #steps-flow-mobile   { order: 6; }
+
+  /* Who am I? heading size */
   #container-3 h2.whoami {
     font-size: 35px !important;
     line-height: 1.15;
   }
+}
 
-  /* "My name is Gabriel Santana..." */
-  #container-3 #gs-blurb {
-    font-size: 15px !important;
-    line-height: 1.35;
-  }
-
-  /* "My goal is simple..." (mobile-only line) */
-  #container-3 #gs-blurb-mobile {
-    font-size: 12px !important;
-    line-height: 1.4;
-  }
-
-  /* "Here’s how I work with you:" */
-  #container-3 .responsive-text {
-    font-size: 28px !important;
-    line-height: 1.12;
+/* Keep this separate — accessibility preference */
+@media (prefers-reduced-motion: reduce) {
+  #container-3 * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
+
 
 
 
