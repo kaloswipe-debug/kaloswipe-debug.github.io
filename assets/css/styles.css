@@ -1561,6 +1561,12 @@
 
   #container-1.ph-auto { padding-inline: 0; }
 
+    /* Narrower horizontal padding only for container-1 */
+  .page > #container-1 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   #container-1 > .content-100 {
      display: flex;
     flex-direction: column;
