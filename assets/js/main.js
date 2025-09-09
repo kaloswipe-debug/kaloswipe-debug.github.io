@@ -290,3 +290,50 @@
     });
   }
 })();
+
+// ======================== CONTAINER #5: Accordion ========================
+(function initContainer5Accordion() {
+  const root = document.querySelector('#container-5');
+  if (!root || root.dataset.init === '1') return; // guard against double init
+  root.dataset.init = '1';
+
+  root.addEventListener('click', (e) => {
+    // Allow clicks on .accordion or its children
+    const accordion = e.target.closest('#container-5 .accordion');
+    if (!accordion || !root.contains(accordion)) return;
+
+    const content = accordion.querySelector('.extra-content');
+    const icon = accordion.querySelector('.icon');
+    const isOpen = accordion.classList.contains('is-open');
+
+    // Close others (optional; comment out if you want multi-open)
+    root.querySelectorAll('.accordion.is-open').forEach(a => {
+      if (a !== accordion) {
+        a.classList.remove('is-open');
+        const c = a.querySelector('.extra-content');
+        const i = a.querySelector('.icon');
+        if (c) c.style.maxHeight = 0;
+        if (i) i.classList.remove('rotate');
+      }
+    });
+
+    // Toggle this one
+    accordion.classList.toggle('is-open');
+    if (content) {
+      if (!isOpen) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } else {
+        content.style.maxHeight = 0;
+      }
+    }
+    if (icon) icon.classList.toggle('rotate', !isOpen);
+  });
+
+  // On load, ensure correct max-heights (e.g., if some start open)
+  window.addEventListener('load', () => {
+    root.querySelectorAll('.accordion.is-open .extra-content').forEach(c => {
+      c.style.maxHeight = c.scrollHeight + 'px';
+    });
+  });
+})();
+
