@@ -665,20 +665,23 @@
     if (e.pointerType === "touch") { if (document.activeElement) document.activeElement.blur?.(); }
   });
 
-   // Drop this anywhere after Lenis is created (e.g., in main.js after Lenis init)
+   
+
+})();
+
+// Drop this anywhere after Lenis is created (e.g., in main.js after Lenis init)
 (() => {
   const wrap = document.getElementById('book-your-call');
   if (!wrap) return;
 
-  const stop = () => window.__lenis && window.__lenis.stop();
-  const start = () => window.__lenis && window.__lenis.start();
+  let paused = false;
+  const stop  = () => { if (window.__lenis && !paused) { window.__lenis.stop();  paused = true; } };
+  const start = () => { if (window.__lenis &&  paused) { window.__lenis.start(); paused = false; } };
 
-  wrap.addEventListener('mouseenter', stop, {passive: true});
-  wrap.addEventListener('mouseleave', start, {passive: true});
+  wrap.addEventListener('pointerenter', stop);
+  wrap.addEventListener('pointerleave', start);
 
   // If the iframe grabs focus, also stop Lenis
   window.addEventListener('blur', stop, true);
   window.addEventListener('focus', start, true);
-})();
-
 })();
