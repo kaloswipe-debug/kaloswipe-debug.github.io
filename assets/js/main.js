@@ -482,3 +482,100 @@
   })();
    
 })();
+
+/* ============================================================
+   Smooth scroll: Lenis + anchors (moved from scripts.html)
+   ============================================================ */
+(() => {
+  // Init Lenis once (desktop only)
+  function initLenisOnce() {
+    // Only run if Lenis is loaded, we're on desktop, and not already inited
+    if (!window.Lenis || window.innerWidth <= 768 || window.__lenis) return;
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      direction: "vertical",
+      gestureDirection: "vertical",
+      smoothTouch: false,
+      touchMultiplier: 1.5,
+    });
+
+    window.__lenis = lenis;
+
+    // Single RAF loop (guarded so we don't create multiple)
+    const loop = (time) => {
+      if (!window.__lenis) return;         // if ever disabled, stop looping
+      window.__lenis.raf(time);
+      window.__lenisRaf = requestAnimationFrame(loop);
+    };
+    cancelAnimationFrame(window.__lenisRaf);
+    window.__lenisRaf = requestAnimationFrame(loop);
+  }
+
+  // Run once when ready
+  const ready = (fn) =>
+    (document.readyState === "loading")
+      ? document.addEventListener("DOMContentLoaded", fn)
+      : fn();
+
+  ready(initLenisOnce);
+
+  // If user resizes from mobile → desktop, allow late init
+  window.addEventListener("resize", initLenisOnce);
+
+  // Optional: if you want to *stop* Lenis when going to mobile widths,
+  // uncomment below. (Safe to leave running too.)
+  // window.addEventListener("resize", () => {
+  //   if (window.innerWidth <= 768 && window.__lenis) {
+  //     cancelAnimationFrame(window.__lenisRaf);
+  //     window.__lenis.stop?.();
+  //     window.__lenis = null;
+  //   }
+  // });
+
+  // Smooth anchors (delegated; runs once)
+  if (!window.__smoothAnchorsInit) {
+    window.__smoothAnchorsInit = true;
+
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest('a[data-smooth][href^="#"]');
+      if (!a) return;
+
+      const id = a.getAttribute("href").slice(1);
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+
+      e.preventDefault();
+
+      // Use Lenis if present; otherwise fallback tween
+      if (window.__lenis) {
+        window.__lenis.scrollTo(target, {
+          offset: 0,
+          duration: 0.9,
+          easing: t => (t < 0.5 ? 8*t*t*t*t : 1 - Math.pow(-2*t + 2, 4)/2),
+        });
+      } else {
+        const start = window.scrollY;
+        const end = start + target.getBoundingClientRect().top;
+        const duration = 900;
+        let startTime = null;
+
+        const easeInOutQuart = (t) =>
+          t < 0.5 ? 8*t*t*t*t : 1 - Math.pow(-2*t + 2, 4)/2;
+
+        const step = (ts) => {
+          if (!startTime) startTime = ts;
+          const p = Math.min((ts - startTime) / duration, 1);
+          const y = start + (end - start) * easeInOutQuart(p);
+          window.scrollTo(0, y);
+          if (p < 1) requestAnimationFrame(step);
+        };
+
+        requestAnimationFrame(step);
+      }
+    });
+  }
+})();
+
