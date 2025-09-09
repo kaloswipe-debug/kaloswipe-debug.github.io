@@ -484,6 +484,76 @@
   /* Container 6 */
   :is(#container-6, .container-6) .content-75 { padding: 3.25rem var(--pad-h); }
 
+  #container-6 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#container-6 .headline {
+  margin: auto;
+  font-family: var(--font-ui, 'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue', Arial, sans-serif);
+  font-weight: 500;
+  font-size: 2.75rem;
+  line-height: .75;
+  letter-spacing: 0;
+  color: #e1e6ec;
+  text-align: center;
+  max-width: 100%;
+}
+#container-6 .headline-strong {
+  font-weight: 700;
+  color: #FFD510; /* (matches your brand accent) */
+}
+
+#container-6 .booking-label {
+  margin: auto;
+  font-family: var(--font-ui, 'SF Pro Display', -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue', Arial, sans-serif);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: .75;
+  letter-spacing: 0;
+  color: #e1e6ec;
+  text-align: center;
+  max-width: 100%;
+}
+
+#container-6 .desktop-only.disclaim {
+  max-width: 50%;      /* override the global 45% just for container-6 */
+  margin: 16px auto;   /* override the global 1rem auto just for container-6 */
+  text-align: center;
+}
+
+#container-6 .logo-row {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+/* Logo-protect (scoped to container-6) */
+#container-6 .logo-protect {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: pan-y;
+}
+#container-6 .logo-protect img {
+  pointer-events: none; /* avoid dragging on the img itself */
+}
+#container-6 .logo-protect .protect-guard {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: transparent;
+  pointer-events: auto; /* absorbs interactions to block menu/drag */
+}
+#book-your-call {
+  min-width: 320px;
+  height: 850px;
+}
+  
   /* FAQ / Container 5 */
   :is(#container-5, .container-5) {
     border: 1px solid var(--border-transparent);
