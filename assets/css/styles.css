@@ -553,6 +553,12 @@
   min-width: 320px;
   height: 850px;
 }
+
+  #container-6 #ge-logo img {
+  max-width: 94px;
+  height: auto;
+  opacity: .8;
+}
   
   /* FAQ / Container 5 */
   :is(#container-5, .container-5) {
