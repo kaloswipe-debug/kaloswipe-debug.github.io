@@ -802,7 +802,7 @@
   #container-3 #steps-flow-mobile { display: none; }
   #container-3 #steps-flow-mobile .arrow-down { font-size: 14px; color: white; margin: 8px 0; line-height: 1; user-select: none; }
   #container-3 #steps-flow-mobile .step-box {
-    width: 100%; max-width: 320px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 13.2px 12px; color: white;
+    width: 100%; max-width: 320px; background: #00000091; border: 1px solid #0C0C0C; border-radius: 6px; padding: 13.8px 12px; color: white;
     box-shadow: 0 1px 5px rgba(0,0,0,.1); transition: box-shadow .3s ease, border-color .3s ease;
   }
   #container-3 #steps-flow-mobile .step-box:hover { box-shadow: 0 0 6px rgba(255,255,255,.04), 0 0 12px rgba(255,255,255,.02); border-color: #ffffff33; }
