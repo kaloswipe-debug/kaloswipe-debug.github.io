@@ -136,10 +136,7 @@
     overflow-x: clip;
   }
 
-  /* Width helpers act on wrapper level */
-  .content-100, .content-75, .content-40 { width: 100%; max-width: 100%; }
-  .container > .wrapper.content-75 { max-width: 75rem; }
-  .container > .wrapper.content-40 { max-width: 40rem; }
+  
 }
 
 /* ========================= utilities ========================= */
