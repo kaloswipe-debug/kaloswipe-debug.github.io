@@ -807,16 +807,7 @@
   min-width: 320px;
 }
 
-  .calendly-inline-widget iframe {
-  width: 100% !important;
-  height: 1300px !important;
-  display: block;
-  border: none;
-}
-
-@media (max-width: 768px){
-  .calendly-inline-widget iframe { height: 1450px !important; }
-}
+  
 
   #container-6 #ge-logo img {
   max-width: 94px;
