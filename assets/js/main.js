@@ -225,6 +225,14 @@
 
   update();
   reset();
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    clearInterval(autoplayTimer);
+  } else {
+    reset();
+  }
+});
+
 })();
 
 /* ============================================================
@@ -250,32 +258,40 @@
   }
 
   function expand() {
-    if (wrap.classList.contains("expanded") || wrap.classList.contains("expanding")) return;
+  if (wrap.classList.contains("expanded") || wrap.classList.contains("expanding")) return;
 
-    lockH();
-    revealText.style.display = "none";
-    revealText.setAttribute("aria-hidden", "true");
-    step2text.style.display = "none";
+  lockH();
+  revealText.style.display = "none";
+  revealText.setAttribute("aria-hidden", "true");
+  step2text.style.display = "none";
 
-    wrap.classList.add("expanding");
-    diamond.setAttribute("aria-expanded", "true");
-    diamond.setAttribute("aria-disabled", "true");
+  wrap.classList.add("expanding");
+  diamond.setAttribute("aria-expanded", "true");
+  diamond.setAttribute("aria-disabled", "true");
 
-    const onEnd = (e) => {
-      if (e.propertyName !== "flex-basis") return;
-      wrap.removeEventListener("transitionend", onEnd, true);
-      wrap.classList.remove("expanding");
+  const onEnd = (e) => {
+    if (e.propertyName !== "flex-basis") return;
+    cleanup();
+  };
 
-      revealText.style.display = "block";
-      revealText.setAttribute("aria-hidden", "false");
-      void revealText.offsetWidth; // force reflow
-      wrap.classList.add("expanded");
+  const fallback = setTimeout(cleanup, 380); // mirrors collapse timing
 
-      requestAnimationFrame(unlockH);
-    };
+  function cleanup() {
+    wrap.removeEventListener("transitionend", onEnd, true);
+    clearTimeout(fallback);
+    wrap.classList.remove("expanding");
 
-    wrap.addEventListener("transitionend", onEnd, true);
+    revealText.style.display = "block";
+    revealText.setAttribute("aria-hidden", "false");
+    void revealText.offsetWidth; // reflow
+    wrap.classList.add("expanded");
+
+    requestAnimationFrame(unlockH);
   }
+
+  wrap.addEventListener("transitionend", onEnd, true);
+}
+
 
   function collapse() {
     if (!wrap.classList.contains("expanded")) return;
