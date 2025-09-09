@@ -999,8 +999,8 @@
     background-color: #00000091;
     box-sizing: border-box;
   }
-  @media (max-width: 900px) {
-    :is(#container-4, .container-4) { width: 92%; }
+  @media (max-width: 768px) {
+    :is(#container-4, .container-4) { width: 100%; }
   }
 
   /* Wistia placeholder blur while component loads */
