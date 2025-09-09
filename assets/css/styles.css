@@ -230,7 +230,7 @@
   }
 
   /* Calendly */
-  .calendly-inline-widget { overscroll-behavior: auto; user-select: none; }  /* smoother scroll handoff */
+  .calendly-inline-widget { overscroll-behavior: contain; user-select: none; }
   .calendly-inline-widget iframe {
     width: 100%;
     height: 100%;
