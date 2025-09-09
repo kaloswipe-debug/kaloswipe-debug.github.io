@@ -568,13 +568,6 @@
     margin: var(--space-4) auto;
   }
 
-  
-
-  /* FAQ structure alignment */
-  :is(#container-5, .container-5) { margin-top: 0; }
-  :is(#container-5, .container-5) .inner-wrap { padding: 0; }
-  :is(#container-5, .container-5) .faq-section { padding-inline: var(--pad-h); }
-
   /* Keep widths controlled by wrappers */
   :is(#container-3, .container-3) .whoami,
   :is(#container-3, .container-3) #gs-blurb { max-width: 100%; }
