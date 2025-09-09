@@ -602,7 +602,7 @@
   :is(#container-1, .container-1) #hl1 .hero-title,
   :is(#container-1, .container-1) #hl1 .mobile-title{
     font-family: var(--font-ui);
-    font-weight:700; text-align:center; margin:0 auto; max-width:98%; color:#e1e6ec;
+    font-weight:700; text-align:center; margin:0 auto; max-width:100%; color:#e1e6ec;
   }
   :is(#container-1, .container-1) #hl1 .hero-title{ font-size:clamp(20px,4vw,40px); line-height:1.2; }
   :is(#container-1, .container-1) #hl1 .mobile-title{
