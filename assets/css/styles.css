@@ -116,7 +116,7 @@
     padding: 0;
   }
   .container > .wrapper > .inner {
-    padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, );
+    padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 40px);
   }
   .container > .wrapper > .inner > * { max-width: 100%; }
 
@@ -356,7 +356,7 @@
 
    @media (min-width: 1024px) {
     .scroll-button {
-      padding: 22px ;
+      padding: 22px 40px;
       font-size: 1.25rem;
       line-height: 1;
       border-radius: 10px;
@@ -364,7 +364,7 @@
     }
     .scroll-button:hover {
       padding: 22px 38px;
-      box-shadow: 0 0  color-mix(in oklab, var(--accent) 42%, transparent);
+      box-shadow: 0 0 40px color-mix(in oklab, var(--accent) 42%, transparent);
     }
   }
 /* ===== Divider 1 (both-ends fade, centered, custom bottom margin) ===== */
@@ -491,8 +491,8 @@
 
 /* icons use a CSS custom prop set by JS */
 .features__icon{
-  width:;
-  height:;
+  width:40px;
+  height:40px;
   margin:0 0 10px 0;
   display:block;
   --bg:none;
@@ -514,7 +514,7 @@
 
 /* desktop-only tweaks */
 @media (min-width:769px){
-  #features{ margin-bottom:; }
+  #features{ margin-bottom:40px; }
 }
 
 /* ===== Divider 2 (mobile-only fade divider) ===== */
@@ -616,8 +616,8 @@
     :is(#container-1, .container-1) #hl1 .mobile-title{ display:block !important; }
   }
    #container-1 #hl1 .hero-title {
-    max-width: 1700px !important;   /* expand beyond Carrd’s default */
-    width: min(1700px, 100%);
+    max-width: 1400px !important;   /* expand beyond Carrd’s default */
+    width: min(1400px, 100%);
     text-wrap: balance;
   }
 
