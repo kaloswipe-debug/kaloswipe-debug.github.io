@@ -112,6 +112,16 @@
   document.addEventListener("DOMContentLoaded", () => {
     updateMobileLabels();
     initAccordions();
+      // close all but the first .active at startup (optional)
+  const opened = Array.from(document.querySelectorAll(".accordion.active"));
+  opened.slice(1).forEach(el => {
+    el.classList.remove("active");
+    el.setAttribute("aria-expanded", "false");
+    const wrap = el.querySelector(".extra-content");
+    const icon = el.querySelector(".icon");
+    if (icon) { icon.textContent = "+"; icon.classList.remove("rotate"); }
+    if (wrap) { wrap.style.maxHeight = null; wrap.setAttribute("aria-hidden","true"); }
+  });
     syncOpenHeights(); // ensure correct initial height if any are open by default
   });
 })();
