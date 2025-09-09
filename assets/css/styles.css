@@ -1074,3 +1074,17 @@
 @media (max-width: 1024px) {
   #container-6 .headline::after { content: none !important; }
 }
+
+@media (min-width: 1024px) {
+  .scroll-button {
+    padding: 22px 40px;   /* era 18px 30px */
+    font-size: 1.25rem;   /* era 1.1rem */
+    line-height: 1;       /* evita ficar “achatado” com fonte maior */
+    border-radius: 10px;  /* opcional: mais encorpado */
+    box-shadow: 0 0 28px color-mix(in oklab, var(--accent) 32%, transparent);
+  }
+  .scroll-button:hover {
+    padding: 22px 38px;   /* mantém o “nudge” no hover sem pular layout */
+    box-shadow: 0 0 40px color-mix(in oklab, var(--accent) 42%, transparent);
+  }
+}
