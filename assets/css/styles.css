@@ -1075,11 +1075,3 @@
 @media (max-width: 1024px) {
   #container-6 .headline::after { content: none !important; }
 }
-@media (max-width: 768px) {
-    .discovery-audit-btn {
-      width: 70%;
-      max-width: 250px;
-      margin: 0 auto;
-      display: block;
-    }
-  }
