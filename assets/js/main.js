@@ -10,7 +10,7 @@
   let faqInited = false;
 
   function updateMobileLabels() {
-    const qs = document.querySelectorAll(".question");
+    const qs = document.querySelectorAll("#container-5 .question, .container-5 .question");
     if (window.innerWidth <= MOBILE_MAX) {
       qs.forEach((q) => {
         const t = q.getAttribute("data-text");
