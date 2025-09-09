@@ -1098,8 +1098,8 @@
   :is(#container-5, .container-5) .faq-section { padding-left: 0 !important; padding-right: 0 !important; }
 
   :is(#container-5, .container-5) .questions-title {
-    margin-bottom: 0 !important;
-    font-size: 1.7rem !important;
+    margin-bottom: 30px !important;
+    font-size: 1.75rem !important;
     line-height: 1.1;
   }
 
