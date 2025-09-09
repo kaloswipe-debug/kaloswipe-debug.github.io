@@ -261,15 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
   .headline{ margin-top:20px; margin-bottom:0; }
   .headline::after{ content:""; }
 }
-/* Mobile — keep your smaller size but also px-lock it */
-@media (max-width:1023px){
-  div.headline{
-    font-size:41px !important;   /* ~Carrd’s 2.4rem on its base, px-locked */
-    line-height:1.2;             /* you had this; keeps rhythm tighter */
-    letter-spacing:0;
-    margin-bottom:4px !important;
-    font-weight:500 !important;
-  }
   .headline::after{ content:":"; }
 }
 </style>
