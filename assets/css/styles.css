@@ -616,9 +616,12 @@
     :is(#container-1, .container-1) #hl1 .mobile-title{ display:block !important; }
   }
    #container-1 #hl1 .hero-title {
-    width: 100%;
-    max-width: none !important;
-    text-wrap: balance;
+     width: 100vw; /* span entire viewport width */
+  max-width: none;
+  margin-left: calc(-50vw + 50%); /* cancel wrapper centering */
+  margin-right: calc(-50vw + 50%); 
+  text-align: center; /* keep text centered */
+  text-wrap: balance;
   }
 
   /* 3) Subheadline 1 (desktop only) */
