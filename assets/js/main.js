@@ -86,7 +86,7 @@
         }
       });
 
-      // ✅ INIT state for pre-opened items (this was misplaced before)
+      // INIT state for pre-opened items
       setState(el, el.classList.contains("active"));
     });
   }
@@ -112,17 +112,18 @@
   document.addEventListener("DOMContentLoaded", () => {
     updateMobileLabels();
     initAccordions();
-      // close all but the first .active at startup (optional)
-  const opened = Array.from(document.querySelectorAll(".accordion.active"));
-  opened.slice(1).forEach(el => {
-    el.classList.remove("active");
-    el.setAttribute("aria-expanded", "false");
-    const wrap = el.querySelector(".extra-content");
-    const icon = el.querySelector(".icon");
-    if (icon) { icon.textContent = "+"; icon.classList.remove("rotate"); }
-    if (wrap) { wrap.style.maxHeight = null; wrap.setAttribute("aria-hidden","true"); }
-  });
-    syncOpenHeights(); // ensure correct initial height if any are open by default
+
+    // close all but the first .active at startup (optional)
+    const opened = Array.from(document.querySelectorAll(".accordion.active"));
+    opened.slice(1).forEach(el => {
+      el.classList.remove("active");
+      el.setAttribute("aria-expanded", "false");
+      const wrap = el.querySelector(".extra-content");
+      const icon = el.querySelector(".icon");
+      if (icon) { icon.textContent = "+"; icon.classList.remove("rotate"); }
+      if (wrap) { wrap.style.maxHeight = null; wrap.setAttribute("aria-hidden","true"); }
+    });
+    syncOpenHeights();
   });
 })();
 
@@ -358,14 +359,14 @@
     });
 
     collapseBtn.addEventListener("keydown", (e) => {
-      if (!wrap.classList.contains("expanded")) return;
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        collapse();
+        if (wrap.classList.contains("expanded")) collapse();
       }
     });
   }
 })();
+
 // ======================== AFTER CONTAINER #5 ========================
 (function initAfterC5() {
   if (document.readyState === "loading") {
@@ -376,7 +377,6 @@
   if (!wrap || !(window.GE && typeof GE.initProtectedZone === "function")) return;
   GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
 })();
-
 
 /* ============================================================
    GE helper: initProtectedZone (shared)
@@ -421,8 +421,8 @@
     const src = "https://i.imgur.com/Hi9k0uo.png";
 
     const wrap = document.createElement("div");
-    wrap.id = "ge-logo-wrap";            // keep the same id
-    wrap.className = "logo-protect";     // uses your shared CSS
+    wrap.id = "ge-logo-wrap";
+    wrap.className = "logo-protect";
     wrap.innerHTML = `
       <img src="${src}" alt="Gabriel Edits Logo" draggable="false">
       <div class="protect-guard" aria-hidden="true"></div>
@@ -436,16 +436,14 @@
       document.querySelector("main") ||
       document.body;
 
-    if (anchor) anchor.innerHTML = "";   // clear any placeholder
+    if (anchor) anchor.innerHTML = "";
     mount.insertBefore(wrap, mount.firstChild);
 
-    // Apply your shared protection helper
     if (window.GE && typeof GE.initProtectedZone === "function") {
       GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
     }
   });
 })();
-
 
 /* ============================================================
    container-6: reveal-card + bottom logo protection
@@ -491,7 +489,6 @@
 
     GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
   })();
-   
 })();
 
 /* ============================================================
@@ -500,7 +497,6 @@
 (() => {
   // Init Lenis once (desktop only)
   function initLenisOnce() {
-    // Only run if Lenis is loaded, we're on desktop, and not already inited
     if (!window.Lenis || window.innerWidth <= 768 || window.__lenis) return;
 
     const lenis = new Lenis({
@@ -515,9 +511,8 @@
 
     window.__lenis = lenis;
 
-    // Single RAF loop (guarded so we don't create multiple)
     const loop = (time) => {
-      if (!window.__lenis) return;         // if ever disabled, stop looping
+      if (!window.__lenis) return;
       window.__lenis.raf(time);
       window.__lenisRaf = requestAnimationFrame(loop);
     };
@@ -535,16 +530,6 @@
 
   // If user resizes from mobile → desktop, allow late init
   window.addEventListener("resize", initLenisOnce);
-
-  // Optional: if you want to *stop* Lenis when going to mobile widths,
-  // uncomment below. (Safe to leave running too.)
-  // window.addEventListener("resize", () => {
-  //   if (window.innerWidth <= 768 && window.__lenis) {
-  //     cancelAnimationFrame(window.__lenisRaf);
-  //     window.__lenis.stop?.();
-  //     window.__lenis = null;
-  //   }
-  // });
 
   // Smooth anchors (delegated; runs once)
   if (!window.__smoothAnchorsInit) {
@@ -590,3 +575,93 @@
   }
 })();
 
+/* ============================================================
+   STANDALONES: headline reveal + features block (icons, in-view, text swap)
+   (this replaces the stray nested block you had inside Smooth Anchors)
+   ============================================================ */
+(() => {
+  // Headline reveal
+  document.addEventListener("DOMContentLoaded", () => {
+    const headline = document.getElementById("alx-headline");
+    if (!headline) return;
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          headline.classList.add("alx-visible");
+          o.unobserve(headline);
+        }
+      });
+    }, { threshold: 0.2 });
+    obs.observe(headline);
+  });
+
+  // Features behavior
+  const container = document.getElementById("features");
+  if (!container) return;
+
+  // Icon URLs → CSS var per icon
+  const ICON_URLS = [
+    "https://i.imgur.com/fBS3wJ4.png",
+    "https://i.imgur.com/0XgLEJ5.png",
+    "https://i.imgur.com/OAVRPFc.png",
+  ];
+  requestAnimationFrame(() => {
+    container.querySelectorAll(".features__icon").forEach(el => {
+      const idx = Number(el.getAttribute("data-img-index"));
+      const url = ICON_URLS[idx];
+      if (url) el.style.setProperty("--bg", `url("${url}")`);
+    });
+  });
+
+  // Scroll-in cards
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  container.querySelectorAll(".features__item").forEach(el => cardObserver.observe(el));
+
+  // Mobile/desktop description swap
+  const descEls = Array.from(container.querySelectorAll(".features__item .features__text"));
+  const desktopTexts = descEls.map(el => el.textContent.trim());
+  const mobileTexts = [
+    "Video editors who don't have any autonomy and constantly have to ask for directions.",
+    "Video editors who can't translate a creator's vague, vision-driven language into concrete editing choices.",
+    "Video editors who take a long time to adapt to new circumstances and get a smooth workflow going."
+  ];
+  const mq = window.matchMedia("(max-width: 768px)");
+  function applyTextSwap(e){
+    const isMobile = e.matches;
+    descEls.forEach((el, i) => { el.textContent = isMobile ? mobileTexts[i] : desktopTexts[i]; });
+  }
+  applyTextSwap(mq);
+  (mq.addEventListener ? mq.addEventListener("change", applyTextSwap) : mq.addListener(applyTextSwap));
+
+  // Local guards for copy/select/drag inside features
+  ["contextmenu","copy","cut"].forEach(evt =>
+    container.addEventListener(evt, e => e.preventDefault(), { passive:false })
+  );
+  container.addEventListener("dragstart", e => e.preventDefault());
+
+  // Touch/selection niceties
+  let pressTimer;
+  container.addEventListener("touchstart", () => { pressTimer=setTimeout(()=>{},600); }, { passive:true });
+  container.addEventListener("touchend", () => clearTimeout(pressTimer));
+  container.querySelectorAll("img").forEach(img => img.setAttribute("draggable","false"));
+  container.addEventListener("selectstart", (e) => e.preventDefault(), { passive: false });
+
+  document.addEventListener("selectionchange", () => {
+    const sel = window.getSelection && window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const anchor = sel.anchorNode && (sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentNode : sel.anchorNode);
+    if (anchor && container.contains(anchor)) sel.removeAllRanges();
+  });
+
+  container.addEventListener("gesturestart", (e) => e.preventDefault());
+  container.addEventListener("pointerdown", (e) => {
+    if (e.pointerType === "touch") { if (document.activeElement) document.activeElement.blur?.(); }
+  });
+})();
