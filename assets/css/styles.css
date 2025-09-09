@@ -658,6 +658,9 @@
 
   @media (max-width: 768px) {
     #book-your-call { margin-bottom: 30px; }
+    #container-6 .headline {
+      margin-bottom: 20px !important;
+    }
   }
   /* ===== Container 3 (moved inline → stylesheet, 1:1 visuals) ===== */
 
