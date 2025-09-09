@@ -84,10 +84,11 @@
           e.preventDefault();
           toggleSelf();
         }
-      // after el.addEventListener(...), add:
-setState(el, el.classList.contains("active"));
+      
 
       });
+       // after el.addEventListener(...), add:
+setState(el, el.classList.contains("active"));
     });
   }
 
@@ -405,14 +406,12 @@ document.addEventListener("visibilitychange", () => {
     if (!card || card.hasAttribute("data-ge-reveal-init")) return;
     card.setAttribute("data-ge-reveal-init", "1");
 
-    const img   = card.querySelector(".rc-media img");
-    const guard = card.querySelector(".protect-guard");
-    if (!img || !guard) return;
-
+    // CHANGED: no guard query/require; img is optional
+    const img = card.querySelector(".rc-media img");
     const src = card.getAttribute("data-src");
-    if (src) img.src = src;
+    if (img && src) img.src = src;
 
-    // Respect CSS variable fallback used in your stylesheet
+    // (unchanged)
     const cs = getComputedStyle(card);
     const collapsedH = (cs.getPropertyValue("--collapsed-h") || "").trim() || "78px";
     card.style.minBlockSize = collapsedH;
@@ -428,8 +427,23 @@ document.addEventListener("visibilitychange", () => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
 
+    // CHANGED: use your helper; works with or without .protect-guard present
     GE.initProtectedZone(card, { guardSelector: ".protect-guard" });
+
+    // CHANGED: only if img exists
+    if (img) img.setAttribute("draggable","false");
   })();
+
+  /* ---------- Bottom logo protect ---------- */
+  (function initLogoProtect() {
+    const wrap = section.querySelector("#ge-logo");
+    if (!wrap || wrap.hasAttribute("data-ge-logo-protect")) return;
+    wrap.setAttribute("data-ge-logo-protect", "1");
+
+    // keep using the helper (also OK if the guard is missing)
+    GE.initProtectedZone(wrap, { guardSelector: ".protect-guard" });
+  })();
+})();
 
 /* ---------- Bottom logo protect ---------- */
 (function initLogoProtect() {
