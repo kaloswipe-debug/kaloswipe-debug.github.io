@@ -1544,7 +1544,6 @@
       height: 1700px !important;
     }
   }
-  @layer pages {
   /* Container 1 — fix slight right/down drift without breaking full-bleed */
   #container-1 {
     position: relative;
