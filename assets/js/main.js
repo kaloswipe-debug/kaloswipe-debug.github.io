@@ -6,9 +6,15 @@
    - Single-open behavior with animated height
    ============================================================ */
 (() => {
+  // Intent-only constants (no behavior change)
+  const MOBILE_MAX = 600;
+
+  // Prevent accidental double-binding (defensive, noop if called once)
+  let faqInited = false;
+
   function updateMobileLabels() {
     const qs = document.querySelectorAll(".question");
-    if (window.innerWidth <= 600) {
+    if (window.innerWidth <= MOBILE_MAX) {
       qs.forEach((q) => {
         const t = q.getAttribute("data-text");
         if (t) q.textContent = t;
@@ -21,7 +27,19 @@
     }
   }
 
+  // Keep open panels sized correctly after viewport changes
+  function syncOpenHeights() {
+    document.querySelectorAll(".accordion.active .extra-content").forEach((wrap) => {
+      const inner = wrap.querySelector(".inner");
+      if (inner) wrap.style.maxHeight = inner.scrollHeight + "px";
+    });
+  }
+
   function initAccordions() {
+    if (faqInited) return; // guard
+    faqInited = true;
+
+    // NOTE: remains global to all .accordion (on purpose; do not scope to container)
     const acc = document.querySelectorAll(".accordion");
     acc.forEach((el) => {
       const icon = el.querySelector(".icon");
@@ -33,16 +51,15 @@
 
         // Close others
         acc.forEach((o) => {
-          if (o !== el) {
-            o.classList.remove("active");
-            const io = o.querySelector(".icon");
-            const wo = o.querySelector(".extra-content");
-            if (io) {
-              io.textContent = "+";
-              io.classList.remove("rotate");
-            }
-            if (wo) wo.style.maxHeight = null;
+          if (o === el) return;
+          o.classList.remove("active");
+          const io = o.querySelector(".icon");
+          const wo = o.querySelector(".extra-content");
+          if (io) {
+            io.textContent = "+";
+            io.classList.remove("rotate");
           }
+          if (wo) wo.style.maxHeight = null;
         });
 
         // Toggle clicked
@@ -58,7 +75,12 @@
     });
   }
 
-  window.addEventListener("resize", updateMobileLabels);
+  // Resize: keep labels in sync and re-measure any open panel
+  window.addEventListener("resize", () => {
+    updateMobileLabels();
+    syncOpenHeights();
+  });
+
   document.addEventListener("DOMContentLoaded", () => {
     updateMobileLabels();
     initAccordions();
@@ -92,6 +114,10 @@
    container-3: slideshow (autoplay, arrows, swipe)
    ============================================================ */
 (() => {
+  // Intent-only constants (no behavior change)
+  const SLIDESHOW_INTERVAL = 7000;
+  const SWIPE_THRESHOLD = 50;
+
   const slideshow = document.getElementById("slideshow");
   const track = document.getElementById("slideTrack");
   if (!slideshow || !track) return;
@@ -104,12 +130,12 @@
     "https://i.imgur.com/kYj36ZY.jpeg",
   ];
 
-  const slides = [];
-  IMAGE_URLS.forEach(() => {
+  // Tiny readability nudge; behavior unchanged
+  const slides = IMAGE_URLS.map(() => {
     const d = document.createElement("div");
     d.className = "slide";
     track.appendChild(d);
-    slides.push(d);
+    return d;
   });
 
   // Defer background image assignment to next frame
@@ -121,7 +147,6 @@
 
   let current = 0;
   let autoplayTimer = null;
-  const interval = 7000;
 
   function update() {
     slides.forEach((s, i) => {
@@ -144,7 +169,7 @@
 
   function reset() {
     clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(() => move(1), interval);
+    autoplayTimer = setInterval(() => move(1), SLIDESHOW_INTERVAL);
   }
 
   const left = slideshow.querySelector(".arrow-left");
@@ -161,7 +186,7 @@
   slideshow.addEventListener("touchend", (e) => {
     const ex = e.changedTouches[0].screenX;
     const d = sx - ex;
-    if (Math.abs(d) >= 50) manual(d > 0 ? 1 : -1);
+    if (Math.abs(d) >= SWIPE_THRESHOLD) manual(d > 0 ? 1 : -1);
   }, { passive: true });
 
   // Light copy-protection inside slideshow
@@ -290,50 +315,3 @@
     });
   }
 })();
-
-// ======================== CONTAINER #5: Accordion ========================
-(function initContainer5Accordion() {
-  const root = document.querySelector('#container-5');
-  if (!root || root.dataset.init === '1') return; // guard against double init
-  root.dataset.init = '1';
-
-  root.addEventListener('click', (e) => {
-    // Allow clicks on .accordion or its children
-    const accordion = e.target.closest('#container-5 .accordion');
-    if (!accordion || !root.contains(accordion)) return;
-
-    const content = accordion.querySelector('.extra-content');
-    const icon = accordion.querySelector('.icon');
-    const isOpen = accordion.classList.contains('is-open');
-
-    // Close others (optional; comment out if you want multi-open)
-    root.querySelectorAll('.accordion.is-open').forEach(a => {
-      if (a !== accordion) {
-        a.classList.remove('is-open');
-        const c = a.querySelector('.extra-content');
-        const i = a.querySelector('.icon');
-        if (c) c.style.maxHeight = 0;
-        if (i) i.classList.remove('rotate');
-      }
-    });
-
-    // Toggle this one
-    accordion.classList.toggle('is-open');
-    if (content) {
-      if (!isOpen) {
-        content.style.maxHeight = content.scrollHeight + 'px';
-      } else {
-        content.style.maxHeight = 0;
-      }
-    }
-    if (icon) icon.classList.toggle('rotate', !isOpen);
-  });
-
-  // On load, ensure correct max-heights (e.g., if some start open)
-  window.addEventListener('load', () => {
-    root.querySelectorAll('.accordion.is-open .extra-content').forEach(c => {
-      c.style.maxHeight = c.scrollHeight + 'px';
-    });
-  });
-})();
-
