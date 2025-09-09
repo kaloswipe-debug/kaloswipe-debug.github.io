@@ -31,6 +31,10 @@
     --space-3: 1.5rem;
     --space-4: 2rem;
     --space-5: 3rem;
+
+    
+    --alx-text: var(--text);
+    --alx-accent: var(--accent);
   }
 }
 
@@ -362,6 +366,215 @@
       box-shadow: 0 0 40px color-mix(in oklab, var(--accent) 42%, transparent);
     }
   }
+/* ===== Divider 1 (both-ends fade, centered, custom bottom margin) ===== */
+.fade-divider{
+  display:block;
+  width:85%;
+  height:1px;
+  margin:24px auto 55px;
+  background:linear-gradient(
+    90deg,
+    rgba(225,230,236,0) 0%,
+    #e1e6ec 20%,
+    #e1e6ec 80%,
+    rgba(225,230,236,0) 100%
+  );
+}
+
+/* ===== “Do you struggle with video editors…” ===== */
+#alx-headline{
+  margin:1.375rem auto;
+  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-weight:500;
+  font-size:2.4rem;
+  line-height:1.125;
+  letter-spacing:-0.1rem;
+  color:var(--alx-text);
+  text-align:center;
+  max-width:100%;
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .8s ease-out, transform .8s ease-out;
+}
+#alx-headline .alx-hl{ color:var(--alx-accent); }
+#alx-headline .br-mobile{ display:none; }
+#alx-headline.alx-visible{ opacity:1; transform:translateY(0); }
+
+@media (max-width:768px){
+  #alx-headline{
+    font-size:1.8rem;
+    letter-spacing:-0.04rem;
+    margin-bottom:-0.01rem;
+  }
+  #alx-headline .br-mobile{ display:inline; }
+}
+@media (prefers-reduced-motion:reduce){
+  #alx-headline{ transition:none; opacity:1; transform:none; }
+}
+
+/* ===== Features: “Containers” ===== */
+#features{
+  --card-bg:#00000091;
+  --card-brd:#0C0C0C;
+
+  display:flex;
+  gap:15px;
+  padding:20px;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+
+  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  color:var(--alx-text);
+
+  /* match Carrd’s inner base so body text lines up */
+  font-size:0.9rem;
+
+  user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+}
+#features *{ -webkit-user-drag:none; }
+
+/* hard no-select inside the features block */
+#features,
+#features *:not(input, textarea){
+  user-select:none !important;
+  -webkit-user-select:none !important;
+  -webkit-touch-callout:none !important;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+#features a, #features img{
+  -webkit-user-select:none !important;
+  -webkit-touch-callout:none !important;
+  pointer-events:auto;
+}
+
+.features__item{
+  flex:1;
+  background:var(--card-bg);
+  padding:25px;
+  border-radius:8px;
+  border:1px solid var(--card-brd);
+  box-shadow:0 2px 10px rgba(0,0,0,.1);
+  text-align:left;
+
+  opacity:0;
+  transform:translateY(30px);
+  transition:
+    border-color .3s ease-out,
+    box-shadow .3s ease-out,
+    opacity .8s ease-out,
+    transform .8s ease-out;
+}
+.features__item.visible{ opacity:1; transform:translateY(0); }
+.features__item:hover{
+  border-color:#ffffff33;
+  box-shadow:0 0 6px rgba(255,255,255,.04), 0 0 12px rgba(255,255,255,.02);
+}
+
+/* lock title to Carrd size */
+.features__title{
+  color:var(--alx-text);
+  margin:0 0 15px;
+  font-size:1.26rem;
+  font-weight:700;
+}
+
+/* body text inherits 0.9rem base */
+.features__text{
+  color:var(--alx-text);
+  line-height:1.6;
+  font-weight:400;
+  margin:0;
+}
+
+/* icons use a CSS custom prop set by JS */
+.features__icon{
+  width:40px;
+  height:40px;
+  margin:0 0 10px 0;
+  display:block;
+  --bg:none;
+  background-image:var(--bg);
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:left top;
+  pointer-events:none;
+  user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+  vertical-align:top;
+}
+
+/* mobile */
+@media (max-width:768px){
+  #features{ flex-direction:column; gap:20px; padding:15px; }
+  .features__item{ padding:20px; }
+  .features__text{ font-size:1.2em; font-weight:500; }
+}
+
+/* desktop-only tweaks */
+@media (min-width:769px){
+  #features{ margin-bottom:40px; }
+}
+
+/* ===== Divider 2 (mobile-only fade divider) ===== */
+#mobile-fade-divider{
+  display:block;
+  width:85%;
+  height:1px;
+  margin:24px auto 55px;
+  background:linear-gradient(
+    90deg,
+    rgba(225,230,236,0) 0%,
+    #e1e6ec 20%,
+    #e1e6ec 80%,
+    rgba(225,230,236,0) 100%
+  );
+}
+@media (min-width:768px){
+  #mobile-fade-divider{ display:none !important; }
+}
+
+/* ===== Long-form editing work (heading, mobile adds colon) ===== */
+.headline{
+  margin:auto;
+  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-weight:500;
+  font-size:44px;          /* Carrd computed */
+  line-height:33px;        /* Carrd computed */
+  letter-spacing:0;        /* Carrd computed 'normal' */
+  color:#E1E6EC;
+  text-align:center;
+  max-width:100%;
+  position:relative;
+  font-synthesis:none;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+/* Desktop (no colon) */
+@media (min-width:1024px){
+  .headline{ margin-top:20px; margin-bottom:0; }
+  .headline::after{ content:""; }
+}
+@media (max-width:1023px){
+  .headline::after{ content:":"; }
+}
+
+/* ===== Credibility/measurable conversions (desktop-only blurb) ===== */
+.trust-text{
+  margin:.5rem auto;
+  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-weight:300;
+  font-size:1.125rem;
+  line-height:1.3;
+  letter-spacing:0;
+  color:#8a8a8a;
+  text-align:center;
+  max-width:100%;
+}
+@media (max-width:768px){
+  .trust-text{ display:none; }
+}
+
 }
 
 
@@ -848,13 +1061,6 @@
     background-size: 200% 200%; animation: rotateGradient 30s ease infinite; cursor: pointer; position: relative; overflow: hidden; display: block;
   }
 
-  /* Gradient motion (shared) */
-  @keyframes rotateGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
   /* Desktop-only widths and visibility tweaks */
   @media (min-width: 768px) {
     #container-3 #steps-flow .how-step { max-width: 220px; }
@@ -1325,9 +1531,15 @@
   #after-c5 .desktop-only { display: none !important; }
 }
 
+
 }
 
-
+ /* Gradient motion (shared) */
+  @keyframes rotateGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
 /* keyframes live outside media to keep code organized */
 @keyframes c5RotateGradient {
