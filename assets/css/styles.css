@@ -541,7 +541,7 @@
   font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   font-weight:500;
   font-size:44px;          /* Carrd computed */
-  line-height:38px;        /* Carrd computed */
+  line-height:33px;        /* Carrd computed */
   letter-spacing:0;        /* Carrd computed 'normal' */
   color:#E1E6EC;
   text-align:center;
@@ -558,6 +558,14 @@
 }
 @media (max-width:1023px){
   .headline::after{ content:":"; }
+}
+@media (max-width:768px){
+  .headline{
+    line-height:38px !important;
+  }
+  .headline .hl{
+    color:#ffd510; font-weight:700;
+  }
 }
 
 /* ===== Credibility/measurable conversions (desktop-only blurb) ===== */
