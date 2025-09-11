@@ -14,6 +14,7 @@
       justify-content: flex-start;
       min-height: 100vh;
       font-family: sans-serif;
+      position: relative; /* Needed for positioning */
     }
 
     .logo {
@@ -21,7 +22,7 @@
     }
 
     .logo img {
-      width: 80px; /* small logo */
+      width: 80px;
       height: auto;
     }
 
@@ -33,6 +34,25 @@
     wistia-player {
       width: 100%;
       height: auto;
+    }
+
+    /* Social icons container */
+    .social-icons {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .social-icons img {
+      width: 30px;
+      height: auto;
+    }
+
+    .social-icons a.email img {
+      width: 22px; /* smaller email icon */
     }
   </style>
 </head>
@@ -53,6 +73,16 @@
       }
     </style>
     <wistia-player media-id="7fabk90kiw" aspect="1.7777777777777777"></wistia-player>
+  </div>
+
+  <!-- Social Media Icons -->
+  <div class="social-icons">
+    <a href="#" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023.svg" alt="Twitter Logo">
+    </a>
+    <a href="#" class="email">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email Icon">
+    </a>
   </div>
 </body>
 </html>
