@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="icon" href="/assets/logo.png" type="image/png">
 
-<meta property="og:title" content="Gabriel Edits">
-<meta property="og:description" content="Re-edit for David Wehner.">
-<meta property="og:image" content="https://gabrieledits.com/assets/davidwehner/bannerdavidwehneroutreach.png">
-<meta property="og:url" content="https://gabrieledits.com/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gabriel Edits">
-<meta name="twitter:description" content="Re-edit for David Wehner.">
-<meta name="twitter:image" content="https://gabrieledits.com/assets/davidwehner/bannerdavidwehneroutreach.png">
+  <!-- Social share meta -->
+  <meta property="og:title" content="Gabriel Edits">
+  <meta property="og:description" content="Re-edit for David Wehner.">
+  <meta property="og:image" content="https://gabrieledits.com/assets/davidwehner/bannerdavidwehneroutreach.png">
+  <meta property="og:url" content="https://gabrieledits.com/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gabriel Edits">
+  <meta name="twitter:description" content="Re-edit for David Wehner.">
+  <meta name="twitter:image" content="https://gabrieledits.com/assets/davidwehner/bannerdavidwehneroutreach.png">
+
   <meta charset="UTF-8">
   <title>David Wehner Video</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
   <style>
     body {
       background-color: #00080f;
@@ -24,7 +30,7 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
-      font-family: sans-serif;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
       position: relative;
     }
 
@@ -38,6 +44,7 @@
     }
 
     .video-wrapper {
+      position: relative; /* positioning context */
       width: 80%;
       max-width: 1200px;
     }
@@ -45,6 +52,24 @@
     wistia-player {
       width: 100%;
       height: auto;
+      display: block;
+    }
+
+    /* Overlay text */
+    .video-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'SF Pro Display', sans-serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: #ffffff;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 6px;
+      pointer-events: none; /* let clicks go through to video */
     }
 
     /* Social icons container */
@@ -58,14 +83,14 @@
     }
 
     .social-icons svg {
-      width: 22px;  /* same size for both */
+      width: 22px;
       height: 22px;
-      fill: #e1e6ec; /* unified color */
+      fill: #e1e6ec;
       transition: opacity 0.2s ease;
     }
 
     .social-icons a:hover svg {
-      opacity: 0.75; /* subtle hover effect */
+      opacity: 0.75;
     }
   </style>
 </head>
@@ -86,6 +111,9 @@
       }
     </style>
     <wistia-player media-id="7fabk90kiw" aspect="1.7777777777777777"></wistia-player>
+
+    <!-- Overlay text -->
+    <div class="video-overlay">CLICK ON VIDEO TO PLAY</div>
   </div>
 
   <!-- Social Media Icons -->
