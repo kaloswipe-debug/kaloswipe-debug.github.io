@@ -3,20 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <title>David Wehner Video</title>
-</head>
-<body>
-  <h1>Video for David Wehner</h1>
-
-  <script src="https://fast.wistia.com/player.js" async></script>
-  <script src="https://fast.wistia.com/embed/7fabk90kiw.js" async type="module"></script>
   <style>
-    wistia-player[media-id='7fabk90kiw']:not(:defined) {
-      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/7fabk90kiw/swatch');
-      display: block;
-      filter: blur(5px);
-      padding-top:56.25%;
+    body {
+      background-color: #00080f;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      font-family: sans-serif;
+    }
+
+    .logo {
+      margin: 20px 0;
+    }
+
+    .logo img {
+      width: 80px; /* small logo */
+      height: auto;
+    }
+
+    .video-wrapper {
+      width: 80%;
+      max-width: 1200px;
+    }
+
+    wistia-player {
+      width: 100%;
+      height: auto;
     }
   </style>
-  <wistia-player media-id="7fabk90kiw" aspect="1.7777777777777777"></wistia-player>
+</head>
+<body>
+  <div class="logo">
+    <img src="https://i.imgur.com/Hi9k0uo.png" alt="Gabrieledits Logo">
+  </div>
+
+  <div class="video-wrapper">
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/7fabk90kiw.js" async type="module"></script>
+    <style>
+      wistia-player[media-id='7fabk90kiw']:not(:defined) {
+        background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/7fabk90kiw/swatch');
+        display: block;
+        filter: blur(5px);
+        padding-top: 56.25%;
+      }
+    </style>
+    <wistia-player media-id="7fabk90kiw" aspect="1.7777777777777777"></wistia-player>
+  </div>
 </body>
 </html>
