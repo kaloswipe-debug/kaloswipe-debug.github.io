@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- ✅ Critical for mobile sizing -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <link rel="icon" href="/assets/mainwebsite/logo.png" type="image/png">
 
   <!-- Social share meta -->
@@ -22,58 +25,79 @@
   <meta property="og:site_name" content="Gabriel Edits">
   <link rel="canonical" href="https://gabrieledits.com/david-wehner/">
 
-
-
   <title>David Wehner Video</title>
 
   <!-- Fonts -->
   <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
   <style>
+    :root {
+      --page-bg: #00080f;
+      --text: #ffffff;
+      --muted: #e1e6ec;
+      --container-max: 1200px;
+    }
+
+    /* Base layout */
+    html, body {
+      height: auto;            /* avoid forcing 100vh on mobile */
+    }
     body {
-      background-color: #00080f;
+      background-color: var(--page-bg);
       margin: 0;
-      padding: 0;
+      padding: 0 16px;         /* small side padding for mobile */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      min-height: 100vh;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-      position: relative;
     }
 
     .logo {
-      margin: 20px 0;
+      margin: 20px 0 12px;
     }
-
     .logo img {
       width: 80px;
-      height: auto;
-    }
-
-    .video-wrapper {
-      width: 70%;
-      max-width: 1200px;
-      text-align: center;
-    }
-
-    .video-overlay {
-      font-family: 'SF Pro Display', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      color: #ffffff;
-      margin-top: 30px;
-      margin-bottom: 20px;
-    }
-
-    wistia-player {
-      width: 100%;
       height: auto;
       display: block;
     }
 
-    /* Social icons container */
+    /* Video container is fluid; cap width on large screens */
+    .video-wrapper {
+      width: 100%;
+      max-width: var(--container-max);
+      text-align: center;
+      margin: 0 auto 24px;
+    }
+
+    .video-overlay {
+      font-weight: 700;
+      font-size: 2.25rem;      /* reduced a bit; we’ll scale on mobile */
+      line-height: 1.2;
+      color: var(--text);
+      margin: 10px 0 16px;
+    }
+
+    /* Wistia element: make it responsive */
+    wistia-player {
+      width: 100%;
+      display: block;
+      /* Ensure the element itself can't exceed viewport width */
+      max-width: 100%;
+    }
+
+    /* While custom element loads, keep correct 16:9 space without huge overflow */
+    wistia-player[media-id='7fabk90kiw']:not(:defined) {
+      background: center / cover no-repeat url('https://fast.wistia.com/embed/medias/7fabk90kiw/swatch');
+      display: block;
+      filter: blur(5px);
+      /* Use aspect-ratio instead of padding hacks when supported */
+      aspect-ratio: 16 / 9;
+      /* Fallback for older browsers if aspect-ratio unsupported */
+      padding-top: 56.25%;
+    }
+
+    /* Social icons: fixed on desktop, inline on mobile to prevent “long page / bottom gap” weirdness */
     .social-icons {
       position: fixed;
       bottom: 15px;
@@ -82,16 +106,44 @@
       gap: 10px;
       z-index: 100;
     }
-
     .social-icons svg {
       width: 22px;
       height: 22px;
-      fill: #e1e6ec;
+      fill: var(--muted);
       transition: opacity 0.2s ease;
+      display: block;
     }
-
     .social-icons a:hover svg {
       opacity: 0.75;
+    }
+
+    /* ===== Responsive tweaks ===== */
+    @media (max-width: 768px) {
+      body { padding: 0 12px; }
+
+      .logo img { width: 64px; }
+
+      .video-overlay {
+        font-size: 1.375rem;   /* ~22px */
+        margin: 6px 0 12px;
+      }
+
+      .video-wrapper { margin-bottom: 16px; }
+
+      /* Let icons sit after content on mobile to avoid bottom “dead zone” */
+      .social-icons {
+        position: static;
+        justify-content: center;
+        margin: 16px 0 24px;
+      }
+      .social-icons svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1200px) {
+      .video-overlay { font-size: 1.75rem; }
     }
   </style>
 </head>
@@ -106,30 +158,23 @@
 
     <script src="https://fast.wistia.com/player.js" async></script>
     <script src="https://fast.wistia.com/embed/7fabk90kiw.js" async type="module"></script>
-    <style>
-      wistia-player[media-id='7fabk90kiw']:not(:defined) {
-        background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/7fabk90kiw/swatch');
-        display: block;
-        filter: blur(5px);
-        padding-top: 56.25%;
-      }
-    </style>
+
     <wistia-player media-id="7fabk90kiw" aspect="1.7777777777777777"></wistia-player>
   </div>
 
   <!-- Social Media Icons -->
   <div class="social-icons">
     <!-- Twitter/X -->
-    <a href="https://x.com/thegabesantana" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+    <a href="https://x.com/thegabesantana" target="_blank" aria-label="X profile">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" focusable="false">
         <path d="M30.1,4h5.4L23.7,17.6L37.6,36H26.7l-8.5-11.2L8.5,36H3.1l12.6-14.5L2.4,4h11.1l7.7,10.2L30.1,4z M28.2,32.8h3L11.9,7.1H8.7 
         L28.2,32.8z"></path>
       </svg>
     </a>
 
     <!-- Email -->
-    <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCHrdlLkkPpjKdNmCNXzlgrWNMrNJKmVjwGKXwDQLVnbPrpcqljcjLXcMHLGqmnQRsmDmDnB" class="email" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+    <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCHrdlLkkPpjKdNmCNXzlgrWNMrNJKmVjwGKXwDQLVnbPrpcqljcjLXcMHLGqmnQRsmDmDnB" class="email" target="_blank" aria-label="Email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" focusable="false">
         <path d="M37.3,15.3v15.3c0,0.8-0.3,1.6-0.9,2.2c-0.6,0.6-1.4,0.9-2.2,0.9H5.8c-0.8,0-1.6-0.3-2.2-0.9s-0.9-1.4-0.9-2.2V15.3
           c0.5,0.6,1.2,1.1,2,1.7c4.7,3.1,7.9,5.4,9.6,6.7c0.7,0.5,1.4,0.9,1.8,1.2c0.4,0.3,1,0.6,1.9,0.9c0.7,0.3,1.5,0.5,2.1,0.5l0,0
           c0.6,0,1.4-0.2,2.1-0.5c0.7-0.3,1.4-0.6,1.9-0.9c0.4-0.3,1-0.7,1.8-1.2c2.2-1.6,5.4-3.8,9.6-6.7C36.1,16.5,36.7,15.9,37.3,15.3
