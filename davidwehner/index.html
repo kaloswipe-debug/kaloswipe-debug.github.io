@@ -44,32 +44,23 @@
     }
 
     .video-wrapper {
-      position: relative; /* positioning context */
       width: 80%;
       max-width: 1200px;
+      text-align: center;
+    }
+
+    .video-overlay {
+      font-family: 'SF Pro Display', sans-serif;
+      font-weight: 500;
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 12px;
     }
 
     wistia-player {
       width: 100%;
       height: auto;
       display: block;
-    }
-
-    /* Overlay text */
-    .video-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'SF Pro Display', sans-serif;
-      font-weight: 500;
-      font-size: 1.5rem;
-      color: #ffffff;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 10px 20px;
-      border-radius: 6px;
-      pointer-events: none; /* let clicks go through to video */
     }
 
     /* Social icons container */
@@ -100,6 +91,9 @@
   </div>
 
   <div class="video-wrapper">
+    <!-- Overlay text ABOVE video -->
+    <div class="video-overlay">CLICK ON VIDEO TO PLAY</div>
+
     <script src="https://fast.wistia.com/player.js" async></script>
     <script src="https://fast.wistia.com/embed/7fabk90kiw.js" async type="module"></script>
     <style>
@@ -111,9 +105,6 @@
       }
     </style>
     <wistia-player media-id="7fabk90kiw" aspect="1.7777777777777777"></wistia-player>
-
-    <!-- Overlay text -->
-    <div class="video-overlay">CLICK ON VIDEO TO PLAY</div>
   </div>
 
   <!-- Social Media Icons -->
